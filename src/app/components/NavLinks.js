@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import {IoIosStats} from 'react-icons/io'
 import {ImProfile} from 'react-icons/im'
 import {FcViewDetails, FcPositiveDynamic, FcPortraitMode, FcList} from 'react-icons/fc'
@@ -9,19 +9,39 @@ const NavLinks = () => {
     <ul className='nav-links'>
         <li className='nav-item'>
             <FcPositiveDynamic />
-            <span>Stats</span>
-        </li>
+            <NavLink 
+                className={({ isActive}) => isActive ? 'active' : ''} 
+                to='/stats'
+                >
+                    Stats
+            </NavLink>
+        </li>   
         <li className='nav-item'>
             <FcList />
-            <span>All Job</span>
+            <NavLink
+                to='/all-job'
+                className={({ isActive }) => isActive ? 'active' : ''} 
+             >
+                All Job
+            </NavLink>
         </li>
         <li className='nav-item'>
             <FcViewDetails />
-            <span>Add Job</span>
+            <NavLink 
+                to='/add-job'
+                className={({ isActive }) =>  isActive ? 'active' : ''} 
+                >
+                Add Job
+            </NavLink>
         </li>
         <li className='nav-item'>
             <FcPortraitMode />
-            <span>Profile</span>
+            <NavLink 
+                to='/profile'
+                className={({ isActive }) =>  isActive ? 'active' : ''} 
+                >
+                    Profile
+            </NavLink>
         </li>
     </ul>
   )
