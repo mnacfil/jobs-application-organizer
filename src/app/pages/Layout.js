@@ -17,8 +17,12 @@ const Layout = () => {
 
 const DashboardWrapper = styled.main`
 
-    width: calc(100vw - 250px);
-    margin-left: 250px;
+    /* width: calc(100vw - 250px); */
+    /* margin-left: 250px; */
+
+    @media screen and (min-width: 992px){
+        margin-left: 250px;
+    }
 `;
 
 export default Layout

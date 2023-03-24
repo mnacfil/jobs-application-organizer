@@ -63,9 +63,13 @@ const Wrapper = styled.div`
   padding: 3rem 2rem;
   box-shadow: var(--shadow-2);
   border-radius: 5px;
-
-
+  width: 80%;
   form {
+
+    label {
+      letter-spacing: var(--letterSpacing);
+      color: var(--grey-700);
+    }
 
     .form-controller {
       margin-top: 2rem;
@@ -82,6 +86,7 @@ const Wrapper = styled.div`
   }
 
   @media screen and (min-width: 992px){
+    width: 90%;
     form {
       display: grid;
       grid-template-columns: 1fr 1fr;
