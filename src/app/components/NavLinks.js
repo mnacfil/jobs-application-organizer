@@ -11,7 +11,7 @@ const NavLinks = () => {
             <FcPositiveDynamic />
             <NavLink 
                 className={({ isActive}) => isActive ? 'active' : ''} 
-                to='/stats'
+                to='/'
                 >
                     Stats
             </NavLink>

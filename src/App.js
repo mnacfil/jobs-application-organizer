@@ -16,8 +16,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route index element={<Dashboard />}/>
-          <Route path='stats' element={<Stats />}/>
+          <Route index element={<Stats />}/>
           <Route path='all-job' element={<AllJob />}/>
           <Route path='add-job' element={<AddJob />}/>
           <Route path='profile' element={<Profile />}/>

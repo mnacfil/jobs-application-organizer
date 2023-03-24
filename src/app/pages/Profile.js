@@ -1,9 +1,16 @@
 import React from 'react'
+import styled from 'styled-components'
 
 const Profile = () => {
   return (
-    <h2>Profile page</h2>
+    <Wrapper className='dashboard-center'>
+      <h1>Profile Page</h1>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+
+`;
 
 export default Profile

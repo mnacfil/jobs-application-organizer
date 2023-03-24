@@ -1,9 +1,16 @@
 import React from 'react'
+import styled from 'styled-components'
 
 const AddJob = () => {
   return (
-    <h1>Add Job page</h1>
+    <Wrapper className='dashboard-center'>
+      <h1>Add job page</h1>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+
+`;
 
 export default AddJob
