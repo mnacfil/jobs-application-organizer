@@ -19,14 +19,27 @@ const BigSidebar = () => {
 }
 
 const Wrapper = styled.aside`
-
   background-color: var(--white);
   width: 250px;
   height: 100vh;
-  box-shadow: var(--shadow-1);
+  position: fixed;
+  top: 0;
+  left: 0;
 
   .sidebar {
-    padding: 3rem 2rem;
+
+    header {
+      height: 6rem;
+    }
+
+    div {
+      box-shadow: 1px 0 0 rgba(0,0,0,0.2);
+      height: calc(100vh - 6rem);
+    }
+
+    .nav-links {
+      margin: 0;
+    }
 
     .nav-item {
       margin-bottom: 1rem ;
