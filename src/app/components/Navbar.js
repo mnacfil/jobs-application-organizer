@@ -4,6 +4,8 @@ import {BiAlignLeft} from 'react-icons/bi'
 import {HiUserCircle} from 'react-icons/hi'
 import {AiFillCaretDown} from 'react-icons/ai'
 
+console.log('Hello World');
+
 const Navbar = () => {
   return (
     <Wrapper>
