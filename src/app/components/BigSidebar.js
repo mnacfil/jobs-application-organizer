@@ -19,6 +19,7 @@ const BigSidebar = () => {
 }
 
 const Wrapper = styled.aside`
+  display: none;
   background-color: var(--white);
   width: 250px;
   height: 100vh;
@@ -58,6 +59,10 @@ const Wrapper = styled.aside`
         color: var(--grey-900);
       }
     }
+  }
+
+  @media screen and (min-width: 992px){
+    display: block;
   }
 `;
 

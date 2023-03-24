@@ -20,19 +20,19 @@ const AddJob = () => {
       <h2>Add job</h2>
       <form onSubmit={handleSubmit}>
         <FormInput 
-          name="Position"
+          label="Position"
           value=""
           handleChange={handleChange}
           type="text"
           />
         <FormInput 
-          name="Company"
+          label="Company"
           value=""
           handleChange={handleChange}
           type="text"
           />
         <FormInput 
-          name="Job Location"
+          label="Job Location"
           value=""
           handleChange={handleChange}
           type="text"
@@ -41,15 +41,17 @@ const AddJob = () => {
           value="Pending"
           handleChange={handleChange}
           options={status}
+          label='Status'
         />
         <FormSelect 
           value="Full-time"
           handleChange={handleChange}
           options={jobTypes}
+          label='Job Type'
         />
         <div className='form-controller'>
-          <button className='control-btn'>Clear</button>
-          <button className='control-btn'>Submit</button>
+          <button className='clear-btn btn'>Clear</button>
+          <button className='submit-btn btn'>Submit</button>
         </div>
       </form>
     </Wrapper>
@@ -57,7 +59,40 @@ const AddJob = () => {
 }
 
 const Wrapper = styled.div`
+  background-color: var(--white);
+  padding: 3rem 2rem;
+  box-shadow: var(--shadow-2);
+  border-radius: 5px;
 
+
+  form {
+
+    .form-controller {
+      margin-top: 2rem;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 1rem;
+
+      .clear-btn {
+        background-color: var(--grey-500);
+      }
+
+    }
+  }
+
+  @media screen and (min-width: 992px){
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+  }
+  @media screen and (min-width: 1120px){
+    form {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
 `;
 
 export default AddJob

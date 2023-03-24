@@ -1,18 +1,17 @@
 import React from 'react'
 
-const FormInput = ({type, name, value, handleChange}) => {
+const FormInput = ({type, label, value, handleChange}) => {
   return (
     <div className='form-control'>
-        <label htmlFor=''>
-            {name}
+        <label htmlFor={label}>
+          {label}
         </label>
         <input
-            
-            className='form-input'
-            type={type}
-            value={value}
-            onChange={handleChange}
-            />
+          className='form-input'
+          type={type}
+          value={value}
+          onChange={handleChange}
+        />
     </div>
   )
 }
