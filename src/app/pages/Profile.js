@@ -4,7 +4,10 @@ import styled from 'styled-components'
 const Profile = () => {
   return (
     <Wrapper className='dashboard-center'>
-      <h1>Profile Page</h1>
+      <h2>Profile Job</h2>
+      <form>
+
+      </form>
     </Wrapper>
   )
 }
