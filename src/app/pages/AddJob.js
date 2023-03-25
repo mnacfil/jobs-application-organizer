@@ -17,7 +17,7 @@ const AddJob = () => {
 
   return (
     <Wrapper className='dashboard-center'>
-      <h2>Add job</h2>
+      <h3>Add job</h3>
       <form onSubmit={handleSubmit}>
         <FormInput 
           label="Position"
@@ -50,8 +50,8 @@ const AddJob = () => {
           label='Job Type'
         />
         <div className='form-controller'>
-          <button className='clear-btn btn'>Clear</button>
-          <button className='submit-btn btn'>Submit</button>
+          <button className='clear-btn btn btn-block'>Clear</button>
+          <button className='submit-btn btn btn-block'>Submit</button>
         </div>
       </form>
     </Wrapper>
@@ -60,7 +60,7 @@ const AddJob = () => {
 
 const Wrapper = styled.div`
   background-color: var(--white);
-  padding: 3rem 2rem;
+  padding: 2.5rem 2rem;
   box-shadow: var(--shadow-2);
   border-radius: 5px;
   width: 80%;
@@ -77,6 +77,7 @@ const Wrapper = styled.div`
       display: grid;
       grid-template-columns: 1fr 1fr;
       column-gap: 1rem;
+      
 
       .clear-btn {
         background-color: var(--grey-500);
@@ -91,6 +92,10 @@ const Wrapper = styled.div`
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
+
+      .form-controller {
+        margin-top: 2.2rem;
+      }
     }
   }
   @media screen and (min-width: 1120px){

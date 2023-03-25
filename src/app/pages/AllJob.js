@@ -17,8 +17,8 @@ const AllJob = () => {
   }
   return (
     <Wrapper className='dashboard-center'>
-        <form onSubmit={handleSubmit} className="form">
-            <h2>Search form</h2>
+        <h3>Search form</h3>
+        <form onSubmit={handleSubmit}>
             <FormInput 
               label='Search'
               type="text"
@@ -43,7 +43,7 @@ const AllJob = () => {
               value=''
               handleChange={handleChange}
               />
-            <button className='clear-btn btn btn-block'>
+            <button className='clear-filter-btn btn btn-block'>
               Clear Filters
             </button>
         </form>
@@ -52,11 +52,20 @@ const AllJob = () => {
 }
 
 const Wrapper = styled.div`
-  
+  background-color: var(--white);
+  padding: 2.5rem 2rem;
+  border-radius: 5px;
+  box-shadow: var(--shadow-2);
+  transition: var(--transition);
+
+  &:hover {
+    box-shadow: var(--shadow-4);
+  }
 
   form {
 
-    .clear-btn {
+    .clear-filter-btn {
+      margin-top: 0.5rem;
       width: 100%;
       background-color: var(--red-light);
       color: var(--red-dark);
@@ -64,12 +73,23 @@ const Wrapper = styled.div`
     }
   }
 
-  /* @media screen and (min-width: 768px){
-    .container {
+  @media screen and (min-width: 768px){
+    form {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      column-gap: 2rem;
     }
-  } */
+  }
+  @media screen and (min-width: 992px){
+    form {
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+
+      .clear-filter-btn {
+        margin-top: 1.1rem;
+      }
+    }
+  }
 `;
 
 export default AllJob
