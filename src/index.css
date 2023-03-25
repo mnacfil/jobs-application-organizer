@@ -240,6 +240,9 @@ lert {
 .btn-block {
   height: 35px;
 }
+.form-input:focus, .form-select:focus {
+  outline: none;
+}
 .form-row {
   margin-bottom: 1rem;
 }
