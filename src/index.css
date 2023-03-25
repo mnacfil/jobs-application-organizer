@@ -186,7 +186,7 @@ ul {
   color: var(--white);
 }
 /* alerts */
-.alert {
+lert {
   padding: 0.375rem 0.75rem;
   margin-bottom: 1rem;
   border-color: transparent;
@@ -289,11 +289,6 @@ ul {
   margin-top: -1rem;
 }
 
-.container {
-  width: var(--fluid-width);
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
 .full-page {
   min-height: 100vh;
 }
