@@ -1,25 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FormInput, AppLogo } from '../components';
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleIsAlreadyRegister } from '../features/user/userSlice';
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const { isAlreadyRegister } = useSelector(store => store.user)
+
   const handleChange = (e) => {
     console.log("handle change");
   }
   const handleSubmit = (e) => {
+    e.preventDefault();
     console.log("handle submit");
   }
   return (
     <Wrapper>
       <form className='form' onSubmit={handleSubmit}>
         <AppLogo />
-        <h3>Register</h3>
-        <FormInput 
+        <h3>{ isAlreadyRegister ? 'Login': 'Register'}</h3>
+        {
+          !isAlreadyRegister && 
+          <FormInput 
           label='Name'
           value=''
           handleChange={handleChange}
           type='text'
-        />
+          />
+        }
         <FormInput 
           label='Email'
           value=''
@@ -43,8 +52,13 @@ const Register = () => {
           Demo App
         </button>
         <p>
-          Already a member?
-          <button className='toggle-btn'>Login</button>
+          {isAlreadyRegister ? 'Not a member yet?' : 'Already a member?'}
+          <button 
+            className='toggle-btn'
+            onClick={() => dispatch(toggleIsAlreadyRegister())}
+            >
+            {isAlreadyRegister ? 'Register' : 'Login'}
+          </button>
         </p>
       </form>
     </Wrapper>
