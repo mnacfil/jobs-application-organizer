@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import NavLinks from './NavLinks'
+// import logo from '../../assets/svg/logo-white.svg'
 
 
 const BigSidebar = () => {
@@ -8,7 +9,8 @@ const BigSidebar = () => {
     <Wrapper>
       <div className='sidebar'>
         <header>
-          Jobs Organizer
+          {/* <img src={logo} alt='jobs organizer logo'/> */}
+          Jobs organizer
         </header>
         <div>
           <NavLinks />
@@ -43,12 +45,20 @@ const Wrapper = styled.aside`
     }
 
     .nav-item {
-      margin-bottom: 1rem ;
       display: flex;
       align-items: center;
+      padding: 1rem;
+      transition: var(--transition);
+      &:hover {
+        background-color: var(--grey-100);
+        color: var(--textColor);
+        padding-left: 1.5rem;
+
+      }
 
       svg {
         margin-right: 1rem;
+        font-size: 1.75rem;
       }
       
       a {
