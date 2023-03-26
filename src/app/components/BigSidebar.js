@@ -1,16 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import NavLinks from './NavLinks'
-// import logo from '../../assets/svg/logo-white.svg'
-
+import AppLogo from './AppLogo'
 
 const BigSidebar = () => {
   return (
     <Wrapper>
       <div className='sidebar'>
         <header>
-          {/* <img src={logo} alt='jobs organizer logo'/> */}
-          Jobs organizer
+          <AppLogo />
         </header>
         <div>
           <NavLinks />

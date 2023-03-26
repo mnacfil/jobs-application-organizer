@@ -6,6 +6,7 @@ import Dashboard from './Dashboard'
 import Error from './Error'
 import Layout from './Layout'
 import Profile from './Profile'
+import Register from './Register'
 
 export { 
     AddJob, 
@@ -15,5 +16,6 @@ export {
     Dashboard, 
     Error, 
     Layout,
-    Profile 
+    Profile,
+    Register
 }

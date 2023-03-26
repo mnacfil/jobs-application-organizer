@@ -8,7 +8,8 @@ import {
   Dashboard, 
   Error, 
   Layout,
-  Profile 
+  Profile,
+  Register 
 } from './app/pages'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path='profile' element={<Profile />}/>
         </Route>
         <Route path='landing' element={<Landing />}/>
+        <Route path='register' element={<Register />}/>
         <Route path='*' element={<Error />}/>
       </Routes>
     </BrowserRouter>
