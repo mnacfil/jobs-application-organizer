@@ -2,6 +2,7 @@ import React from 'react';
 import {AppLogo} from '../components';
 import styled from 'styled-components';
 import LandingImage from '../../assets/image/landing-pic.svg'
+import { Link } from 'react-router-dom';
 
 
 const Landing = () => {
@@ -14,11 +15,12 @@ const Landing = () => {
           <p>
           A job organizing app is a software application that helps individuals or organizations to manage and organize their work-related tasks, projects, schedules, and agendas in a more efficient and effective manner. These apps provide features such as task lists, project workflows, calendars, reminders, collaboration tools, and reporting capabilities to help users stay on top of their professional commitments and achieve their goals.
           </p>
-          <button 
-            className='btn login-register-btn'
+          <Link 
+            to='/register'
+            className='btn '
             >
-              Login/Register
-          </button>
+            Login/Register
+          </Link>
         </article>
         <div>
           <img src={LandingImage} alt='landing image'/>
@@ -50,10 +52,10 @@ const Wrapper = styled.main`
           color: var(--primary-500);
         }
       }
-      button {
-        height: 40px;
+      a {
+        display: inline-block;
         font-size: 1.1rem;
-        padding: 0 1.25rem;
+        padding: 0.5rem 1rem;
       }
 
     }
@@ -74,7 +76,7 @@ const Wrapper = styled.main`
       article {
         padding-top: 0;
 
-        button {
+        a {
           font-size: 1.25rem;
         }
       }
