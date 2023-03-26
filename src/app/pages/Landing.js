@@ -50,6 +50,12 @@ const Wrapper = styled.main`
           color: var(--primary-500);
         }
       }
+      button {
+        height: 40px;
+        font-size: 1.1rem;
+        padding: 0 1.25rem;
+      }
+
     }
 
     div {
@@ -67,6 +73,10 @@ const Wrapper = styled.main`
 
       article {
         padding-top: 0;
+
+        button {
+          font-size: 1.25rem;
+        }
       }
       div {
         display: block;
