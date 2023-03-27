@@ -2,18 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 import { FormInput, AppLogo } from '../components';
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleIsAlreadyRegister } from '../features/user/userSlice';
+import { toggleIsAlreadyRegister, handleChange, loginUser } from '../features/user/userSlice';
+import {toast} from 'react-toastify';
 
 const Register = () => {
   const dispatch = useDispatch();
-  const { isAlreadyRegister } = useSelector(store => store.user)
+  const { isAlreadyRegister, user, isLoading } = useSelector(store => store.user);
 
-  const handleChange = (e) => {
-    console.log("handle change");
+  const handleData = (e) => {
+    const name = e.target.name;
+    console.log(name);
+    const value = e.target.value;
+    dispatch(handleChange({ name, value }));
   }
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("handle submit");
+  }
+  const login = () => {
+    if(!user.email || !user.password) return toast.error('Please fill out all field.');
+    dispatch(loginUser({emai: user.email, password: user.password }));
   }
   return (
     <Wrapper>
@@ -24,25 +32,29 @@ const Register = () => {
           !isAlreadyRegister && 
           <FormInput 
           label='Name'
-          value=''
-          handleChange={handleChange}
+          value={user.name}
+          handleData={handleData}
           type='text'
+          name='name'
           />
         }
         <FormInput 
           label='Email'
-          value=''
-          handleChange={handleChange}
+          value={user.email}
+          handleData={handleData}
           type='email'
+          name='email'
         />
         <FormInput 
           label='Password'
-          value=''
-          handleChange={handleChange}
+          value={user.password}
+          handleData={handleData}
           type='password'
+          name='password'
         />
         <button
           className='btn btn-block submit-btn'
+          onClick={login}
         >
           Submit
         </button>
@@ -99,6 +111,10 @@ const Wrapper = styled.main`
       background: none;
       cursor: pointer;
       letter-spacing: 1px;
+
+      &:focus {
+        outline: none;
+      }
     }
   }
 `;
