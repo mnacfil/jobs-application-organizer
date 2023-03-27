@@ -45,7 +45,7 @@ const Register = () => {
     <Wrapper>
       <AppLogo />
       <h3>{ isAlreadyRegister ? 'Login': 'Register'}</h3>
-      <form className='form' onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         {
           !isAlreadyRegister && 
           <FormInput 
@@ -95,12 +95,18 @@ const Register = () => {
 }
 
 const Wrapper = styled.main`
-  display: grid;
-  place-items: center;
-  min-height: 100vh;
-  .form {
-    width: 400px;
+  background-color: var(--white);
+  margin: 0 auto;
+  width: 400px;
+  padding: 1rem 2rem;
+  margin-top: 10rem;
+  box-shadow: var(--shadow-2);
+  border-radius: var(--borderRadius);
+  transition: var(--transition);
 
+  &:hover {
+    box-shadow: var(--shadow-4);
+  }
     header {
       text-align: center;
       h2 {
@@ -133,7 +139,6 @@ const Wrapper = styled.main`
         outline: none;
       }
     }
-  }
 `;
 
 export default Register
