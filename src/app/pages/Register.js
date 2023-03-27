@@ -29,12 +29,12 @@ const Register = () => {
       toast.error('Plese fill out all field.');
       return;
     }
-    // if user already register
+    // if user want to login,
     if(user.action === 'login') {
       dispatch(loginUser({ email, password }));
       return;
     }
-    // then register the user
+    // otherwise he/she performing register.
     dispatch(registerUser({ name, email, password }));
   }
 

@@ -12,7 +12,8 @@ const initialState = {
     },
     isLoading: false,
     isError: false,
-    isLogin: false
+    isLogin: false,
+    isLogoutBtnShow: false
 }
 
 export const registerUser = createAsyncThunk('user/register', async(user, thunkAPI) => {
@@ -32,6 +33,9 @@ const userSlice = createSlice({
         },
         handleChange: (state, { payload: { name, value} }) => {
             state.user[name] = value;
+        },
+        toggleLogoutBtn : (state) => {
+            state.isLogoutBtnShow = !state.isLogoutBtnShow;
         }
     },
     extraReducers: (builder) => {
@@ -73,4 +77,8 @@ const userSlice = createSlice({
 })
 
 export default userSlice.reducer;
-export const { toggleIsAlreadyRegister, handleChange, toggleUserAction }  = userSlice.actions;
+export const { 
+    handleChange, 
+    toggleUserAction,
+    toggleLogoutBtn
+}  = userSlice.actions;

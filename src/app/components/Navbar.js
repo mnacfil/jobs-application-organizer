@@ -3,9 +3,13 @@ import styled from 'styled-components'
 import {BiAlignLeft} from 'react-icons/bi'
 import {HiUserCircle} from 'react-icons/hi'
 import {AiFillCaretDown} from 'react-icons/ai'
+import { toggleLogoutBtn } from '../features/user/userSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const { isLogoutBtnShow } = useSelector(store => store.user);
   return (
     <Wrapper>
       <div className="nav-center">
@@ -14,12 +18,17 @@ const Navbar = () => {
         </div>
         <h2>Dashboard</h2>
         <div className="nav-user">
-          <button>
+          <button 
+            className='btn'
+            onClick={() => dispatch(toggleLogoutBtn())}
+            >
             <HiUserCircle />
             <span>Melvin</span>
             <AiFillCaretDown />
           </button>
-          <button className='logout-btn'>
+          <button 
+            className={`btn logout-btn ${isLogoutBtnShow ? 'show-logout-btn' : ''}`}
+            >
             Logout
           </button>
         </div>
@@ -61,16 +70,8 @@ const Wrapper = styled.nav`
     .nav-user {
       position: relative;
       button {
-        background-color: var(--primary-500);
-        border: none;
-        outline: none;
-        color: var(--white);
-        padding: 6px 12px;
         display: flex;
         align-items: center;
-        cursor: pointer;
-        border-radius: 5px;
-        letter-spacing: var(--letterSpacing);
         span {
           margin: 0 5px;
         };
@@ -80,13 +81,17 @@ const Wrapper = styled.nav`
         position: absolute;
         top: 40px;
         left: 0;
-        width: 100%;
         display: grid;
         place-items: center;
-        height: 40px;
         background-color: var(--primary-100);
         color: var(--primary-600);
+        border: none;
+        height: 40px;
+        width: 100%;
         display: none;
+      }
+      .show-logout-btn {
+        display: inline-block;
       }
     }
   }
