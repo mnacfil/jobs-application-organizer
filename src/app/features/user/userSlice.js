@@ -47,11 +47,12 @@ const userSlice = createSlice({
                 toast.success(`Welcome ${payload.user.name}`);
                 saveUserToLS(payload.user);
             })
-            .addCase(loginUser.rejected, (state) => {
+            .addCase(loginUser.rejected, (state, action) => {
+                console.log(action);
                 state.isLoading = false;
                 state.isError = true;
                 state.isLogin = false;
-                toast.error(`there's an error`);
+                toast.error(action.payload);
             })
     }
 })
