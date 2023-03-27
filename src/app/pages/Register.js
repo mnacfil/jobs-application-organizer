@@ -1,33 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { FormInput, AppLogo } from '../components';
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleIsAlreadyRegister, handleChange, loginUser } from '../features/user/userSlice';
 import {toast} from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const dispatch = useDispatch();
-  const { isAlreadyRegister, user, isLoading } = useSelector(store => store.user);
+  const navigate = useNavigate();
+  const { user, isLoading, isLogin } = useSelector(store => store.user);
+  const { isAlreadyRegister, name, email, password } = user;
 
   const handleData = (e) => {
     const name = e.target.name;
-    console.log(name);
     const value = e.target.value;
     dispatch(handleChange({ name, value }));
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("handle submit");
+    if(!email || !password || (!isAlreadyRegister && !name)) {
+      toast.error('Plese fill out all field.');
+      return;
+    }
+    // if user already register
+    if(isAlreadyRegister) {
+      dispatch(loginUser({ email, password }));
+      return;
+    }
+    // then register the user
   }
-  const login = () => {
-    if(!user.email || !user.password) return toast.error('Please fill out all field.');
-    dispatch(loginUser({emai: user.email, password: user.password }));
-  }
+
+  useEffect(() => {
+    // after the user login, progmmatically navigate user to root/home page
+    console.log("navigate user");
+    if(isLogin) {
+      setTimeout(() => {
+        navigate('/');
+      }, 2000);
+    }
+  }, [isLogin]);
+
   return (
     <Wrapper>
+      <AppLogo />
+      <h3>{ isAlreadyRegister ? 'Login': 'Register'}</h3>
       <form className='form' onSubmit={handleSubmit}>
-        <AppLogo />
-        <h3>{ isAlreadyRegister ? 'Login': 'Register'}</h3>
         {
           !isAlreadyRegister && 
           <FormInput 
@@ -54,15 +72,15 @@ const Register = () => {
         />
         <button
           className='btn btn-block submit-btn'
-          onClick={login}
         >
-          Submit
+          {isLoading ? 'loading...' : 'Submit'}
         </button>
         <button
           className='btn btn-block demo-btn'
         >
           Demo App
         </button>
+      </form>
         <p>
           {isAlreadyRegister ? 'Not a member yet?' : 'Already a member?'}
           <button 
@@ -72,7 +90,6 @@ const Register = () => {
             {isAlreadyRegister ? 'Register' : 'Login'}
           </button>
         </p>
-      </form>
     </Wrapper>
   )
 }

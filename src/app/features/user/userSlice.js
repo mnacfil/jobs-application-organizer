@@ -1,15 +1,17 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import { loginThunk, registerThunk } from './userThunk';
+import { toast } from 'react-toastify';
 
 const initialState = {
     user: {
-        name: null,
-        email: null,
-        password: null
+        name: '',
+        email: '',
+        password: '',
+        isAlreadyRegister: true,
     },
-    isAlreadyRegister: true,
     isLoading: false,
-    isError: false
+    isError: false,
+    isLogin: false
 }
 
 export const registerUser = createAsyncThunk('user/register', async(thunkAPI) => {
@@ -26,11 +28,29 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         toggleIsAlreadyRegister: (state) => {
-            state.isAlreadyRegister = !state.isAlreadyRegister;
+            state.user.isAlreadyRegister = !state.user.isAlreadyRegister;
         },
         handleChange: (state, { payload: { name, value} }) => {
             state.user[name] = value;
         }
+    },
+    extraReducers: (builder) => {
+        builder.
+            addCase(loginUser.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(loginUser.fulfilled, (state, { payload }) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.isLogin = true;
+                toast.success(`Welcome ${payload.user.name}`);
+            })
+            .addCase(loginUser.rejected, (state) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.isLogin = false;
+                toast.error(`there's an error`);
+            })
     }
 })
 
