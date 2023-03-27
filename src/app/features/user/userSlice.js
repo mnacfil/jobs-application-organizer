@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import { loginThunk, registerThunk } from './userThunk';
 import { toast } from 'react-toastify';
+import { getUserFromLS, saveUserToLS } from '../../util/localStorage';
 
 const initialState = {
     user: {
@@ -44,6 +45,7 @@ const userSlice = createSlice({
                 state.isError = false;
                 state.isLogin = true;
                 toast.success(`Welcome ${payload.user.name}`);
+                saveUserToLS(payload.user);
             })
             .addCase(loginUser.rejected, (state) => {
                 state.isLoading = false;
