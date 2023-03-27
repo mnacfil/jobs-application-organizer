@@ -1,8 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FormInput, AppLogo } from '../components';
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleIsAlreadyRegister, handleChange, loginUser } from '../features/user/userSlice';
+import { 
+  handleChange, 
+  loginUser, 
+  registerUser,
+  toggleUserAction
+} from '../features/user/userSlice';
 import {toast} from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +15,8 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, isLoading, isLogin } = useSelector(store => store.user);
-  const { isAlreadyRegister, name, email, password } = user;
+  const { name, email, password } = user;
+  const [ userAction, setUserAction ] = useState('login');
 
   const handleData = (e) => {
     const name = e.target.name;
@@ -19,16 +25,26 @@ const Register = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!email || !password || (!isAlreadyRegister && !name)) {
+    if(!email || !password || (user.action === 'register' && !name)) {
       toast.error('Plese fill out all field.');
       return;
     }
     // if user already register
-    if(isAlreadyRegister) {
+    if(user.action === 'login') {
       dispatch(loginUser({ email, password }));
       return;
     }
     // then register the user
+    dispatch(registerUser({ name, email, password }));
+  }
+
+  const handleUserAction = () => {
+    if(userAction === 'login') {
+      setUserAction('register');
+    } else {
+      setUserAction('login');
+    }
+    dispatch(toggleUserAction(userAction));
   }
 
   useEffect(() => {
@@ -44,10 +60,10 @@ const Register = () => {
   return (
     <Wrapper>
       <AppLogo />
-      <h3>{ isAlreadyRegister ? 'Login': 'Register'}</h3>
+      <h3>{ user.action === 'login' ? 'Login': 'Register'}</h3>
       <form onSubmit={handleSubmit}>
         {
-          !isAlreadyRegister && 
+          user.action === 'register' && 
           <FormInput 
           label='Name'
           value={user.name}
@@ -82,12 +98,12 @@ const Register = () => {
         </button>
       </form>
         <p>
-          {isAlreadyRegister ? 'Not a member yet?' : 'Already a member?'}
+          {user.action === 'login' ? 'Not a member yet?' : 'Already a member?'}
           <button 
             className='toggle-btn'
-            onClick={() => dispatch(toggleIsAlreadyRegister())}
+            onClick={handleUserAction}
             >
-            {isAlreadyRegister ? 'Register' : 'Login'}
+            {user.action === 'login' ? 'Register' : 'Login'}
           </button>
         </p>
     </Wrapper>

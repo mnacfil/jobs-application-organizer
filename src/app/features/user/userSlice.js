@@ -8,28 +8,27 @@ const initialState = {
         name: '',
         email: '',
         password: '',
-        isAlreadyRegister: true,
+        action: 'login'
     },
     isLoading: false,
     isError: false,
     isLogin: false
 }
 
-export const registerUser = createAsyncThunk('user/register', async(thunkAPI) => {
-    console.log(thunkAPI);
-    console.log('register user');
-})
-export const loginUser = createAsyncThunk('user/register', async(user, thunkAPI) => {
-    console.log(thunkAPI);
+export const registerUser = createAsyncThunk('user/register', async(user, thunkAPI) => {
+    return registerThunk('/auth/register', user, thunkAPI);
+});
+
+export const loginUser = createAsyncThunk('user/login', async(user, thunkAPI) => {
     return loginThunk('/auth/login', user, thunkAPI);
-})
+});
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        toggleIsAlreadyRegister: (state) => {
-            state.user.isAlreadyRegister = !state.user.isAlreadyRegister;
+        toggleUserAction: (state, { payload }) => {
+            state.user.action = payload;
         },
         handleChange: (state, { payload: { name, value} }) => {
             state.user[name] = value;
@@ -44,7 +43,7 @@ const userSlice = createSlice({
                 state.isLoading = false;
                 state.isError = false;
                 state.isLogin = true;
-                toast.success(`Welcome ${payload.user.name}`);
+                toast.success(`Welcome back ${payload.user.name}!`);
                 saveUserToLS(payload.user);
             })
             .addCase(loginUser.rejected, (state, action) => {
@@ -54,8 +53,24 @@ const userSlice = createSlice({
                 state.isLogin = false;
                 toast.error(action.payload);
             })
+            .addCase(registerUser.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(registerUser.fulfilled, (state, { payload }) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.isLogin = true;
+                toast.success(`Welcome ${payload.user.name}`);
+                saveUserToLS(payload.user);
+            })
+            .addCase(registerUser.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.isLogin = false;
+                toast.error(action.payload);
+            })
     }
 })
 
 export default userSlice.reducer;
-export const { toggleIsAlreadyRegister, handleChange }  = userSlice.actions;
+export const { toggleIsAlreadyRegister, handleChange, toggleUserAction }  = userSlice.actions;
