@@ -8,3 +8,6 @@ export const getUserFromLS = () => {
     if(!user) return null;
     return JSON.parse(user)
 }
+export const removeUserFromLS = () => {
+    localStorage.removeItem('user');
+}

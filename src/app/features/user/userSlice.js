@@ -1,8 +1,14 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import { loginThunk, registerThunk } from './userThunk';
 import { toast } from 'react-toastify';
-import { getUserFromLS, saveUserToLS } from '../../util/localStorage';
+import { getUserFromLS, saveUserToLS, removeUserFromLS } from '../../util/localStorage';
 
+const defaultUser = {
+    name: '',
+    email: '',
+    password: '',
+    action: 'login'
+}
 const initialState = {
     user: {
         name: '',
@@ -36,6 +42,13 @@ const userSlice = createSlice({
         },
         toggleLogoutBtn : (state) => {
             state.isLogoutBtnShow = !state.isLogoutBtnShow;
+        },
+        logoutUser: (state) => {
+            state.user = defaultUser;
+            state.isLogin = false;
+            state.isLogoutBtnShow = false;
+            removeUserFromLS();
+            toast.success('Logging out...');
         }
     },
     extraReducers: (builder) => {
@@ -80,5 +93,6 @@ export default userSlice.reducer;
 export const { 
     handleChange, 
     toggleUserAction,
-    toggleLogoutBtn
+    toggleLogoutBtn,
+    logoutUser
 }  = userSlice.actions;
