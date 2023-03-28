@@ -9,7 +9,6 @@ export const createJobThunk = async(job, thunkAPI) => {
     }
 }
 export const getAllJobThunk = async( _, thunkAPI) => {
-    console.log(thunkAPI)
     try {
         const response = await customAxios.get('/jobs')
         return response.data;

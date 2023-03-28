@@ -5,11 +5,11 @@ import SkeletonCard from './SkeletonCard';
 
 const AllJobContainer = ({ allJob, totalJob, loading }) => {
   return (
-    <SkeletonTheme baseColor='#9fb3c8' highlightColor="#627d98">
+    <SkeletonTheme baseColor='#bcccdc' highlightColor="#829ab1">
       {
         loading ? <SkeletonCard allJob={allJob}/> :
         <section className='all-job-section'>
-          <h3>{totalJob} Jobs Found`</h3>
+          <h3>{totalJob} Jobs Found</h3>
           <div className='all-job-container'>
             {allJob.map(job => {
               return (

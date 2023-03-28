@@ -165,6 +165,9 @@ const Wrapper = styled.div`
               border-radius: var(--borderRadius);
               margin-right: 2rem;
             }
+            .skeleton-loading-company-initial {
+              background: none;
+            }
           }
           .application-data {
     
@@ -179,6 +182,10 @@ const Wrapper = styled.div`
             .delete-btn {
               background-color: var(--red-light);
               color: var(--red-dark);
+            }
+            .skeleton-loading-btn {
+              background: none;
+              box-shadow: none;
             }
     
             @media screen and (min-width: 576px){

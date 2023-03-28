@@ -22,15 +22,15 @@ const initialState = {
         jobLocation: '',
         status: 'pending',
         jobType: 'full-time',
-        statusOptions: ['pending', 'Declined', 'Job Offer'],
+        statusOptions: ['pending', 'Declined', 'interview'],
         jobTypeOptions: ['full-time', 'part-time', 'remote', 'internship'],
     },
     searchForm: {
         isSearchLoading: false,
         isSearchError: false,
         searchFilter: searchDefaultFilterState,
-        statuses: ['all','interview','Declined','Pending'],
-        types: ['all', 'Full-time', 'Part-time', 'Remote', 'Internship'],
+        statuses: ['all','interview','declined','pending'],
+        types: ['all', 'full-time', 'part-time', 'remote', 'internship'],
         sorts: ['latest', 'oldest', 'a-z', 'z-a'],
         allJob: [],
         totalJob: 0,
@@ -66,7 +66,7 @@ const jobSlice = createSlice({
         })
         .addCase(getAllJob.fulfilled, (state, { payload }) => {
             const {jobs, totalJobs, numOfPages } = payload;
-            state.searchForm.isSearchLoading = true;
+            state.searchForm.isSearchLoading = false;
             state.searchForm.isSearchError = false;
             state.searchForm.allJob = jobs;
             state.searchForm.totalJob = totalJobs;
@@ -82,10 +82,15 @@ const jobSlice = createSlice({
         })
         .addCase(createJob.fulfilled, (state, { payload }) => {
             console.log(payload);
+            state.job.isLoading = false;
+            state.job.isError = false;
             toast.success('Job created')
         })
         .addCase(createJob.rejected, (state, { payload }) => {
             console.log(payload);
+            state.job.isLoading = false;
+            state.job.isError = true;
+            toast.success('Something went wrong')
         })
         .addCase(deleteJob.pending, (state) => {
             state.job.isLoading = true;
