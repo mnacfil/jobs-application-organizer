@@ -4,8 +4,6 @@ import { FormInput, FormSelect, AllJobContainer } from '../components';
 import { useSelector, useDispatch } from 'react-redux';
 import { handleChange, getAllJob } from '../features/job/jobSlice'
 
-// search, status, type, sort, clear-filter-btn
-
 const AllJob = () => {
   const dispatch = useDispatch();
   const { searchForm } = useSelector(store => store.job);

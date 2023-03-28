@@ -1,8 +1,11 @@
 import React from 'react'
-import {formatDate} from '../util/moment'
+import {formatDate} from '../util/moment';
+import { deleteJob } from '../features/job/jobSlice';
+import { useDispatch } from 'react-redux';
 
-const Job = ({ company, jobLocation, position, jobType, status, createdAt }) => {
-  return (
+const Job = ({ company, jobLocation, position, jobType, status, createdAt, _id }) => {
+    const dispatch = useDispatch();
+    return (
     <article className='job'>
         <header>
             <div className='company-initial'>D</div>
@@ -23,7 +26,12 @@ const Job = ({ company, jobLocation, position, jobType, status, createdAt }) => 
             </div>
             <div className='edit-delete-controller'>
                 <button className='edit-btn btn'>Edit</button>
-                <button className='delete-btn btn'>Delete</button>
+                <button 
+                    className='delete-btn btn'
+                    onClick={() => dispatch(deleteJob(_id))}
+                    >
+                    Delete
+                </button>
             </div>
         </div>
     </article> 

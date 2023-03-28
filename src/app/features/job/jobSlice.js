@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { createJobThunk, getAllJobThunk } from './jobThunk'
+import { toast } from 'react-toastify';
+import { 
+    createJobThunk, 
+    getAllJobThunk,
+    deleteJobThunk 
+} from './jobThunk'
 
 const searchDefaultFilterState = {
     search: '',
@@ -34,8 +39,8 @@ const initialState = {
 }
 
 export const createJob = createAsyncThunk('job/create', createJobThunk);
-
-export const getAllJob = createAsyncThunk('job/getAllJob', getAllJobThunk )
+export const getAllJob = createAsyncThunk('job/getAll', getAllJobThunk );
+export const deleteJob = createAsyncThunk('job/delete', deleteJobThunk );
 
 const jobSlice = createSlice({
     name: 'job',
@@ -72,6 +77,29 @@ const jobSlice = createSlice({
             state.searchForm.isSearchLoading = false;
             state.searchForm.isSearchError = true;
             console.log(payload);
+        })
+        .addCase(createJob.pending, (state) => {
+            state.job.isLoading = true;
+        })
+        .addCase(createJob.fulfilled, (state, { payload }) => {
+            console.log(payload);
+            toast.success('Job created')
+        })
+        .addCase(createJob.rejected, (state, { payload }) => {
+            console.log(payload);
+        })
+        .addCase(deleteJob.pending, (state) => {
+            state.job.isLoading = true;
+        })
+        .addCase(deleteJob.fulfilled, (state, { payload }) => {
+            state.job.isLoading = false;
+            toast.success(payload)
+        })
+        .addCase(deleteJob.rejected, (state, { payload }) => {
+            console.log(payload);
+            state.job.isLoading = false;
+            state.job.isError = true;
+            toast.error('Unathorized');
         })
     }
 });
