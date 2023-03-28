@@ -4,8 +4,10 @@ import { useSelector } from 'react-redux'
 import { getUserFromLS } from './util/localStorage'
 
 const ProtectedRoute = ({ children }) => {
+    const user = getUserFromLS()
+    console.log(user);
     const { currentUser } = useSelector(store => store.user);
-    if(!currentUser) return <Navigate to='/landing'/>
+    if(!currentUser && !user) return <Navigate to='/landing'/>
     return children;
 }
 

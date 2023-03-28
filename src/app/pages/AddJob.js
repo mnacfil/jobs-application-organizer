@@ -6,7 +6,7 @@ import { handleChange, createJob } from '../features/job/jobSlice'
 
 const AddJob = () => {
   const dispatch = useDispatch();
-  const initialState = useSelector(store => store.job)
+  const {job} = useSelector(store => store.job)
   const {
     statusOptions, 
     jobTypeOptions,
@@ -16,12 +16,11 @@ const AddJob = () => {
     jobType,
     status,
     isLoading
-  } = initialState;
+  } = job;
 
   const handleDataInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log(value);
     dispatch(handleChange({ name, value }));
   }
 
