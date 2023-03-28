@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FormSelect = ({ handleChange, value, options = [], label}) => {
+const FormSelect = ({ handleData, value, options = [], label}) => {
   return (
     <div className='form-row'>
         <label 
@@ -12,7 +12,7 @@ const FormSelect = ({ handleChange, value, options = [], label}) => {
         <select
           className='form-select'
           value={value}
-          onChange={handleChange}
+          onChange={handleData}
           name={label}
         >
           {options.map((option, index) => {

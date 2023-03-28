@@ -1,14 +1,28 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FormInput, FormSelect } from '../components'
-
-const status = ['Pending', 'Interviewed', 'Declined', 'Job Offer']
-const jobTypes = ['Full-time', 'Part-time', 'Remote', 'Internship']
+import { useDispatch, useSelector } from 'react-redux';
+import { handleChange } from '../features/job/jobSlice'
 
 const AddJob = () => {
+  const dispatch = useDispatch();
+  const initialState = useSelector(store => store.job)
+  const {
+    statusOptions, 
+    jobTypeOptions,
+    position,
+    company,
+    jobLocation,
+    jobType,
+    status,
+    isLoading
+  } = initialState;
 
-  const handleChange = (e) => {
-    console.log(e.target.name)
+  const handleDataInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    console.log(value);
+    dispatch(handleChange({ name, value }));
   }
 
   const handleSubmit = (e) => {
@@ -19,34 +33,39 @@ const AddJob = () => {
     <Wrapper className='dashboard-center'>
       <h3>Add job</h3>
       <form onSubmit={handleSubmit}>
-        <FormInput 
+        <FormInput
+          name='position'
           label="Position"
-          value=""
-          handleChange={handleChange}
+          value={position}
+          handleData={handleDataInput}
           type="text"
           />
         <FormInput 
+          name='company'
           label="Company"
-          value=""
-          handleChange={handleChange}
+          value={company}
+          handleData={handleDataInput}
           type="text"
           />
         <FormInput 
+          name='jobLocation'
           label="Job Location"
-          value=""
-          handleChange={handleChange}
+          value={jobLocation}
+          handleData={handleDataInput}
           type="text"
           />
-        <FormSelect 
-          value="Pending"
-          handleChange={handleChange}
-          options={status}
+        <FormSelect
+          name='status' 
+          value={status}
+          handleData={handleDataInput}
+          options={statusOptions}
           label='Status'
         />
-        <FormSelect 
-          value="Full-time"
-          handleChange={handleChange}
-          options={jobTypes}
+        <FormSelect
+          name='jobType' 
+          value={jobType}
+          handleData={handleDataInput}
+          options={jobTypeOptions}
           label='Job Type'
         />
         <div className='form-controller'>
