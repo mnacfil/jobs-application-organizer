@@ -1,10 +1,11 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux'
+import { getUserFromLS } from './util/localStorage'
 
 const ProtectedRoute = ({ children }) => {
-    const { isLogin } = useSelector(store => store.user)
-    if(!isLogin) return <Navigate to='/landing'/>
+    const { currentUser } = useSelector(store => store.user);
+    if(!currentUser) return <Navigate to='/landing'/>
     return children;
 }
 

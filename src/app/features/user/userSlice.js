@@ -10,6 +10,7 @@ const defaultUser = {
     action: 'login'
 }
 const initialState = {
+    currentUser: null,
     user: {
         name: '',
         email: '',
@@ -53,6 +54,7 @@ const userSlice = createSlice({
             state.user = defaultUser;
             state.isLogin = false;
             state.isLogoutBtnShow = false;
+            state.currentUser = null;
             removeUserFromLS();
             toast.success('Logging out...');
         }
@@ -66,6 +68,7 @@ const userSlice = createSlice({
                 state.isLoading = false;
                 state.isError = false;
                 state.isLogin = true;
+                state.currentUser = payload.user;
                 toast.success(`Welcome back ${payload.user.name}!`);
                 saveUserToLS(payload.user);
             })
@@ -83,6 +86,7 @@ const userSlice = createSlice({
                 state.isLoading = false;
                 state.isError = false;
                 state.isLogin = true;
+                state.currentUser = payload.user;
                 toast.success(`Welcome ${payload.user.name}`);
                 saveUserToLS(payload.user);
             })
