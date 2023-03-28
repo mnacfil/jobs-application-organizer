@@ -3,7 +3,8 @@ import { toast } from 'react-toastify';
 import { 
     createJobThunk, 
     getAllJobThunk,
-    deleteJobThunk 
+    deleteJobThunk,
+    editJobThunk 
 } from './jobThunk'
 
 const searchDefaultFilterState = {
@@ -34,13 +35,16 @@ const initialState = {
         sorts: ['latest', 'oldest', 'a-z', 'z-a'],
         allJob: [],
         totalJob: 0,
-        numberOfPage: 1
+        numberOfPage: 1,
+        isEditing: false,
+        editID: null
     }
 }
 
-export const createJob = createAsyncThunk('job/create', createJobThunk);
+export const createJob = createAsyncThunk('job/create', createJobThunk );
 export const getAllJob = createAsyncThunk('job/getAll', getAllJobThunk );
 export const deleteJob = createAsyncThunk('job/delete', deleteJobThunk );
+export const editJob = createAsyncThunk('job/edit', editJobThunk );
 
 const jobSlice = createSlice({
     name: 'job',
@@ -57,6 +61,17 @@ const jobSlice = createSlice({
         },
         clearFilter : (state) => {
             // setup logic
+        },
+        handleEditAction: (state, { payload }) => {
+            const jobToBeEdit = state.searchForm.allJob.find(job => job._id === payload);
+            const { position, company, status, jobType, jobLocation} = jobToBeEdit;
+            state.searchForm.isEditing = true;
+            state.searchForm.editID = payload;
+            state.job.position = position;
+            state.job.company = company;
+            state.job.status = status;
+            state.job.jobType = jobType;
+            state.job.jobLocation = jobLocation;
         }
     },
     extraReducers: (builder) => {
@@ -90,7 +105,7 @@ const jobSlice = createSlice({
             console.log(payload);
             state.job.isLoading = false;
             state.job.isError = true;
-            toast.success('Something went wrong')
+            toast.error('Something went wrong')
         })
         .addCase(deleteJob.pending, (state) => {
             state.job.isLoading = true;
@@ -105,9 +120,25 @@ const jobSlice = createSlice({
             state.job.isError = true;
             toast.error('Unathorized');
         })
+        .addCase(editJob.pending, (state) => {
+            state.job.isLoading = true;
+        })
+        .addCase(editJob.fulfilled, (state, { payload }) => {
+            state.job.isLoading = false;
+            state.searchForm.isEditing = false;
+            state.searchForm.editID = null;
+            toast.success('Job Updated!')
+        })
+        .addCase(editJob.rejected, (state, { payload }) => {
+            console.log(payload);
+            state.searchForm.isEditing = false;
+            state.searchForm.editID = null;
+            state.job.isError = true;
+            toast.error('Something went wrong');
+        })
     }
 });
 
-export const { handleChange } = jobSlice.actions;
+export const { handleChange, handleEditAction } = jobSlice.actions;
 
 export default jobSlice.reducer;

@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { FormInput, FormSelect } from '../components'
 import { useDispatch, useSelector } from 'react-redux';
-import { handleChange, createJob } from '../features/job/jobSlice'
+import { handleChange, createJob, editJob } from '../features/job/jobSlice'
 
 const AddJob = () => {
   const dispatch = useDispatch();
-  const {job} = useSelector(store => store.job)
+  const {job, searchForm: {isEditing, editID}} = useSelector(store => store.job)
   const {
     statusOptions, 
     jobTypeOptions,
@@ -26,11 +26,14 @@ const AddJob = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const job = { position, company, jobLocation, status, jobType }
+    if(isEditing) return dispatch(editJob({ editID, job }));
+    dispatch(createJob(job));
   }
 
   return (
     <Wrapper className='dashboard-center'>
-      <h3>Add job</h3>
+      <h3>{isEditing ? 'Edit Job' : 'Add Job'}</h3>
       <form onSubmit={handleSubmit}>
         <FormInput
           name='position'
@@ -68,12 +71,17 @@ const AddJob = () => {
           label='Job Type'
         />
         <div className='form-controller'>
-          <button className='clear-btn btn btn-block'>Clear</button>
+          <button 
+            className='clear-btn btn btn-block' 
+            type='button'
+          >
+            Clear
+          </button>
           <button 
             className='submit-btn btn btn-block'
-            onClick={() => dispatch(createJob({ position, company, jobLocation, status, jobType}))}
-            >
-              Submit
+            disabled={isLoading}
+          >
+              { isEditing ? 'Save' : 'Submit'}
           </button>
         </div>
       </form>
