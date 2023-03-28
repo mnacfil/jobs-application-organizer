@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import {BiAlignLeft} from 'react-icons/bi'
 import {HiUserCircle} from 'react-icons/hi'
 import {AiFillCaretDown} from 'react-icons/ai'
-import { toggleLogoutBtn, logoutUser } from '../features/user/userSlice'
+import { toggleLogoutBtn, clearStoreWhenUserLogout } from '../features/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserFromLS } from '../util/localStorage'
 
@@ -25,12 +25,12 @@ const Navbar = () => {
             onClick={() => dispatch(toggleLogoutBtn())}
             >
             <HiUserCircle />
-            <span>{user.name || ''}</span>
+            {/* <span>{user.name || ''}</span> */}
             <AiFillCaretDown />
           </button>
           <button 
             className={`btn logout-btn ${isLogoutBtnShow ? 'show-logout-btn' : ''}`}
-            onClick={() => dispatch(logoutUser())}
+            onClick={() => dispatch(clearStoreWhenUserLogout())}
             >
             Logout
           </button>
