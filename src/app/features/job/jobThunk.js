@@ -12,7 +12,7 @@ export const getAllJobThunk = async( _, thunkAPI) => {
     console.log(thunkAPI.getState())
     try {
         const response = await customAxios.get('/jobs')
-        console.log(response);
+        return response.data;
     } catch (error) {
         console.log(error);
     }

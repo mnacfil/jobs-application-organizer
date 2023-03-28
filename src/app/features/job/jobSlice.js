@@ -22,6 +22,7 @@ const initialState = {
     },
     searchForm: {
         isSearchLoading: false,
+        isSearchError: false,
         searchFilter: searchDefaultFilterState,
         statuses: ['all','interview','Declined','Pending'],
         types: ['all', 'Full-time', 'Part-time', 'Remote', 'Internship'],
@@ -52,6 +53,26 @@ const jobSlice = createSlice({
         clearFilter : (state) => {
             // setup logic
         }
+    },
+    extraReducers: (builder) => {
+        builder
+        .addCase(getAllJob.pending, (state) => {
+            state.searchForm.isSearchLoading = true
+        })
+        .addCase(getAllJob.fulfilled, (state, { payload }) => {
+            console.log(payload);
+            const {jobs, totalJobs, numOfPages } = payload;
+            state.searchForm.isSearchLoading = false;
+            state.searchForm.isSearchError = false;
+            state.searchForm.allJob = jobs;
+            state.searchForm.totalJob = totalJobs;
+            state.searchForm.numberOfPage = numOfPages;
+        })
+        .addCase(getAllJob.rejected, (state, { payload }) => {
+            state.searchForm.isSearchLoading = false;
+            state.searchForm.isSearchError = true;
+            console.log(payload);
+        })
     }
 });
 

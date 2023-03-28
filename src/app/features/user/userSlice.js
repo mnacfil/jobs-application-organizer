@@ -1,7 +1,9 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import { loginThunk, registerThunk, clearStoreThunk } from './userThunk';
 import { toast } from 'react-toastify';
-import { saveUserToLS, removeUserFromLS } from '../../util/localStorage';
+import { saveUserToLS, removeUserFromLS, getUserFromLS } from '../../util/localStorage';
+
+const user = getUserFromLS()
 
 const defaultUser = {
     name: '',
@@ -10,10 +12,10 @@ const defaultUser = {
     action: 'login'
 }
 const initialState = {
-    currentUser: null,
+    currentUser: getUserFromLS(),
     user: {
-        name: '',
-        email: '',
+        name: user.name || '',
+        email: user.email || '',
         password: '',
         action: 'login'
     },

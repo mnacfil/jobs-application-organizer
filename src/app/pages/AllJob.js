@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { FormInput, FormSelect } from '../components';
+import { FormInput, FormSelect, AllJobContainer } from '../components';
 import { useSelector, useDispatch } from 'react-redux';
-import { handleChange } from '../features/job/jobSlice'
+import { handleChange, getAllJob } from '../features/job/jobSlice'
 
 // search, status, type, sort, clear-filter-btn
 
@@ -18,7 +18,10 @@ const AllJob = () => {
       status,
       type,
       sort
-    } 
+    },
+    allJob,
+    totalJob,
+    numberOfPage 
   } = searchForm;
 
   const handleData = (e) => {
@@ -29,6 +32,11 @@ const AllJob = () => {
   const handleSubmit = (e) => {
     console.log(e.target);
   }
+
+  useEffect(() => {
+    dispatch(getAllJob())
+  }, []);
+
   return (
     <Wrapper className='dashboard-center'>
         <section className='all-job-form'>
@@ -69,85 +77,7 @@ const AllJob = () => {
               </button>
           </form>
         </section>
-        <section className='all-job-section'>
-          <h3>2 Jobs found</h3>
-          <div className='all-job-container'>
-            <article className='job'>
-              <header>
-                <div className='company-initial'>D</div>
-                <div className='company-info'>
-                  <h4>React Developer</h4>
-                  <p>Decode technologies</p>
-                </div>
-              </header>
-              <hr />
-              <div className='application-data'>
-                <div className='first-data'>
-                  <p className='location'>Pasay</p>
-                  <p className='date'>March 25, 2023</p>
-                </div>
-                <div className='second-data'>
-                  <p className='type'>Remote</p>
-                  <p className='status'>Pending</p>
-                </div>
-                <div className='edit-delete-controller'>
-                  <button className='edit-btn btn'>Edit</button>
-                  <button className='delete-btn btn'>Delete</button>
-                </div>
-              </div>
-            </article>
-
-            <article className='job'>
-              <header>
-                <div className='company-initial'>S</div>
-                <div className='company-info'>
-                  <h4>Software Engineer</h4>
-                  <p>Slash</p>
-                </div>
-              </header>
-              <hr />
-              <div className='application-data'>
-                <div className='first-data'>
-                  <p className='location'>Singapore</p>
-                  <p className='date'>March 25, 2023</p>
-                </div>
-                <div className='second-data'>
-                  <p className='type'>Remote</p>
-                  <p className='status'>Pending</p>
-                </div>
-                <div className='edit-delete-controller'>
-                  <button className='edit-btn btn'>Edit</button>
-                  <button className='delete-btn btn'>Delete</button>
-                </div>
-              </div>
-            </article>
-
-            <article className='job'>
-              <header>
-                <div className='company-initial'>S</div>
-                <div className='company-info'>
-                  <h4>Software Engineer</h4>
-                  <p>Slash</p>
-                </div>
-              </header>
-              <hr />
-              <div className='application-data'>
-                <div className='first-data'>
-                  <p className='location'>Singapore</p>
-                  <p className='date'>March 25, 2023</p>
-                </div>
-                <div className='second-data'>
-                  <p className='type'>Remote</p>
-                  <p className='status'>Pending</p>
-                </div>
-                <div className='edit-delete-controller'>
-                  <button className='edit-btn btn'>Edit</button>
-                  <button className='delete-btn btn'>Delete</button>
-                </div>
-              </div>
-            </article>
-          </div>
-        </section>
+        <AllJobContainer allJob={allJob} totalJob={totalJob}/>
     </Wrapper>
   )
 }
