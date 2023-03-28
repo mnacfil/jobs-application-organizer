@@ -1,17 +1,25 @@
 import React from 'react'
 import Job from './Job'
-const AllJobContainer = ({ allJob, totalJob }) => {
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import SkeletonCard from './SkeletonCard';
+
+const AllJobContainer = ({ allJob, totalJob, loading }) => {
   return (
-    <section className='all-job-section'>
-      <h3>{totalJob} Jobs found</h3>
-      <div className='all-job-container'>
-        {allJob.map(job => {
-          return (
-            <Job {...job} key={job._id}/>
-          )
-        })}
-      </div>
-    </section>
+    <SkeletonTheme baseColor='#9fb3c8' highlightColor="#627d98">
+      {
+        loading ? <SkeletonCard allJob={allJob}/> :
+        <section className='all-job-section'>
+          <h3>{totalJob} Jobs Found`</h3>
+          <div className='all-job-container'>
+            {allJob.map(job => {
+              return (
+                <Job {...job} key={job._id}/>
+              )
+            })}
+          </div>
+        </section>
+      }
+    </SkeletonTheme>
   )
 }
 

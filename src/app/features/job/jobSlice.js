@@ -65,9 +65,8 @@ const jobSlice = createSlice({
             state.searchForm.isSearchLoading = true
         })
         .addCase(getAllJob.fulfilled, (state, { payload }) => {
-            console.log(payload);
             const {jobs, totalJobs, numOfPages } = payload;
-            state.searchForm.isSearchLoading = false;
+            state.searchForm.isSearchLoading = true;
             state.searchForm.isSearchError = false;
             state.searchForm.allJob = jobs;
             state.searchForm.totalJob = totalJobs;
