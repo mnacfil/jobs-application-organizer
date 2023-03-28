@@ -1,16 +1,30 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FormInput, FormSelect } from '../components';
+import { useSelector, useDispatch } from 'react-redux';
+import { handleChange } from '../features/job/jobSlice'
 
 // search, status, type, sort, clear-filter-btn
 
-const status = ['all', 'Interviewed', 'Declined', 'Pending', 'Job Offer'];
-const types = ['all', 'Full-time', 'Part-time', 'Remote', 'Internship'];
-const sorts = ['latest', 'oldest', 'a-z', 'z-a'];
-
 const AllJob = () => {
-  const handleChange = (e) => {
-    console.log(e.target);
+  const dispatch = useDispatch();
+  const { searchForm } = useSelector(store => store.job);
+  const { 
+    statuses, 
+    types, 
+    sorts, 
+    searchFilter: {
+      search,
+      status,
+      type,
+      sort
+    } 
+  } = searchForm;
+
+  const handleData = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    dispatch(handleChange({ newData: { name, value }, originPage: 'all-job' }));
   }
   const handleSubmit = (e) => {
     console.log(e.target);
@@ -20,31 +34,37 @@ const AllJob = () => {
         <section className='all-job-form'>
           <h3>Search form</h3>
           <form onSubmit={handleSubmit}>
-              <FormInput 
+              <FormInput
+                name='search' 
                 label='Search'
                 type="text"
-                value=''
-                handleChange={handleChange}
+                value={search}
+                handleData={handleData}
                 />
               <FormSelect 
+                name='status'
                 label='Status'
-                options={status}
-                value=''
-                handleChange={handleChange}
+                options={statuses}
+                value={status}
+                handleData={handleData}
                 />
-              <FormSelect 
+              <FormSelect
+                name='type'
                 label='Type'
                 options={types}
-                value=''
-                handleChange={handleChange}
+                value={type}
+                handleData={handleData}
                 />
-              <FormSelect 
+              <FormSelect
+                name='sort'
                 label='Sort'
                 options={sorts}
-                value=''
-                handleChange={handleChange}
+                value={sort}
+                handleData={handleData}
                 />
-              <button className='clear-filter-btn btn btn-block'>
+              <button 
+                className='clear-filter-btn btn btn-block'
+                >
                 Clear Filters
               </button>
           </form>

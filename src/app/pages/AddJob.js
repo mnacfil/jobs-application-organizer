@@ -21,7 +21,7 @@ const AddJob = () => {
   const handleDataInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    dispatch(handleChange({ name, value }));
+    dispatch(handleChange({ newData: { name, value }, originPage: 'add-job'}));
   }
 
   const handleSubmit = (e) => {
