@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { FormInput, FormSelect } from '../components'
 import { useDispatch, useSelector } from 'react-redux';
-import { handleChange } from '../features/job/jobSlice'
+import { handleChange, createJob } from '../features/job/jobSlice'
 
 const AddJob = () => {
   const dispatch = useDispatch();
@@ -70,7 +70,12 @@ const AddJob = () => {
         />
         <div className='form-controller'>
           <button className='clear-btn btn btn-block'>Clear</button>
-          <button className='submit-btn btn btn-block'>Submit</button>
+          <button 
+            className='submit-btn btn btn-block'
+            onClick={() => dispatch(createJob({ position, company, jobLocation, status, jobType}))}
+            >
+              Submit
+          </button>
         </div>
       </form>
     </Wrapper>

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { customAxios } from '../../api/api'
+import { createJobThunk } from './jobThunk'
 
 const initialState = {
     isLoading: false,
@@ -7,11 +7,13 @@ const initialState = {
     position: '',
     company: '',
     jobLocation: '',
-    status: 'Pending',
-    jobType: 'Full-time',
-    statusOptions: ['Pending', 'Interviewed', 'Declined', 'Job Offer'],
-    jobTypeOptions: ['Full-time', 'Part-time', 'Remote', 'Internship'],
+    status: 'pending',
+    jobType: 'full-time',
+    statusOptions: ['pending', 'Declined', 'Job Offer'],
+    jobTypeOptions: ['full-time', 'part-time', 'remote', 'internship'],
 }
+
+export const createJob = createAsyncThunk('job/create', createJobThunk)
 
 const jobSlice = createSlice({
     name: 'job',
