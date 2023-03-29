@@ -42,6 +42,11 @@ html {
   --red-dark: #842029;
   --green-light: #d1e7dd;
   --green-dark: #0f5132;
+  --pending-bg: rgb(252, 239, 199);
+  --pending-color: rgb(233, 185, 73);
+  --interview-bg: rgb(224, 232, 249);
+  --interview-color: rgb(100, 122, 203);
+  --declined-bg: rgb(255, 238, 238);
 
   /* fonts  */
   --headingFont: 'Roboto Condensed', Sans-Serif;

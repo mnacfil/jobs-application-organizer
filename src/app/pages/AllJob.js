@@ -139,7 +139,7 @@ const Wrapper = styled.div`
     gap: 1.5rem;
       .job {
         background-color: var(--white);
-        padding: 1.5rem;
+        padding: 2rem;
         box-shadow: var(--shadow-2);
         border-radius: var(--borderRadius);
           header {
@@ -173,6 +173,43 @@ const Wrapper = styled.div`
     
             color: var(--textColor);
             letter-spacing: var(--letterSpacing);
+
+            p {
+              display: flex;
+              align-items: center;
+              color: var(--grey-800);
+              text-transform: capitalize;
+              svg {
+                margin-right: 0.75rem;
+                color: var(--grey-400);
+              }
+            }
+            .status {
+              padding: 0.25rem 0.5rem;
+              border-radius: var(--borderRadius);
+              box-shadow: var(--shadow-2);
+            }
+            .interview {
+              background: var(--interview-bg);
+              color: var(--interview-color);
+              svg {
+                color: var(--interview-color);
+              }
+            }
+            .declined {
+              background: var(--declined-bg);
+              color: var(--red-dark);
+              svg {
+                color: var(--red-dark);
+              }
+            }
+            .pending {
+              background: var(--pending-bg);
+              color: var(--pending-color);
+              svg {
+                color: var(--pending-color);
+              }
+            }
     
             .edit-btn {
               margin-right: 1rem;
