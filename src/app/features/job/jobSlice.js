@@ -23,7 +23,7 @@ const initialState = {
         jobLocation: '',
         status: 'pending',
         jobType: 'full-time',
-        statusOptions: ['pending', 'Declined', 'interview'],
+        statusOptions: ['pending', 'declined', 'interview'],
         jobTypeOptions: ['full-time', 'part-time', 'remote', 'internship'],
     },
     searchForm: {
@@ -72,6 +72,13 @@ const jobSlice = createSlice({
             state.job.status = status;
             state.job.jobType = jobType;
             state.job.jobLocation = jobLocation;
+        },
+        clearInput : (state) => {
+            state.job.position = '';
+            state.job.company = '';
+            state.job.status = 'pending';
+            state.job.jobType = 'full-time';
+            state.job.jobLocation = '';
         }
     },
     extraReducers: (builder) => {
@@ -139,6 +146,6 @@ const jobSlice = createSlice({
     }
 });
 
-export const { handleChange, handleEditAction } = jobSlice.actions;
+export const { handleChange, handleEditAction, clearInput } = jobSlice.actions;
 
 export default jobSlice.reducer;

@@ -1,9 +1,10 @@
 import { customAxios } from '../../api/api'
-import { getAllJob } from './jobSlice';
+import { getAllJob, clearInput } from './jobSlice';
 
 export const createJobThunk = async(job, thunkAPI) => {
     try {
-        await customAxios.post('/jobs', job)
+        await customAxios.post('/jobs', job);
+        thunkAPI.dispatch(clearInput());
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data.msg);
     }
@@ -29,6 +30,7 @@ export const deleteJobThunk = async(jobID, thunkAPI) => {
 export const editJobThunk = async({editID, job}, thunkAPI) => {
     try {
         const response = await customAxios.patch(`/jobs/${editID}`, job);
+        thunkAPI.dispatch(clearInput());
         return response.data.msg;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data.msg);
