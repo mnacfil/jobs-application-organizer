@@ -5,6 +5,7 @@ import FormInput from './FormInput';
 import FormSelect from './FormSelect';
 import AppLogo from './AppLogo';
 import AllJobContainer from './AllJobContainer';
+import Stat from './Stat';
 
 export {
     Navbar,
@@ -13,5 +14,6 @@ export {
     FormInput,
     FormSelect,
     AppLogo,
-    AllJobContainer
+    AllJobContainer,
+    Stat
 }
