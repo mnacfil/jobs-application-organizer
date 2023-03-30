@@ -27,3 +27,12 @@ export const clearStoreThunk = async(undefined ,thunkAPI) => {
         return Promise.reject();
     }
 }
+
+export const updateThunk = async (path, user, thunkAPI) => {
+    try {
+        const response = await customAxios.patch(path, user);
+        return response.data;
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data.msg);
+    }
+}

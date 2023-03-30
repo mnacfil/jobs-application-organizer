@@ -1,43 +1,65 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FormInput, FormSelect } from '../components'
+import { FormInput } from '../components'
+import { handleChange, updateUser } from '../features/user/userSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 
 const Profile = () => {
-  const handleChange = (e) => {
-    console.log(e.target);
+  const dispatch = useDispatch();
+  const { 
+    user: { name, lastName, email, location }
+  } = useSelector(store => store.user);
+
+  const handleData = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    dispatch(handleChange({name, value}));
   }
   const handleSubmit = (e) => {
-    console.log(e.target);
+    e.preventDefault();
+    if(!name || !lastName || !email || !location) {
+      toast.error('Please fill up all field.')
+      return;
+    }
+    dispatch(updateUser({name, lastName, email, location}));
   }
   return (
     <Wrapper className='dashboard-center'>
       <h2>Profile Job</h2>
       <form onSubmit={handleSubmit}>
         <FormInput 
+          name='name'
           label='First Name'
           type='text'
-          value=''
-          handleChange={handleChange}
+          value={name}
+          handleData={handleData}
         />
-        <FormInput 
+        <FormInput
+          name='lastName'
           label='Last Name'
           type='text'
-          value=''
-          handleChange={handleChange}
+          value={lastName}
+          handleData={handleData}
         />
         <FormInput 
+          name='email'
           label='Email'
           type='email'
-          value=''
-          handleChange={handleChange}
+          value={email}
+          handleData={handleData}
         />
         <FormInput 
+          name='location'
           label='Location'
           type='text'
-          value=''
-          handleChange={handleChange}
+          value={location}
+          handleData={handleData}
         />
-        <button className='save-btn btn btn-block'>Save Changes</button>
+        <button 
+          className='save-btn btn btn-block'>
+            Save Changes
+        </button>
       </form>
     </Wrapper>
   )

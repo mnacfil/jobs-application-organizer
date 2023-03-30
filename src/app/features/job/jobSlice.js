@@ -6,6 +6,7 @@ import {
     deleteJobThunk,
     editJobThunk 
 } from './jobThunk'
+import { getUserFromLS } from '../../util/localStorage'
 
 const searchDefaultFilterState = {
     search: '',
@@ -20,7 +21,7 @@ const initialState = {
         isError: false,
         position: '',
         company: '',
-        jobLocation: '',
+        jobLocation: getUserFromLS()?.location || '',
         status: 'pending',
         jobType: 'full-time',
         statusOptions: ['pending', 'declined', 'interview'],

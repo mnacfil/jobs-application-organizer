@@ -1,12 +1,14 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import { loginThunk, registerThunk, clearStoreThunk } from './userThunk';
+import { loginThunk, registerThunk, clearStoreThunk, updateThunk } from './userThunk';
 import { toast } from 'react-toastify';
 import { saveUserToLS, removeUserFromLS, getUserFromLS } from '../../util/localStorage';
 
-const user = getUserFromLS()
+const user = getUserFromLS();
 
 const defaultUser = {
     name: '',
+    lastName: '',
+    location: '',
     email: '',
     password: '',
     action: 'login'
@@ -16,6 +18,8 @@ const initialState = {
     user: {
         name: user.name || '',
         email: user.email || '',
+        lastName: user.lastName || '',
+        location: user.location || '',
         password: '',
         action: 'login'
     },
@@ -32,6 +36,10 @@ export const registerUser = createAsyncThunk('user/register', async(user, thunkA
 export const loginUser = createAsyncThunk('user/login', async(user, thunkAPI) => {
     return loginThunk('/auth/login', user, thunkAPI);
 });
+
+export const updateUser = createAsyncThunk('user/update', async(user, thunkAPI) => {
+    return updateThunk('/auth/updateUser', user, thunkAPI);
+})
 
 export const clearStoreWhenUserLogout = createAsyncThunk('user/clearStoreWhenUserLogout', 
     async(undefined, thunkAPI) => {
@@ -59,7 +67,7 @@ const userSlice = createSlice({
             state.currentUser = null;
             removeUserFromLS();
             toast.success('Logging out...');
-        }
+        },
     },
     extraReducers: (builder) => {
         builder.
@@ -96,6 +104,20 @@ const userSlice = createSlice({
                 state.isLoading = false;
                 state.isError = true;
                 state.isLogin = false;
+                toast.error(action.payload);
+            })
+            .addCase(updateUser.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(updateUser.fulfilled, (state, { payload }) => {
+                state.isLoading = false;
+                state.isError = false;
+                toast.success('Success, Profile updated!');
+                saveUserToLS(payload.user);
+            })
+            .addCase(updateUser.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
                 toast.error(action.payload);
             })
     }
