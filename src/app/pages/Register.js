@@ -49,7 +49,6 @@ const Register = () => {
 
   useEffect(() => {
     // after the user login, progmmatically navigate user to root/home page
-    console.log("navigate user");
     if(isLogin) {
       setTimeout(() => {
         navigate('/');

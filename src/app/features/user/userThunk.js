@@ -21,7 +21,7 @@ export const registerThunk = async (path, user, thunkAPI) => {
 
 export const clearStoreThunk = async(undefined ,thunkAPI) => {
     try {
-        thunkAPI.dispatch(logoutUser())
+        thunkAPI.dispatch(logoutUser());
         return Promise.resolve();
     } catch (error) {
         return Promise.reject();
@@ -33,6 +33,9 @@ export const updateThunk = async (path, user, thunkAPI) => {
         const response = await customAxios.patch(path, user);
         return response.data;
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data.msg);
+        if(error.response.status === 401) {
+            thunkAPI.dispatch(logoutUser(error.response.data.msg))
+            thunkAPI.rejectWithValue(error.response.data.msg);
+        }
     }
 }

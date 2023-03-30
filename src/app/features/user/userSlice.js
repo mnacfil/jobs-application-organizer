@@ -16,10 +16,10 @@ const defaultUser = {
 const initialState = {
     currentUser: getUserFromLS(),
     user: {
-        name: user.name || '',
-        email: user.email || '',
-        lastName: user.lastName || '',
-        location: user.location || '',
+        name: user?.name || '',
+        email: user?.email || '',
+        lastName: user?.lastName || '',
+        location: user?.location || '',
         password: '',
         action: 'login'
     },
@@ -60,12 +60,13 @@ const userSlice = createSlice({
         toggleLogoutBtn : (state) => {
             state.isLogoutBtnShow = !state.isLogoutBtnShow;
         },
-        logoutUser: (state) => {
+        logoutUser: (state, {payload}) => {
             state.user = defaultUser;
             state.isLogin = false;
             state.isLogoutBtnShow = false;
             state.currentUser = null;
             removeUserFromLS();
+            if(payload) return toast.error(payload);
             toast.success('Logging out...');
         },
     },
@@ -118,7 +119,10 @@ const userSlice = createSlice({
             .addCase(updateUser.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
-                toast.error(action.payload);
+                state.currentUser = null;
+                state.isLogin = false
+                state.user = defaultUser
+                state.isLogoutBtnShow = false
             })
     }
 })
