@@ -21,7 +21,7 @@ const statSlice = createSlice({
                 state.isStatLoading = true;
             })
             .addCase(getJobApplicationStats.fulfilled, (state, { payload }) => {
-                state.isStatLoading = false;
+                state.isStatLoading = true;
                 state.isStatError = false;
                 state.stats = payload.defaultStats;
                 state.monthlyApplication = payload.monthlyApplications;

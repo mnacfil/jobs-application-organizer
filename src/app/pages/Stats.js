@@ -3,39 +3,48 @@ import styled from 'styled-components'
 import {getUserFromLS} from '../util/localStorage'
 import { useDispatch, useSelector } from 'react-redux';
 import { getJobApplicationStats } from '../features/stat/statSlice';
-import {Stat} from '../components';
+import {Stat, SkeletonStatCard} from '../components';
 import {FcCancel, FcExpand, FcNeutralDecision} from 'react-icons/fc'
+import { SkeletonTheme } from 'react-loading-skeleton';
+
 
 const Stats = () => {
   const dispatch = useDispatch();
   const { isStatLoading, stats, monthlyApplication } = useSelector(store => store.stat);
-  console.log(stats);
+
   useEffect(() => {
     dispatch(getJobApplicationStats())
   }, []);
+
   return (
-    <Wrapper className='dashboard-center'>
-      <div className='stats-container'>
-        <Stat 
-          value={stats.pending} 
-          name='pending' 
-          Icon={FcNeutralDecision}
-          className='stat pending'
-        />
-        <Stat 
-          value={stats.interview} 
-          name='interview' 
-          Icon={FcExpand}
-          className='stat interview'
-        />
-        <Stat 
-          value={stats.declined} 
-          name='declined' 
-          Icon={FcCancel}
-          className='stat declined'
-        />
-      </div>
-    </Wrapper>
+    <SkeletonTheme baseColor='#bcccdc' highlightColor="#829ab1">
+      {
+        isStatLoading ? <SkeletonStatCard /> 
+      :
+        <Wrapper className='dashboard-center'>
+          <div className='stats-container'>
+            <Stat 
+              value={stats.pending} 
+              name='pending' 
+              Icon={FcNeutralDecision}
+              className='stat pending'
+            />
+            <Stat 
+              value={stats.interview} 
+              name='interview' 
+              Icon={FcExpand}
+              className='stat interview'
+            />
+            <Stat 
+              value={stats.declined} 
+              name='declined' 
+              Icon={FcCancel}
+              className='stat declined'
+            />
+          </div>
+        </Wrapper>
+      }
+    </SkeletonTheme>
   )
 }
 

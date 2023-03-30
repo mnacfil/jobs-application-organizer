@@ -6,6 +6,7 @@ import FormSelect from './FormSelect';
 import AppLogo from './AppLogo';
 import AllJobContainer from './AllJobContainer';
 import Stat from './Stat';
+import SkeletonStatCard from './SkeletonStatCard';
 
 export {
     Navbar,
@@ -15,5 +16,6 @@ export {
     FormSelect,
     AppLogo,
     AllJobContainer,
-    Stat
+    Stat,
+    SkeletonStatCard
 }
