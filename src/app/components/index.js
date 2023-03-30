@@ -7,6 +7,9 @@ import AppLogo from './AppLogo';
 import AllJobContainer from './AllJobContainer';
 import Stat from './Stat';
 import SkeletonStatCard from './SkeletonStatCard';
+import ChartContainer from './ChartContainer';
+import BarChart from './BarChart';
+import AreaChart from './AreaChart';
 
 export {
     Navbar,
@@ -17,5 +20,8 @@ export {
     AppLogo,
     AllJobContainer,
     Stat,
-    SkeletonStatCard
+    SkeletonStatCard,
+    ChartContainer,
+    BarChart,
+    AreaChart
 }
