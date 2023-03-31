@@ -3,7 +3,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 const SkeletonCard = () => {
   return (
-    <SkeletonTheme baseColor='#bcccdc' highlightColor="#829ab1"> 
+    <SkeletonTheme baseColor='#d9e2ec' highlightColor="#9fb3c8"> 
         <section className='all-job-section'>
             <h3><Skeleton width={200} /></h3>
             <div className='all-job-container'>

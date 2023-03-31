@@ -1,17 +1,14 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import {getUserFromLS} from '../util/localStorage'
 import { useDispatch, useSelector } from 'react-redux';
 import { getJobApplicationStats } from '../features/stat/statSlice';
 import {Stat, SkeletonStatCard, ChartContainer} from '../components';
 import {FcCancel, FcExpand, FcNeutralDecision} from 'react-icons/fc'
-import { SkeletonTheme } from 'react-loading-skeleton';
-
 
 const Stats = () => {
   const dispatch = useDispatch();
   const { isStatLoading, stats, monthlyApplication } = useSelector(store => store.stat);
-  console.log(monthlyApplication);
+
   useEffect(() => {
     dispatch(getJobApplicationStats())
   }, []);
@@ -41,7 +38,7 @@ const Stats = () => {
                   className='stat declined'
                 />
               </section>
-              <ChartContainer />
+              { monthlyApplication.length > 0 && <ChartContainer /> }
             </div>
           }
         </Wrapper>

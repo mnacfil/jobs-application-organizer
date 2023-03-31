@@ -3,7 +3,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 const SkeletonStatCard = () => {
   return (
-    <SkeletonTheme baseColor='#bcccdc' highlightColor="#829ab1">
+    <SkeletonTheme baseColor='#d9e2ec' highlightColor="#9fb3c8">
         <section className='stats-container'>
             {Array(3).fill().map((_, index) => {
                 return (
