@@ -39,11 +39,7 @@ const Wrapper = styled.aside`
         top: 0;
         transform: translate(-100%);
         transition: var(--transition);
-    
-        .show-sidebar {
-            transform: translate(0);
-        }
-    
+        z-index: 10;
         div {
             position: relative;
             button {
@@ -88,6 +84,9 @@ const Wrapper = styled.aside`
             color: var(--primary-400);
           }
         }
+    }
+    .show-sidebar {
+        transform: translate(0);
     }
 `;
 
