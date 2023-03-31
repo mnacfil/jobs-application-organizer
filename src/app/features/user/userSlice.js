@@ -26,7 +26,8 @@ const initialState = {
     isLoading: false,
     isError: false,
     isLogin: false,
-    isLogoutBtnShow: false
+    isLogoutBtnShow: false,
+    isSidebarShow: false
 }
 
 export const registerUser = createAsyncThunk('user/register', async(user, thunkAPI) => {
@@ -69,6 +70,14 @@ const userSlice = createSlice({
             if(payload) return toast.error(payload);
             toast.success('Logging out...');
         },
+        openSidebar: (state) => {
+            state.isSidebarShow = true;
+            console.log(state.isSidebarShow);
+        },
+        closeSidebar: (state) => {
+            state.isSidebarShow = false;
+            console.log(state.isSidebarShow);
+        }
     },
     extraReducers: (builder) => {
         builder.
@@ -132,5 +141,7 @@ export const {
     handleChange, 
     toggleUserAction,
     toggleLogoutBtn,
-    logoutUser
+    logoutUser,
+    openSidebar,
+    closeSidebar
 }  = userSlice.actions;

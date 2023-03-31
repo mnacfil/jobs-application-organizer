@@ -1,7 +1,5 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom';
-import {IoIosStats} from 'react-icons/io'
-import {ImProfile} from 'react-icons/im'
+import { NavLink } from 'react-router-dom';
 import {FcViewDetails, FcPositiveDynamic, FcPortraitMode, FcList} from 'react-icons/fc'
 
 const NavLinks = () => {

@@ -1,12 +1,13 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom';
-import { Navbar, BigSidebar } from '../components'
+import { Navbar, BigSidebar, SmallSidebar} from '../components'
 import styled from 'styled-components';
 
 const Layout = () => {
     return (
         <div>
             <Navbar />
+            <SmallSidebar />
             <BigSidebar />
             <DashboardWrapper className="dashboard">
                 <Outlet />

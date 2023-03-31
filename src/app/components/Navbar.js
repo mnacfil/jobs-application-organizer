@@ -1,11 +1,15 @@
 import React from 'react'
-import styled from 'styled-components'
-import {BiAlignLeft} from 'react-icons/bi'
-import {HiUserCircle} from 'react-icons/hi'
-import {AiFillCaretDown} from 'react-icons/ai'
-import { toggleLogoutBtn, clearStoreWhenUserLogout } from '../features/user/userSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { getUserFromLS } from '../util/localStorage'
+import styled from 'styled-components';
+import {BiAlignLeft} from 'react-icons/bi';
+import {HiUserCircle} from 'react-icons/hi';
+import {AiFillCaretDown} from 'react-icons/ai';
+import { 
+  toggleLogoutBtn, 
+  clearStoreWhenUserLogout, 
+  openSidebar 
+} from '../features/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserFromLS } from '../util/localStorage';
 
 
 const Navbar = () => {
@@ -15,7 +19,7 @@ const Navbar = () => {
   return (
     <Wrapper>
       <div className="nav-center">
-        <div className="nav-toggle">
+        <div className="nav-toggle" onClick={() => dispatch(openSidebar())}>
           <BiAlignLeft />
         </div>
         <h2>Dashboard</h2>
