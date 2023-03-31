@@ -1,10 +1,10 @@
 import React from 'react'
-import Skeleton from 'react-loading-skeleton'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 const SkeletonStatCard = () => {
   return (
-    <div className='dashboard-center'>
-        <div className='stats-container'>
+    <SkeletonTheme baseColor='#bcccdc' highlightColor="#829ab1">
+        <section className='stats-container'>
             {Array(3).fill().map((_, index) => {
                 return (
                     <article className='stat' key={index}>
@@ -18,8 +18,17 @@ const SkeletonStatCard = () => {
                     </article>
                 )
             })}
-        </div>
-    </div>
+        </section>
+        <section style={{ textAlign: 'center', marginTop: '3rem'}}>
+            <h5 style={{ marginBottom: '1rem'}}><Skeleton width={120}/></h5>
+            <button className='chart-btn' style={{ border: 'none', marginBottom: '1rem'}}> 
+                <Skeleton width={100}/> 
+            </button>
+            <div>
+                <Skeleton width='80%' height={300}/>
+            </div>
+        </section>
+    </SkeletonTheme>
   )
 }
 

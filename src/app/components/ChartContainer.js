@@ -7,7 +7,7 @@ import BarChart from './BarChartContainer';
 
 const ChartContainer = () => {
     const dispatch = useDispatch()
-    const {stats, monthlyApplication, defaultChart} = useSelector(store => store.stat);
+    const { monthlyApplication, defaultChart } = useSelector(store => store.stat);
 
     const toggleChart = () => {
         if(defaultChart === 'bar') {

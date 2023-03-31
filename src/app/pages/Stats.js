@@ -17,35 +17,34 @@ const Stats = () => {
   }, []);
 
   return (
-    <SkeletonTheme baseColor='#bcccdc' highlightColor="#829ab1">
-      {
-        isStatLoading ? <SkeletonStatCard /> 
-      :
         <Wrapper className='dashboard-center'>
-          <div className='stats-container'>
-            <Stat 
-              value={stats.pending} 
-              name='pending' 
-              Icon={FcNeutralDecision}
-              className='stat pending'
-            />
-            <Stat 
-              value={stats.interview} 
-              name='interview' 
-              Icon={FcExpand}
-              className='stat interview'
-            />
-            <Stat 
-              value={stats.declined} 
-              name='declined' 
-              Icon={FcCancel}
-              className='stat declined'
-            />
-          </div>
-          <ChartContainer />
+          { isStatLoading ? <SkeletonStatCard /> 
+          : 
+            <div>
+              <section className='stats-container'>
+                <Stat 
+                  value={stats.pending} 
+                  name='pending' 
+                  Icon={FcNeutralDecision}
+                  className='stat pending'
+                />
+                <Stat 
+                  value={stats.interview} 
+                  name='interview' 
+                  Icon={FcExpand}
+                  className='stat interview'
+                />
+                <Stat 
+                  value={stats.declined} 
+                  name='declined' 
+                  Icon={FcCancel}
+                  className='stat declined'
+                />
+              </section>
+              <ChartContainer />
+            </div>
+          }
         </Wrapper>
-      }
-    </SkeletonTheme>
   )
 }
 

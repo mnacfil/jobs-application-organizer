@@ -1,11 +1,10 @@
 import React from 'react'
 import Job from './Job'
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import Skeleton from 'react-loading-skeleton';
 import SkeletonJobCard from './SkeletonJobCard';
 
 const AllJobContainer = ({ allJob, totalJob, loading }) => {
-  return (
-    <SkeletonTheme baseColor='#bcccdc' highlightColor="#829ab1">
+  return <>
       {
         loading ? <SkeletonJobCard allJob={allJob}/> :
         <section className='all-job-section'>
@@ -19,8 +18,7 @@ const AllJobContainer = ({ allJob, totalJob, loading }) => {
           </div>
         </section>
       }
-    </SkeletonTheme>
-  )
+  </>
 }
 
 export default AllJobContainer
