@@ -2,8 +2,8 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { handleChartType } from '../features/stat/statSlice'
-import AreaChart from './AreaChart';
-import BarChart from './BarChart';
+import AreaChart from './AreaChartContainer';
+import BarChart from './BarChartContainer';
 
 const ChartContainer = () => {
     const dispatch = useDispatch()
@@ -23,13 +23,26 @@ const ChartContainer = () => {
         <button className='chart-btn' onClick={toggleChart}>
             { defaultChart === 'bar' ? 'Area Chart': 'Bar Chart'}
         </button>
-        { defaultChart === 'bar' ? <BarChart />: <AreaChart /> }
+        { defaultChart === 'bar' ? 
+            <BarChart data={monthlyApplication}/> 
+            : 
+            <AreaChart data={monthlyApplication}/> 
+        }
     </Wrapper>
   )
 }
 
 const Wrapper = styled.section`
+    margin-top: 3rem;
+    text-align: center;
 
+    .chart-btn {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: var(--primary-500);
+        font-size: 1.25rem;
+    }
 `;
 
 export default ChartContainer
