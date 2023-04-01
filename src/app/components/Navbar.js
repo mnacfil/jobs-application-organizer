@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import {BiAlignLeft} from 'react-icons/bi';
 import {HiUserCircle} from 'react-icons/hi';
@@ -17,10 +17,9 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const user = getUserFromLS();
   const { isLogoutBtnShow, isSmallSidebarShow } = useSelector(store => store.user);
-  const viewport = window.innerWidth;
-
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const handleSidebar = () => {
-    if(viewport < 992) {
+    if(viewportWidth < 992) {
       console.log("open");
       dispatch(openSidebar());
     } else {
@@ -28,6 +27,19 @@ const Navbar = () => {
       dispatch(toggleBigSidebar());
     }
   }
+
+  console.log(viewportWidth);
+
+  const handleResize = () => {
+    setViewportWidth(window.innerWidth);
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
+  }, [viewportWidth])
 
   return (
     <Wrapper>
