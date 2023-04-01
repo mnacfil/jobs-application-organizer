@@ -1,45 +1,25 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
 import {FcViewDetails, FcPositiveDynamic, FcPortraitMode, FcList} from 'react-icons/fc'
+import AppLink from './AppLink'
 
 const NavLinks = () => {
   return (
     <ul className='nav-links'>
         <li className='nav-item'>
             <FcPositiveDynamic />
-            <NavLink 
-                className={({ isActive}) => isActive ? 'active' : ''} 
-                to='/'
-                >
-                    Stats
-            </NavLink>
+            <AppLink name='Stats' to='/'/>
         </li>   
         <li className='nav-item'>
             <FcList />
-            <NavLink
-                to='/all-job'
-                className={({ isActive }) => isActive ? 'active' : ''} 
-             >
-                All Job
-            </NavLink>
+            <AppLink name='All Job' to='/all-job'/>
         </li>
         <li className='nav-item'>
             <FcViewDetails />
-            <NavLink 
-                to='/add-job'
-                className={({ isActive }) =>  isActive ? 'active' : ''} 
-                >
-                Add Job
-            </NavLink>
+            <AppLink name='Add Job' to='add-job'/>
         </li>
         <li className='nav-item'>
             <FcPortraitMode />
-            <NavLink 
-                to='/profile'
-                className={({ isActive }) =>  isActive ? 'active' : ''} 
-                >
-                    Profile
-            </NavLink>
+            <AppLink name='Profile' to='/profile'/>
         </li>
     </ul>
   )

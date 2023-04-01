@@ -72,11 +72,9 @@ const userSlice = createSlice({
         },
         openSidebar: (state) => {
             state.isSidebarShow = true;
-            console.log(state.isSidebarShow);
         },
         closeSidebar: (state) => {
             state.isSidebarShow = false;
-            console.log(state.isSidebarShow);
         }
     },
     extraReducers: (builder) => {
