@@ -7,12 +7,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { closeSidebar } from '../features/user/userSlice'
 
 const SmallSidebar = () => {
-    const { isSidebarShow } = useSelector(store => store.user);
+    const { isSmallSidebarShow } = useSelector(store => store.user);
     const dispatch = useDispatch();
 
     return (
         <Wrapper>
-            <div className={`${isSidebarShow ? 'show-sidebar': ''} sidebar`}>
+            <div className={`${isSmallSidebarShow ? 'show-sidebar': ''} sidebar`}>
                 <div>
                     <AppLogo />
                     <button onClick={() => dispatch(closeSidebar())}>

@@ -2,11 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import NavLinks from './NavLinks'
 import AppLogo from './AppLogo'
+import { useSelector } from 'react-redux'
 
 const BigSidebar = () => {
+  const { isBigSidebarShow } = useSelector(store => store.user);
   return (
-    <Wrapper>
-      <div className='sidebar'>
+    <Wrapper >
+      <div className={`${isBigSidebarShow ? 'open-big-sidebar' : ''} sidebar`}>
         <header>
           <AppLogo />
         </header>
@@ -19,17 +21,16 @@ const BigSidebar = () => {
 }
 
 const Wrapper = styled.aside`
-  display: none;
-  background-color: var(--white);
-  width: 250px;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  
 
   .sidebar {
-
+    background-color: var(--white);
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: var(--transition);
+    transform: translate(-100%);
     header {
       height: 6rem;
     }
@@ -71,8 +72,11 @@ const Wrapper = styled.aside`
   }
 
   @media screen and (min-width: 992px){
-    display: block;
+    .open-big-sidebar {
+      transform: translate(0);
+    }
   }
+
 `;
 
 export default BigSidebar

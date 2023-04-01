@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
 const Layout = () => {
-    const {isSidebarShow} = useSelector(store => store.user);
+    const {isSmallSidebarShow, isBigSidebarShow} = useSelector(store => store.user);
     return (
         <div>
             <Navbar />
@@ -14,7 +14,7 @@ const Layout = () => {
             <DashboardWrapper className="dashboard">
                 <Outlet />
                 <div 
-                    className={`${isSidebarShow ? 'darken-the-body' : ''} dark-body`}>
+                    className={`${isSmallSidebarShow ? 'darken-the-body' : ''} dark-body`}>
                 </div>
             </DashboardWrapper>
         </div>

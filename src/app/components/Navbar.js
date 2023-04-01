@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import {BiAlignLeft} from 'react-icons/bi';
 import {HiUserCircle} from 'react-icons/hi';
@@ -6,7 +6,8 @@ import {AiFillCaretDown} from 'react-icons/ai';
 import { 
   toggleLogoutBtn, 
   clearStoreWhenUserLogout, 
-  openSidebar 
+  openSidebar,
+  toggleBigSidebar 
 } from '../features/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserFromLS } from '../util/localStorage';
@@ -15,11 +16,23 @@ import { getUserFromLS } from '../util/localStorage';
 const Navbar = () => {
   const dispatch = useDispatch();
   const user = getUserFromLS();
-  const { isLogoutBtnShow } = useSelector(store => store.user);
+  const { isLogoutBtnShow, isSmallSidebarShow } = useSelector(store => store.user);
+  const viewport = window.innerWidth;
+
+  const handleSidebar = () => {
+    if(viewport < 992) {
+      console.log("open");
+      dispatch(openSidebar());
+    } else {
+      console.log("toggle");
+      dispatch(toggleBigSidebar());
+    }
+  }
+
   return (
     <Wrapper>
       <div className="nav-center">
-        <div className="nav-toggle" onClick={() => dispatch(openSidebar())}>
+        <div className="nav-toggle" onClick={handleSidebar}>
           <BiAlignLeft />
         </div>
         <h2>Dashboard</h2>

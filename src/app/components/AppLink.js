@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const AppLink = ({ name, to }) => {
     const dispatch = useDispatch();
-    const { isSidebarShow } = useSelector(store => store.user);
+    const { isSmallSidebarShow } = useSelector(store => store.user);
     const onClick = () => {
       // during desktop view
-      if(!isSidebarShow) return;
+      if(!isSmallSidebarShow) return;
       dispatch(closeSidebar());
     }
   return (
