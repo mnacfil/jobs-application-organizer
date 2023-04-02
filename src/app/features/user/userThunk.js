@@ -26,10 +26,11 @@ export const updateThunk = async (path, user, thunkAPI) => {
         return response.data;
     } catch (error) {
         console.log(error);
-        // if(error.response.status === 401) {
-        //     thunkAPI.dispatch(logoutUser(error.response.data.msg));
-        //     thunkAPI.rejectWithValue(error.response.data.msg);
-        // }
+        if(error.response.status === 401) {
+            thunkAPI.dispatch(logoutUser(error.response.data.msg));
+            thunkAPI.rejectWithValue(error.response.data.msg);
+            return;
+        }
         thunkAPI.rejectWithValue(error.response.data.msg);
     }
 }

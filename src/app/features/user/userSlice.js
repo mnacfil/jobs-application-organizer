@@ -89,6 +89,10 @@ const userSlice = createSlice({
                 state.isError = false;
                 state.isLogin = true;
                 state.currentUser = payload.user;
+                state.user.email = payload.user.email;
+                state.user.name = payload.user.name;
+                state.user.location = payload.user.location;
+                state.user.lastName = payload.user.lastName;
                 toast.success(`Welcome back ${payload.user.name}!`);
                 saveUserToLS(payload.user);
             })
