@@ -11,7 +11,7 @@ const Layout = () => {
             <Navbar />
             <SmallSidebar />
             <BigSidebar />
-            <DashboardWrapper className="dashboard">
+            <DashboardWrapper className={`${isBigSidebarShow ? 'add-left-margin' : ''} dashboard`}>
                 <Outlet />
                 <div 
                     className={`${isSmallSidebarShow ? 'darken-the-body' : ''} dark-body`}>
@@ -22,10 +22,7 @@ const Layout = () => {
 }
 
 const DashboardWrapper = styled.main`
-
-    @media screen and (min-width: 992px){
-        margin-left: 250px;
-    }
+    transition: var(--transition);
 
     .dark-body {
         position: fixed;

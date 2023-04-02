@@ -7,7 +7,8 @@ import {
   toggleLogoutBtn, 
   clearStoreWhenUserLogout, 
   openSidebar,
-  toggleBigSidebar 
+  toggleBigSidebar,
+  hideBigSidebar 
 } from '../features/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserFromLS } from '../util/localStorage';
@@ -16,19 +17,16 @@ import { getUserFromLS } from '../util/localStorage';
 const Navbar = () => {
   const dispatch = useDispatch();
   const user = getUserFromLS();
-  const { isLogoutBtnShow, isSmallSidebarShow } = useSelector(store => store.user);
+  const { isLogoutBtnShow, isBigSidebarShow } = useSelector(store => store.user);
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+  
   const handleSidebar = () => {
     if(viewportWidth < 992) {
-      console.log("open");
       dispatch(openSidebar());
     } else {
-      console.log("toggle");
       dispatch(toggleBigSidebar());
     }
   }
-
-  console.log(viewportWidth);
 
   const handleResize = () => {
     setViewportWidth(window.innerWidth);
@@ -39,10 +37,16 @@ const Navbar = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     }
+  }, [viewportWidth]);
+
+  useEffect(() => {
+    if (viewportWidth < 992 && isBigSidebarShow) {
+      dispatch(hideBigSidebar());
+    }
   }, [viewportWidth])
 
   return (
-    <Wrapper>
+    <Wrapper className={isBigSidebarShow ? 'add-left-margin' : ''}>
       <div className="nav-center">
         <div className="nav-toggle" onClick={handleSidebar}>
           <BiAlignLeft />
@@ -76,6 +80,7 @@ const Wrapper = styled.nav`
   justify-content: center;
   align-items: center;
   box-shadow: var(--shadow-1);
+  transition: var(--transition);
 
   .nav-center {
     display: flex;
@@ -83,7 +88,7 @@ const Wrapper = styled.nav`
     justify-content: space-between;
     align-items: center;
 
-    h2 {
+    h2 {  
       margin: 0;
     }
 
@@ -128,9 +133,6 @@ const Wrapper = styled.nav`
     }
   }
 
-  @media screen and (min-width: 992px){
-    margin-left: 250px;
-  }
 `;
 
 export default Navbar

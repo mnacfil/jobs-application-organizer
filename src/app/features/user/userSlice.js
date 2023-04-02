@@ -79,7 +79,10 @@ const userSlice = createSlice({
         },
         toggleBigSidebar: (state) => {
             state.isBigSidebarShow = !state.isBigSidebarShow;
-        }
+        },
+        hideBigSidebar: (state) => {
+            state.isBigSidebarShow = false;
+        },
     },
     extraReducers: (builder) => {
         builder.
@@ -146,5 +149,6 @@ export const {
     logoutUser,
     openSidebar,
     closeSidebar,
-    toggleBigSidebar
+    toggleBigSidebar,
+    hideBigSidebar
 }  = userSlice.actions;
