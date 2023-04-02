@@ -10,7 +10,6 @@ export const createJobThunk = async(job, thunkAPI) => {
     }
 }
 export const getAllJobThunk = async( _, thunkAPI) => {
-    console.log(thunkAPI.getState().job);
     const { search, status, type, sort} = thunkAPI.getState().job.searchForm.searchFilter;
     let queryParam = `status=${status}&jobType=${type}&sort=${sort}`;
     if(search) {

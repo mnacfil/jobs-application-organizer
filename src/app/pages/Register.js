@@ -25,6 +25,7 @@ const Register = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(e.target);
     if(!email || !password || (user.action === 'register' && !name)) {
       toast.error('Plese fill out all field.');
       return;
@@ -87,13 +88,16 @@ const Register = () => {
         />
         <button
           className='btn btn-block submit-btn'
+          type='submit'
         >
           {isLoading ? 'loading...' : 'Submit'}
         </button>
         <button
           className='btn btn-block demo-btn'
+          type='button'
+          onClick={() => dispatch(loginUser({ email: 'testUser@test.com', password: 'secret'}))}
         >
-          Demo App
+          {isLoading ? 'loading...' : 'Demo app'}
         </button>
       </form>
         <p>

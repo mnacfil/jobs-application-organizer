@@ -56,7 +56,8 @@ const Profile = () => {
           value={location}
           handleData={handleData}
         />
-        <button 
+        <button
+          type='submit' 
           className='save-btn btn btn-block'>
             Save Changes
         </button>

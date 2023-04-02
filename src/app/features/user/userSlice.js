@@ -43,7 +43,6 @@ export const updateUser = createAsyncThunk('user/update', async(user, thunkAPI) 
     return updateThunk('/auth/updateUser', user, thunkAPI);
 })
 
-
 const userSlice = createSlice({
     name: 'user',
     initialState,
@@ -126,13 +125,14 @@ const userSlice = createSlice({
                 toast.success('Success, Profile updated!');
                 saveUserToLS(payload.user);
             })
-            .addCase(updateUser.rejected, (state, action) => {
+            .addCase(updateUser.rejected, (state, { payload }) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.currentUser = null;
                 state.isLogin = false
                 state.user = defaultUser
-                state.isLogoutBtnShow = false
+                state.isLogoutBtnShow = false;
+                toast.error(payload);
             })
     }
 })
