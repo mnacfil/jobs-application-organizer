@@ -54,6 +54,9 @@ const Wrapper = styled.aside`
                 font-size: 2rem;
                 cursor: pointer;
             }
+            header {
+                margin-right: 8rem;
+            }
         }
         .nav-links {
           margin: 0;

@@ -5,13 +5,14 @@ import {HiUserCircle} from 'react-icons/hi';
 import {AiFillCaretDown} from 'react-icons/ai';
 import { 
   toggleLogoutBtn, 
-  clearStoreWhenUserLogout, 
+  logoutUser, 
   openSidebar,
   toggleBigSidebar,
   hideBigSidebar 
 } from '../features/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserFromLS } from '../util/localStorage';
+import AppLogo from './AppLogo';
 
 
 const Navbar = () => {
@@ -51,7 +52,7 @@ const Navbar = () => {
         <div className="nav-toggle" onClick={handleSidebar}>
           <BiAlignLeft />
         </div>
-        <h2>Dashboard</h2>
+        <h2>{viewportWidth < 992 ? <AppLogo /> : 'Dashboard'}</h2>
         <div className="nav-user">
           <button 
             className='btn'
@@ -63,7 +64,7 @@ const Navbar = () => {
           </button>
           <button 
             className={`btn logout-btn ${isLogoutBtnShow ? 'show-logout-btn' : ''}`}
-            onClick={() => dispatch(clearStoreWhenUserLogout())}
+            onClick={() => dispatch(logoutUser())}
             >
             Logout
           </button>
@@ -75,7 +76,7 @@ const Navbar = () => {
 
 const Wrapper = styled.nav`
   background-color: var(--white);
-  height: 6rem;
+  height: 7rem;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -32,7 +32,7 @@ const Wrapper = styled.aside`
     transition: var(--transition);
     transform: translate(-100%);
     header {
-      height: 6rem;
+      height: 7rem;
     }
 
     div {

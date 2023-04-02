@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 const Landing = () => {
   return (
     <Wrapper>
-      <AppLogo />
       <div className='landing-container'>
         <article>
           <h1>Job <span>Organizing</span> App</h1>

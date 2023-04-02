@@ -43,11 +43,6 @@ export const updateUser = createAsyncThunk('user/update', async(user, thunkAPI) 
     return updateThunk('/auth/updateUser', user, thunkAPI);
 })
 
-export const clearStoreWhenUserLogout = createAsyncThunk('user/clearStoreWhenUserLogout', 
-    async(undefined, thunkAPI) => {
-        return clearStoreThunk(undefined, thunkAPI);
-});
-
 
 const userSlice = createSlice({
     name: 'user',
@@ -67,6 +62,7 @@ const userSlice = createSlice({
             state.isLogin = false;
             state.isLogoutBtnShow = false;
             state.currentUser = null;
+            state.isBigSidebarShow = true;
             removeUserFromLS();
             if(payload) return toast.error(payload);
             toast.success('Logging out...');

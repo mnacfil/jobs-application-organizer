@@ -19,15 +19,6 @@ export const registerThunk = async (path, user, thunkAPI) => {
     }
 }
 
-export const clearStoreThunk = async(undefined ,thunkAPI) => {
-    try {
-        thunkAPI.dispatch(logoutUser());
-        return Promise.resolve();
-    } catch (error) {
-        return Promise.reject();
-    }
-}
-
 export const updateThunk = async (path, user, thunkAPI) => {
     try {
         const response = await customAxios.patch(path, user);
