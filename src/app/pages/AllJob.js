@@ -34,7 +34,7 @@ const AllJob = () => {
 
   useEffect(() => {
     dispatch(getAllJob())
-  }, []);
+  }, [search, status, type, sort]);
 
   return (
     <Wrapper className='dashboard-center'>

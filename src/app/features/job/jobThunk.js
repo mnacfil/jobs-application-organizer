@@ -10,8 +10,14 @@ export const createJobThunk = async(job, thunkAPI) => {
     }
 }
 export const getAllJobThunk = async( _, thunkAPI) => {
+    console.log(thunkAPI.getState().job);
+    const { search, status, type, sort} = thunkAPI.getState().job.searchForm.searchFilter;
+    let queryParam = `status=${status}&jobType=${type}&sort=${sort}`;
+    if(search) {
+        queryParam += `&search=${search}`;
+    }
     try {
-        const response = await customAxios.get('/jobs')
+        const response = await customAxios.get(`/jobs?${queryParam}`)
         return response.data;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data.msg);
