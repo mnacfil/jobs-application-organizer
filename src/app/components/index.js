@@ -11,6 +11,7 @@ import SkeletonStatCard from './SkeletonStatCard';
 import ChartContainer from './ChartContainer';
 import BarChart from './BarChartContainer';
 import AreaChart from './AreaChartContainer';
+import Pagination from './Pagination';
 
 export {
     Navbar,
@@ -25,5 +26,6 @@ export {
     ChartContainer,
     BarChart,
     AreaChart,
-    SmallSidebar
+    SmallSidebar,
+    Pagination
 }

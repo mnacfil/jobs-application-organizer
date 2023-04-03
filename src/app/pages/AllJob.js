@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { FormInput, FormSelect, AllJobContainer } from '../components';
+import { FormInput, FormSelect, AllJobContainer, Pagination } from '../components';
 import { useSelector, useDispatch } from 'react-redux';
 import { handleChange, getAllJob } from '../features/job/jobSlice'
 
@@ -81,6 +81,7 @@ const AllJob = () => {
           totalJob={totalJob}
           loading={isSearchLoading}
           />
+        <Pagination pages={numberOfPage}/>
     </Wrapper>
   )
 }
