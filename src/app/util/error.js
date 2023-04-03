@@ -1,9 +1,9 @@
-import { logoutUser } from '../features/user/userSlice';
+import { clearAllWhenUserLogout } from '../features/user/userSlice';
 
 export const handleError = (error, thunkAPI) => {
     if(error.response.status === 401) {
-        thunkAPI.dispatch(logoutUser(error.response.data.msg));
+        thunkAPI.dispatch(clearAllWhenUserLogout('Unauthorized! logging out...'));
         return thunkAPI.rejectWithValue(error.response.data.msg);
     }
-    return thunkAPI.rejectWithValue("Something went wrong!");
+    return thunkAPI.rejectWithValue(error.response.data.msg);
 }

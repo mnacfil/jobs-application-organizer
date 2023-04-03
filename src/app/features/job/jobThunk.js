@@ -1,6 +1,6 @@
 import { customAxios } from '../../api/api'
 import { getAllJob, clearAddJobInput } from './jobSlice';
-import { clearAllWhenUserLogout } from '../user/userSlice';
+import { handleError } from '../../util/error';
 
 export const createJobThunk = async(job, thunkAPI) => {
     console.log(thunkAPI);
@@ -8,11 +8,7 @@ export const createJobThunk = async(job, thunkAPI) => {
         await customAxios.post('/jobs', job);
         thunkAPI.dispatch(clearAddJobInput());
     } catch (error) {  
-        if(error.response.status === 401) {
-            thunkAPI.dispatch(clearAllWhenUserLogout('Unauthorized! logging out...'));
-            return thunkAPI.rejectWithValue(error.response.data.msg);
-        }
-        thunkAPI.rejectWithValue(error.response.data.msg);
+        return handleError(error, thunkAPI);
     }
 }
 export const getAllJobThunk = async( _, thunkAPI) => {
@@ -31,7 +27,7 @@ export const getAllJobThunk = async( _, thunkAPI) => {
         const response = await customAxios.get(`/jobs?${queryParam}`)
         return response.data;
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data.msg);
+        return handleError(error, thunkAPI);
     }
 }
 export const deleteJobThunk = async(jobID, thunkAPI) => {
@@ -40,7 +36,7 @@ export const deleteJobThunk = async(jobID, thunkAPI) => {
         thunkAPI.dispatch(getAllJob());
         return response.data.msg;
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data.msg);
+        return handleError(error, thunkAPI);
     }
 }
 
@@ -50,6 +46,6 @@ export const editJobThunk = async({editID, job}, thunkAPI) => {
         thunkAPI.dispatch(clearAddJobInput());
         return response.data.msg;
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data.msg);
+        return handleError(error, thunkAPI);
     }
 }
