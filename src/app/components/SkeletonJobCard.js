@@ -27,7 +27,7 @@ const SkeletonCard = () => {
                             </div>
                             <div className='second-data'>
                                 <p className='type'><Skeleton width={120}/></p>
-                                <p className='status'><Skeleton width={120}/></p>
+                                <p className='status skeleton-loading-btn'><Skeleton width={120}/></p>
                             </div>
                             <div className='edit-delete-controller'>
                                 <button 
