@@ -88,14 +88,16 @@ const AllJob = () => {
           totalJob={totalJob}
           loading={isSearchLoading}
           />
-        <Pagination 
-          pages={numberOfPage} 
-          page={page}
-          dispatch={dispatch}
-          navigateToNextPage={navigateToNextPage}
-          navigateToPrevPage={navigateToPrevPage}
-          navigateToTargetPage={navigateToTargetPage}
-        />
+        {numberOfPage > 1 && 
+          <Pagination 
+            pages={numberOfPage} 
+            page={page}
+            dispatch={dispatch}
+            navigateToNextPage={navigateToNextPage}
+            navigateToPrevPage={navigateToPrevPage}
+            navigateToTargetPage={navigateToTargetPage}
+          />
+        }
     </Wrapper>
   )
 }
