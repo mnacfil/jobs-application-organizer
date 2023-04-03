@@ -2,7 +2,13 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { FormInput, FormSelect, AllJobContainer, Pagination } from '../components';
 import { useSelector, useDispatch } from 'react-redux';
-import { handleChange, getAllJob } from '../features/job/jobSlice'
+import { 
+  handleChange, 
+  getAllJob, 
+  navigateToNextPage, 
+  navigateToPrevPage,
+  navigateToTargetPage 
+} from '../features/job/jobSlice'
 
 const AllJob = () => {
   const dispatch = useDispatch();
@@ -15,7 +21,8 @@ const AllJob = () => {
       search,
       status,
       type,
-      sort
+      sort,
+      page
     },
     allJob,
     totalJob,
@@ -34,7 +41,7 @@ const AllJob = () => {
 
   useEffect(() => {
     dispatch(getAllJob())
-  }, [search, status, type, sort]);
+  }, [search, status, type, sort, page]);
 
   return (
     <Wrapper className='dashboard-center'>
@@ -81,7 +88,14 @@ const AllJob = () => {
           totalJob={totalJob}
           loading={isSearchLoading}
           />
-        <Pagination pages={numberOfPage}/>
+        <Pagination 
+          pages={numberOfPage} 
+          page={page}
+          dispatch={dispatch}
+          navigateToNextPage={navigateToNextPage}
+          navigateToPrevPage={navigateToPrevPage}
+          navigateToTargetPage={navigateToTargetPage}
+        />
     </Wrapper>
   )
 }

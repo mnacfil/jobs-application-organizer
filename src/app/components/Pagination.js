@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
+import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
 
-const Pagination = ({ pages }) => {
-    const [page, setPage] = useState(1);
+const Pagination = ({ pages, page, dispatch, navigateToNextPage, navigateToPrevPage, navigateToTargetPage}) => {
   return (
     <Wrapper>
         <div className='pagination-controllers'>
-            <button type='button' className='btn prev-btn'>
+            <button 
+                type='button' 
+                className='btn prev-btn'
+                onClick={() => dispatch(navigateToPrevPage())}
+                >
                 <FiChevronsLeft />
                 <span>Prev</span>
             </button>
@@ -16,13 +19,18 @@ const Pagination = ({ pages }) => {
                     return (
                         <button 
                             className={`${(index + 1) === page ? 'active-btn' : ''} page-btn`}
+                            onClick={() => dispatch(navigateToTargetPage(index + 1))}
                         >
                             {index + 1}
                         </button>
                     )
                 })}
             </div>
-            <button type='button' className='btn next-btn'>
+            <button 
+                type='button' 
+                className='btn next-btn'
+                onClick={() => dispatch(navigateToNextPage())}
+                >
                 <span>Next</span>
                 <FiChevronsRight />
             </button>

@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { 
     createJobThunk, 
@@ -6,13 +6,15 @@ import {
     deleteJobThunk,
     editJobThunk 
 } from './jobThunk'
-import { getUserFromLS } from '../../util/localStorage'
+import { getUserFromLS } from '../../util/localStorage';
+import { validatePageNumber } from '../../util/validatePageNumber';
 
 const searchDefaultFilterState = {
     search: '',
     status: 'all',
     type: 'all',
     sort: 'latest',
+    page: 1
 }
 
 const initialState = {
@@ -80,7 +82,18 @@ const jobSlice = createSlice({
             state.job.status = 'pending';
             state.job.jobType = 'full-time';
             state.job.jobLocation = '';
-        }
+        },
+        navigateToNextPage: (state) => {
+            state.searchForm.searchFilter.page  = 
+                validatePageNumber(state.searchForm.searchFilter.page + 1, state.searchForm.numberOfPage);
+        },
+        navigateToPrevPage: (state) => {
+            state.searchForm.searchFilter.page  = 
+                validatePageNumber(state.searchForm.searchFilter.page - 1, state.searchForm.numberOfPage);
+        },
+        navigateToTargetPage: (state, { payload }) => {
+            state.searchForm.searchFilter.page  = payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -145,6 +158,13 @@ const jobSlice = createSlice({
     }
 });
 
-export const { handleChange, handleEditAction, clearInput } = jobSlice.actions;
+export const { 
+    handleChange, 
+    handleEditAction, 
+    clearInput,
+    navigateToNextPage,
+    navigateToPrevPage,
+    navigateToTargetPage 
+} = jobSlice.actions;
 
 export default jobSlice.reducer;
