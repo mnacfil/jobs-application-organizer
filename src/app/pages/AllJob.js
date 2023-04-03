@@ -7,7 +7,8 @@ import {
   getAllJob, 
   navigateToNextPage, 
   navigateToPrevPage,
-  navigateToTargetPage 
+  navigateToTargetPage,
+  clearAllJobFilter 
 } from '../features/job/jobSlice'
 
 const AllJob = () => {
@@ -78,6 +79,8 @@ const AllJob = () => {
                 />
               <button 
                 className='clear-filter-btn btn btn-block'
+                type='button'
+                onClick={() => dispatch(clearAllJobFilter())}
                 >
                 Clear Filters
               </button>

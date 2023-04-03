@@ -8,7 +8,7 @@ export const customAxios = axios.create({
 customAxios.interceptors.request.use((config) => {
     const user = getUserFromLS()
     if(user) {
-        config.headers['Authorization'] = `Bearer ${user.token}`
+        config.headers['Authorization'] = `Bearer ${user.token}`;
     }
     return config;
 })

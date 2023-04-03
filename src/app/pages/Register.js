@@ -25,7 +25,6 @@ const Register = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
     if(!email || !password || (user.action === 'register' && !name)) {
       toast.error('Plese fill out all field.');
       return;

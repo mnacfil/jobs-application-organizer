@@ -5,7 +5,7 @@ import {HiUserCircle} from 'react-icons/hi';
 import {AiFillCaretDown} from 'react-icons/ai';
 import { 
   toggleLogoutBtn, 
-  logoutUser, 
+  clearAllWhenUserLogout, 
   openSidebar,
   toggleBigSidebar,
   hideBigSidebar 
@@ -64,7 +64,7 @@ const Navbar = () => {
           </button>
           <button 
             className={`btn logout-btn ${isLogoutBtnShow ? 'show-logout-btn' : ''}`}
-            onClick={() => dispatch(logoutUser())}
+            onClick={() => dispatch(clearAllWhenUserLogout())}
             >
             Logout
           </button>

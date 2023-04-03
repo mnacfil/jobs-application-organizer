@@ -18,6 +18,7 @@ const searchDefaultFilterState = {
 }
 
 const initialState = {
+    // add-job page
     job: {
         isLoading: false,
         isError: false,
@@ -29,6 +30,7 @@ const initialState = {
         statusOptions: ['pending', 'declined', 'interview'],
         jobTypeOptions: ['full-time', 'part-time', 'remote', 'internship'],
     },
+    // all-job-page
     searchForm: {
         isSearchLoading: false,
         isSearchError: false,
@@ -62,9 +64,6 @@ const jobSlice = createSlice({
                 state.searchForm.searchFilter[name] = value;
             }
         },
-        clearFilter : (state) => {
-            // setup logic
-        },
         handleEditAction: (state, { payload }) => {
             const jobToBeEdit = state.searchForm.allJob.find(job => job._id === payload);
             const { position, company, status, jobType, jobLocation} = jobToBeEdit;
@@ -76,12 +75,15 @@ const jobSlice = createSlice({
             state.job.jobType = jobType;
             state.job.jobLocation = jobLocation;
         },
-        clearInput : (state) => {
+        clearAddJobInput : (state) => {
             state.job.position = '';
             state.job.company = '';
             state.job.status = 'pending';
             state.job.jobType = 'full-time';
             state.job.jobLocation = '';
+        },
+        clearAllJobFilter: (state) => {
+            state.searchForm.searchFilter = searchDefaultFilterState;
         },
         navigateToNextPage: (state) => {
             state.searchForm.searchFilter.page  = 
@@ -124,7 +126,7 @@ const jobSlice = createSlice({
         .addCase(createJob.rejected, (state, { payload }) => {
             state.job.isLoading = false;
             state.job.isError = true;
-            toast.error(payload)
+            toast.error(payload);
         })
         .addCase(deleteJob.pending, (state) => {
             state.job.isLoading = true;
@@ -161,7 +163,8 @@ const jobSlice = createSlice({
 export const { 
     handleChange, 
     handleEditAction, 
-    clearInput,
+    clearAddJobInput,
+    clearAllJobFilter,
     navigateToNextPage,
     navigateToPrevPage,
     navigateToTargetPage 

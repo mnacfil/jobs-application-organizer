@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import { loginThunk, registerThunk, clearStoreThunk, updateThunk } from './userThunk';
+import { loginThunk, registerThunk, clearAllDataThunk , updateThunk } from './userThunk';
 import { toast } from 'react-toastify';
 import { saveUserToLS, removeUserFromLS, getUserFromLS } from '../../util/localStorage';
 
@@ -41,7 +41,12 @@ export const loginUser = createAsyncThunk('user/login', async(user, thunkAPI) =>
 
 export const updateUser = createAsyncThunk('user/update', async(user, thunkAPI) => {
     return updateThunk('/auth/updateUser', user, thunkAPI);
-})
+});
+
+export const clearAllWhenUserLogout = createAsyncThunk('user/clearAllWhenUserLogout', 
+    async(_, thunkAPI) => {
+        return clearAllDataThunk(thunkAPI);
+});
 
 const userSlice = createSlice({
     name: 'user',

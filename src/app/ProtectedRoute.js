@@ -6,7 +6,7 @@ import { getUserFromLS } from './util/localStorage'
 const ProtectedRoute = ({ children }) => {
     const user = getUserFromLS()
     const { currentUser } = useSelector(store => store.user);
-    if(!currentUser && !user) return <Navigate to='/landing'/>
+    if(!currentUser) return <Navigate to='/landing'/>
     return children;
 }
 
