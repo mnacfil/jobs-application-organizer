@@ -44,8 +44,8 @@ export const updateUser = createAsyncThunk('user/update', async(user, thunkAPI) 
 });
 
 export const clearAllWhenUserLogout = createAsyncThunk('user/clearAllWhenUserLogout', 
-    async(_, thunkAPI) => {
-        return clearAllDataThunk(thunkAPI);
+    async(message, thunkAPI) => {
+        return clearAllDataThunk(message, thunkAPI);
 });
 
 const userSlice = createSlice({
@@ -68,7 +68,10 @@ const userSlice = createSlice({
             state.currentUser = null;
             state.isBigSidebarShow = true;
             removeUserFromLS();
-            if(payload) return toast.error(payload);
+            if(payload) {
+                toast.error(payload);
+                return;
+            } 
             toast.success('Logging out...');
         },
         openSidebar: (state) => {

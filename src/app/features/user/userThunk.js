@@ -32,11 +32,11 @@ export const updateThunk = async (path, user, thunkAPI) => {
         thunkAPI.rejectWithValue(error.response.data.msg);
     }
 }
-export const clearAllDataThunk = async ( thunkAPI ) => {
+export const clearAllDataThunk = async ( message, thunkAPI ) => {
     try {
         thunkAPI.dispatch(clearAddJobInput());
         thunkAPI.dispatch(clearAllJobFilter());
-        thunkAPI.dispatch(logoutUser());
+        thunkAPI.dispatch(logoutUser(message));
         return Promise.resolve();
     } catch (error) {
         return Promise.reject();

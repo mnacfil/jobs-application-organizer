@@ -1,6 +1,6 @@
 import { customAxios } from '../../api/api'
 import { getAllJob, clearAddJobInput } from './jobSlice';
-import { logoutUser } from '../user/userSlice';
+import { clearAllWhenUserLogout } from '../user/userSlice';
 
 export const createJobThunk = async(job, thunkAPI) => {
     console.log(thunkAPI);
@@ -9,7 +9,7 @@ export const createJobThunk = async(job, thunkAPI) => {
         thunkAPI.dispatch(clearAddJobInput());
     } catch (error) {  
         if(error.response.status === 401) {
-            thunkAPI.dispatch(logoutUser(error.response.data.msg));
+            thunkAPI.dispatch(clearAllWhenUserLogout('Unauthorized! logging out...'));
             return thunkAPI.rejectWithValue(error.response.data.msg);
         }
         thunkAPI.rejectWithValue(error.response.data.msg);

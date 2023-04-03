@@ -126,7 +126,9 @@ const jobSlice = createSlice({
         .addCase(createJob.rejected, (state, { payload }) => {
             state.job.isLoading = false;
             state.job.isError = true;
-            toast.error(payload);
+            if(!(payload === 'Authentication Invalid')){
+                toast.error(payload);
+            }
         })
         .addCase(deleteJob.pending, (state) => {
             state.job.isLoading = true;

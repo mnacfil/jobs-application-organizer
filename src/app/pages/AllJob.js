@@ -42,6 +42,7 @@ const AllJob = () => {
 
   useEffect(() => {
     dispatch(getAllJob())
+    // eslint-disable-next-line
   }, [search, status, type, sort, page]);
 
   return (
