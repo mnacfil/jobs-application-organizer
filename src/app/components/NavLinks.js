@@ -1,5 +1,5 @@
 import React from 'react'
-import {FcViewDetails, FcPositiveDynamic, FcPortraitMode, FcList} from 'react-icons/fc'
+import {FcViewDetails, FcPositiveDynamic, FcPortraitMode, FcList, FcCalendar } from 'react-icons/fc'
 import AppLink from './AppLink'
 
 const NavLinks = () => {
@@ -20,6 +20,10 @@ const NavLinks = () => {
         <li className='nav-item'>
             <FcPortraitMode />
             <AppLink name='Profile' to='/profile'/>
+        </li>
+        <li className='nav-item'>
+            <FcCalendar />
+            <AppLink name='Calendar' to='/calendar'/>
         </li>
     </ul>
   )

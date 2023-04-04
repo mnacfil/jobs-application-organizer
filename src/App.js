@@ -11,7 +11,8 @@ import {
   Error, 
   Layout,
   Profile,
-  Register 
+  Register,
+  MyCalendar 
 } from './app/pages'
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path='all-job' element={<AllJob />}/>
           <Route path='add-job' element={<AddJob />}/>
           <Route path='profile' element={<Profile />}/>
+          <Route path='calendar' element={<MyCalendar />}/>
         </Route>
         <Route path='landing' element={<Landing />}/>
         <Route path='register' element={<Register />}/>
