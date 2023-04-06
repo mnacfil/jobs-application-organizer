@@ -2,11 +2,14 @@ require('dotenv').config();
 
 const express = require('express');
 const morgan = require('morgan');
+const connectToDatabase = require('./config/db');
+const userRoutes = require('./routes/userRoute');
 
 const app = express();
 
 app.use(morgan('dev'));
 app.use(express.json());
+app.use('/api/v1/user', userRoutes);
 
 // testing route
 app.get('/test', (req, res) => {
@@ -17,6 +20,7 @@ const port = process.env.PORT || '5000';
 
 const start = async() => {
     try {
+        await connectToDatabase(process.env.MONGO_URL);
         app.listen(port, () => {
             console.log(`Server is listening on port: ${port}...`);
         })
