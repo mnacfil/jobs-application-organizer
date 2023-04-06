@@ -5,12 +5,17 @@ const express = require('express');
 const morgan = require('morgan');
 const connectToDatabase = require('./config/db');
 const userRoutes = require('./routes/userRoute');
+const { errorHandler, notFoundPage } = require('./middlewares');
 
 const app = express();
 
 app.use(morgan('dev'));
 app.use(express.json());
 app.use('/api/v1/user', userRoutes);
+
+
+app.use(notFoundPage);
+app.use(errorHandler);
 
 // testing route
 app.get('/test', (req, res) => {
