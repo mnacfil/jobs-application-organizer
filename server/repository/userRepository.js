@@ -9,11 +9,22 @@ class UserRepository {
                 resolve(await User.create(user));
             } catch (error) {
                 console.log(`User repository error: ${error}`);
-                reject(error)
+                reject(error);
             }
         })
     }
 
+    // getUserByEmail 
+    getUserByEmail = (email) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                resolve(await User.findOne({ email }));
+            } catch (error) {
+                console.log(`get user repository error: ${error}`);
+                reject(error);
+            }
+        })
+    }
 
 }
 

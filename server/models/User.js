@@ -40,7 +40,10 @@ UserSchema.pre('save', async function() {
     if(!this.isModified('password')) return;
     const salt = await brcrypt.genSalt(10);
     this.password = await brcrypt.hash(this.password, salt);
-})
+});
 
+UserSchema.methods.isPasswordMatch = async function(givenPassword) {
+    return await brcrypt.compare(givenPassword, this.password);
+}
 
 module.exports = mongoose.model('User', UserSchema);
