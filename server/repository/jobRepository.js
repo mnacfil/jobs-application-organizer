@@ -12,10 +12,10 @@ class JobRepository {
             }
         })
     }
-    findAll = () => {
+    findAll = (userID) => {
         return new Promise(async (resolve, reject) => {
             try {
-                resolve(await Job.find({}));
+                resolve(await Job.find({ owner: userID }));
             } catch (error) {
                 console.log('find job repository error');
                 reject(error);

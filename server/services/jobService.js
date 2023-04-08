@@ -17,9 +17,9 @@ class JobService {
             throw new BadRequest(error);
         }
     }
-    findAll = async() => {
+    findAll = async(userID) => {
         try {
-            return await JobRepository.findAll();
+            return await JobRepository.findAll(userID);
         } catch (error) {
             throw new BadRequest(error);
         }

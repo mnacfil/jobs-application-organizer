@@ -42,7 +42,12 @@ const JobSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please provide position']
     },
-    recruiter: RecruiterSchema
+    recruiter: RecruiterSchema,
+    owner: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+        required: true
+    }
 }, {timestamps: true});
 
 module.exports = mongoose.model('Job', JobSchema);

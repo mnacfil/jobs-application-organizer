@@ -2,6 +2,7 @@ const JobService = require('../services/jobService');
 const { responseTemplate } = require('../middlewares/utilities')
 
 const createJob = async (req, res) => {
+    req.body.owner = req.user.userID;
     const jobCreated = await JobService.create(req.body);
     res.
         status(201).
@@ -24,7 +25,7 @@ const deleteJob = (req, res) => {
     res.status(200).json({ route: 'delete job'})
 }
 const getAllJob = async (req, res) => {
-    const jobs = await JobService.findAll();
+    const jobs = await JobService.findAll(req.user.userID);
     res.
         status(200).
         json(responseTemplate(
