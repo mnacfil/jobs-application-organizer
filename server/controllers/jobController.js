@@ -1,7 +1,11 @@
+const JobService = require('../services/jobService');
+const { responseTemplate } = require('../middlewares/utilities')
 
-
-const createJob = (req, res) => {
-    res.status(200).json({ route: 'create job'})
+const createJob = async (req, res) => {
+    const jobCreated = await JobService.create(req.body);
+    res.
+        status(201).
+        json(responseTemplate('SUCCESS', 'Job created!', jobCreated))
 }
 const getJob = (req, res) => {
     res.status(200).json({ route: 'get job'})
