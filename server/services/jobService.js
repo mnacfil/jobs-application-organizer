@@ -1,5 +1,5 @@
 const JobRepository = require('../repository/jobRepository');
-const { Unauthorized, NotFound, BadRequest } = require('../error')
+const { NotFound, BadRequest } = require('../error')
 
 class JobService {
 
@@ -22,6 +22,13 @@ class JobService {
             return await JobRepository.findAll(userID);
         } catch (error) {
             throw new BadRequest(error);
+        }
+    }
+    findById = async(jobID) => {
+        try {
+            return await JobRepository.findById(jobID);
+        } catch (error) {
+            throw new NotFound(error);
         }
     }
 }

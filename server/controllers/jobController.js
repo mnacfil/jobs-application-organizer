@@ -1,15 +1,26 @@
 const JobService = require('../services/jobService');
-const { responseTemplate } = require('../middlewares/utilities')
+const { responseTemplate } = require('../middlewares/utilities');
 
 const createJob = async (req, res) => {
     req.body.owner = req.user.userID;
     const jobCreated = await JobService.create(req.body);
     res.
         status(201).
-        json(responseTemplate('SUCCESS', 'Job created!', jobCreated))
+        json(responseTemplate(
+            'SUCCESS', 
+            'Job created!', 
+            jobCreated
+        ));
 }
-const getJob = (req, res) => {
-    res.status(200).json({ route: 'get job'})
+const getJob = async (req, res) => {
+    const job = await JobService.findById(req.params.id);
+    res.
+        status(200).
+        json(responseTemplate(
+            'SUCCESS', 
+            'Job found!', 
+            job
+        ));
 }
 const updateJob = async (req, res) => {
     const result = await JobService.update(req.params.id, req.body);

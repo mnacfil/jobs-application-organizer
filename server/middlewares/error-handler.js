@@ -11,11 +11,20 @@ module.exports = (err, req, res, next) => {
                 err.name._message,
             ));
     }
+    if(err.name.name === 'CastError') {
+        return res.
+            status(err.status).
+            json(responseTemplate(
+                'Failed',
+                'No job found.',
+                err.name._message,
+            ));
+    }
     return res.
-        status(err.status).
+        status(err.status || 500).
         json(responseTemplate(
             'Failed',
-             err.name || 'Something went wrong',
+             err.name.name || 'Something went wrong',
             null
         )
     )

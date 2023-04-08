@@ -1,4 +1,5 @@
 const Job = require('../models/Job');
+const { NotFound } = require('../error');
 
 class JobRepository {
 
@@ -25,7 +26,11 @@ class JobRepository {
     findById = (jobID) => {
         return new Promise(async (resolve, reject) => {
             try {
-                resolve(await Job.findOne({ _id: jobID }));
+                const job = await Job.findOne({ _id: jobID });
+                if(!job) {
+                    throw new NotFound('No job found!');
+                }
+                resolve(job);
             } catch (error) {
                 console.log('find job repository error');
                 reject(error);
@@ -48,6 +53,9 @@ class JobRepository {
         return new Promise (async (resolve, reject) => {
             try {
                 const job = await this.findById(jobId);
+                if(!job) {
+                    throw new NotFound('No job found!');
+                }
                 job.jobStatus = jobStatus;
                 job.jobType = jobType;
                 job.jobLocation = jobLocation;
@@ -60,6 +68,7 @@ class JobRepository {
                 resolve(job);
             } catch (error) {
                 console.log("update job repository error");
+                console.log(error);
                 reject(error)
             }
         })
