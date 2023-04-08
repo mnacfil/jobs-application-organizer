@@ -48,7 +48,6 @@ class JobRepository {
         return new Promise (async (resolve, reject) => {
             try {
                 const job = await this.findById(jobId);
-                console.log(job);
                 job.jobStatus = jobStatus;
                 job.jobType = jobType;
                 job.jobLocation = jobLocation;

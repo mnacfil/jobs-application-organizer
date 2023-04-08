@@ -7,7 +7,6 @@ class JobService {
         try {
              return await JobRepository.create(job);
         } catch (error) {
-            console.log(`job servicer error`);
             throw new BadRequest(error)
         }
     }

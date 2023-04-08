@@ -4,21 +4,12 @@ const validator = require('validator')
 const RecruiterSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Please provide recruiter name'],
     },
     email: {
         type: String,
-        unique: true,
-        required: [true, 'Please provide recruiter email'],
-        validate: {
-            validator: validator.isEmail,
-            message: 'Plese provide valid recruiter email'
-        }
     },
     contactNumber: {
         type: String,
-        required: [true, 'Please provide recruiter contact number'],
-
     },
 })
 
