@@ -8,8 +8,21 @@ class JobService {
              return await JobRepository.create(job);
         } catch (error) {
             console.log(`job servicer error`);
-            console.log(error);
             throw new BadRequest(error)
+        }
+    }
+    update = async (jobID, updatedJob) => {
+        try {
+            return await JobRepository.update(jobID, updatedJob);
+        } catch (error) {
+            throw new BadRequest(error);
+        }
+    }
+    findAll = async() => {
+        try {
+            return await JobRepository.findAll();
+        } catch (error) {
+            throw new BadRequest(error);
         }
     }
 }
