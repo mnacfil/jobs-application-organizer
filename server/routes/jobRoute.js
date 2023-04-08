@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const {authenticated} = require('../middlewares')
 
 const {
     getAllJob,
@@ -11,10 +12,12 @@ const {
 
 // setup authentication middleware,
 // only authenticate user can perform crud operations
-router.route('/').post(createJob).get(getAllJob)
+router.route('/').
+                post( authenticated, createJob).
+                get( authenticated, getAllJob);
 router.route('/:id').
-    get(getJob).
-    patch(updateJob).
-    delete(deleteJob)
+                    get( authenticated, getJob).
+                    patch( authenticated, updateJob).
+                    delete( authenticated, deleteJob);
 
-module.exports = router
+module.exports = router;

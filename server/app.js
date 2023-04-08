@@ -17,8 +17,6 @@ app.use(cookieParser(process.env.TOKEN_SECRET));
 app.use('/api/v1/user', userRoutes);
 app.use('/api/v1/job', jobRoutes);
 
-
-
 // testing route
 app.get('/test', (req, res) => {
     res.json({msg: 'testing route'})
