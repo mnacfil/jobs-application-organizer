@@ -5,6 +5,7 @@ const express = require('express');
 const morgan = require('morgan');
 const connectToDatabase = require('./config/db');
 const userRoutes = require('./routes/userRoute');
+const jobRoutes = require('./routes/jobRoute');
 const { errorHandler, notFoundPage } = require('./middlewares');
 const cookieParser = require('cookie-parser');
 
@@ -14,6 +15,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser(process.env.TOKEN_SECRET));
 app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/job', jobRoutes);
 
 
 
