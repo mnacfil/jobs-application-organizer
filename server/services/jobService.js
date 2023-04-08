@@ -31,6 +31,13 @@ class JobService {
             throw new NotFound(error);
         }
     }
+    delete = async(jobID) => {
+        try {
+            return await JobRepository.delete(jobID);
+        } catch (error) {
+            throw new NotFound(error);
+        }
+    }
 }
 
 module.exports = new JobService()

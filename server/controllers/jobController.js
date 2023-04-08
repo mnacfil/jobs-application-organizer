@@ -32,8 +32,15 @@ const updateJob = async (req, res) => {
             result
     ));
 }
-const deleteJob = (req, res) => {
-    res.status(200).json({ route: 'delete job'})
+const deleteJob = async (req, res) => {
+    const result = await JobService.delete(req.params.id);
+    res.
+        status(200).
+        json(responseTemplate(
+            "SUCCESS",
+            "Succesfully delete the job",
+            result
+    ));
 }
 const getAllJob = async (req, res) => {
     const jobs = await JobService.findAll(req.user.userID);

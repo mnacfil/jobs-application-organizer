@@ -37,6 +37,20 @@ class JobRepository {
             }
         })
     }
+    delete = (jobID) => {
+        return new Promise (async(resolve, reject) => {
+            try {
+                const job = await Job.findByIdAndDelete({ _id: jobID });
+                if(!job) {
+                    throw new NotFound('No job found!');
+                }
+                resolve('Job Deleted');
+            } catch (error) {
+                console.log('delete job repository error');
+                reject(error);
+            }
+        })
+    }
     update = (jobId, updatedJob) => {
         const { 
             jobStatus, 
