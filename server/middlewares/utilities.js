@@ -24,9 +24,15 @@ const responseTemplate = (status, message, data) => {
     }
 }
 
+const isAuthorize = (owner, resourceOwner) => {
+    if(owner === resourceOwner.toString()) return true;
+    return false;
+}
+
 module.exports = {
     createToken,
     isValidToken,
     payload,
-    responseTemplate
+    responseTemplate,
+    isAuthorize
 }

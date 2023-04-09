@@ -1,7 +1,7 @@
 const { isValidToken } = require('./utilities');
 const { Unauthorized } = require('../error')
 
-const authenticated = async(req, res, next) => {
+const authenticate = async(req, res, next) => {
     try {
         const [ name, token ] = req.headers.authorization.split(' ');
         const decode = isValidToken(token);
@@ -13,5 +13,5 @@ const authenticated = async(req, res, next) => {
 }
 
 module.exports = {
-    authenticated
+    authenticate
 }

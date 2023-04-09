@@ -23,7 +23,7 @@ const getJob = async (req, res) => {
         ));
 }
 const updateJob = async (req, res) => {
-    const result = await JobService.update(req.params.id, req.body);
+    const result = await JobService.update( req.user.userID, req.params.id, req.body );
     res.
         status(200).
         json(responseTemplate(
@@ -33,7 +33,7 @@ const updateJob = async (req, res) => {
     ));
 }
 const deleteJob = async (req, res) => {
-    const result = await JobService.delete(req.params.id);
+    const result = await JobService.delete(req.user.userID, req.params.id);
     res.
         status(200).
         json(responseTemplate(

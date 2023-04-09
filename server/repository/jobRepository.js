@@ -1,5 +1,6 @@
 const Job = require('../models/Job');
-const { NotFound } = require('../error');
+const { NotFound, Unauthorized } = require('../error');
+const { isAuthorize } = require('../middlewares/utilities');
 
 class JobRepository {
 
@@ -37,21 +38,27 @@ class JobRepository {
             }
         })
     }
-    delete = (jobID) => {
+    delete = (userID, jobID) => {
         return new Promise (async(resolve, reject) => {
             try {
-                const job = await Job.findByIdAndDelete({ _id: jobID });
+                const job = await this.findById(jobID)
                 if(!job) {
                     throw new NotFound('No job found!');
                 }
-                resolve('Job Deleted');
+                const isUserAuthorize = isAuthorize(userID, job.owner);
+                if(isUserAuthorize) {
+                    await Job.findOneAndDelete({ _id: jobID})
+                    resolve('Job Deleted');
+                } else {
+                    throw new Unauthorized('Youre not authorize to perform this operation');
+                }
             } catch (error) {
                 console.log('delete job repository error');
                 reject(error);
             }
         })
     }
-    update = (jobId, updatedJob) => {
+    update = (userID, jobId, updatedJob) => {
         const { 
             jobStatus, 
             jobType, 
@@ -70,19 +77,23 @@ class JobRepository {
                 if(!job) {
                     throw new NotFound('No job found!');
                 }
-                job.jobStatus = jobStatus;
-                job.jobType = jobType;
-                job.jobLocation = jobLocation;
-                job.company = company;
-                job.position = position;
-                job.recruiter.name = name;
-                job.recruiter.email = email;
-                job.recruiter.contactNumber = contactNumber;
-                await job.save();
-                resolve(job);
+                const isUserAuthorize = isAuthorize(userID, job.owner);
+                if(isUserAuthorize) {
+                    job.jobStatus = jobStatus;
+                    job.jobType = jobType;
+                    job.jobLocation = jobLocation;
+                    job.company = company;
+                    job.position = position;
+                    job.recruiter.name = name;
+                    job.recruiter.email = email;
+                    job.recruiter.contactNumber = contactNumber;
+                    await job.save(); 
+                    resolve(job);
+                } else {
+                    throw new Unauthorized('Youre not authorize to perform this operation');
+                }
             } catch (error) {
                 console.log("update job repository error");
-                console.log(error);
                 reject(error)
             }
         })

@@ -10,9 +10,9 @@ class JobService {
             throw new BadRequest(error)
         }
     }
-    update = async (jobID, updatedJob) => {
+    update = async (userID, jobID, updatedJob) => {
         try {
-            return await JobRepository.update(jobID, updatedJob);
+            return await JobRepository.update(userID, jobID, updatedJob);
         } catch (error) {
             throw new BadRequest(error);
         }
@@ -31,9 +31,9 @@ class JobService {
             throw new NotFound(error);
         }
     }
-    delete = async(jobID) => {
+    delete = async(userID, jobID) => {
         try {
-            return await JobRepository.delete(jobID);
+            return await JobRepository.delete(userID, jobID);
         } catch (error) {
             throw new NotFound(error);
         }
