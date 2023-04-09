@@ -1,6 +1,6 @@
 const {createToken, payload, responseTemplate} = require('../middlewares/utilities');
 const userRepository = require('../repository/userRepository');
-const userService = require('../services/userService')
+const UserService = require('../services/userService')
 const { BadRequest, Unauthorized } = require('../error')
 
 const register = async(req, res) => {
@@ -20,23 +20,35 @@ const login = async(req, res) => {
     if(!email || !password) {
         throw new BadRequest('Please fill out all field');
     }
-    const user = await userService.getUserByEmail(email);
+    const user = await UserService.findOne(email);
     const isPasswordMatch = await user.isPasswordMatch(password);
     if(!isPasswordMatch) {
-        throw new BadRequest('Password is incorrect!');
+        throw new BadRequest('Invalid Credential, email or password is incorrect');
     }
     const payloadUser = payload(user);
     res.
-    status(200).
-    json(responseTemplate(
-        'SUCCESS',
-        'Successfully login the user',
-        data = { payloadUser, token: createToken(payloadUser)}
-    ));
+        status(200).
+        json(responseTemplate(
+            'SUCCESS',
+            'Successfully login the user',
+            data = { payloadUser, token: createToken(payloadUser)}
+        ));
+}
+
+const updateUser = async(req, res) => {
+    const result = await UserService.update(req.user.userID, req.body);
+    res.
+        status(200).
+        json(responseTemplate(
+            'SUCCESS',
+            'Successfully update the user',
+            result
+        ));
 }
 
 
 module.exports = {
     register,
-    login
+    login,
+    updateUser
 }

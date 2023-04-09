@@ -1,14 +1,21 @@
-const userRepository = require('../repository/userRepository');
-const { NotFound } = require('../error')
+const UserRepository = require('../repository/userRepository');
+const { NotFound, BadRequest } = require('../error')
 
 class UserService {
 
-    getUserByEmail = async (email) => {
-        const user = await userRepository.getUserByEmail(email);
-        if(!user) {
-            throw new NotFound('No user found!');
+    findOne = async (email) => {
+        try {
+            return await UserRepository.findOne(email);
+        } catch (error) {
+            throw new BadRequest(error);
         }
-        return user;
+    }
+    update = async (userID, updatedUser) => {
+        try {
+            return await UserRepository.update(userID, updatedUser);
+        } catch (error) {
+            throw new Error(error);
+        }
     }
 }
 

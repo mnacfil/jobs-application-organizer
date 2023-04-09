@@ -24,7 +24,7 @@ module.exports = (err, req, res, next) => {
         status(err.status || 500).
         json(responseTemplate(
             'Failed',
-             err.name.name || 'Something went wrong',
+             err.name.name || err.name || 'Something went wrong',
             null
         )
     )
