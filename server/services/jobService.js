@@ -18,7 +18,7 @@ class JobService {
         }
     }
     findAll = async(query) => {
-        const { search, status, type, page, sort } = query;
+        const { search, status, type, page, sort, limit } = query;
         let whereParams = { owner: query.owner}
         if(status && status !== 'all') {
             whereParams.jobStatus = status;
@@ -41,11 +41,11 @@ class JobService {
         if(search) {
             whereParams.position = { $regex: search, $options: 'i'}
         }
-        let limit = 10;
-        let skip = (page - 1) * limit;
+        const targetPage = Number(page) || 1;
+        let targetLimit = Number(limit) || 10;
+        let skip = (targetPage - 1) * targetLimit;
         try {
-            const jobs = await JobRepository.findAll(whereParams, limit, skip, query.sort);
-            return jobs;
+            return await JobRepository.findAll(whereParams, targetLimit, skip, query.sort);
         } catch (error) {
             throw new BadRequest(error);
         }
