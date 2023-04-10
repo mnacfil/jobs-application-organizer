@@ -17,9 +17,35 @@ class JobService {
             throw new BadRequest(error);
         }
     }
-    findAll = async(userID) => {
+    findAll = async(query) => {
+        const { search, status, type, page, sort } = query;
+        let whereParams = { owner: query.owner}
+        if(status && status !== 'all') {
+            whereParams.jobStatus = status;
+        }
+        if(type && type !== 'all') {
+            whereParams.jobType = type;
+        }
+        if(sort === 'a-z') {
+            query.sort = 'position';
+        }
+        if(sort === 'z-a') {
+            query.sort = '-position';
+        }
+        if(sort === 'latest') {
+            query.sort = '-createdAt';
+        }
+        if(sort === 'oldest') {
+            query.sort = 'createdAt';
+        }
+        if(search) {
+            whereParams.position = { $regex: search, $options: 'i'}
+        }
+        let limit = 10;
+        let skip = (page - 1) * limit;
         try {
-            return await JobRepository.findAll(userID);
+            const jobs = await JobRepository.findAll(whereParams, limit, skip, query.sort);
+            return jobs;
         } catch (error) {
             throw new BadRequest(error);
         }

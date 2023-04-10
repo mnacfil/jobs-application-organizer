@@ -14,10 +14,11 @@ class JobRepository {
             }
         })
     }
-    findAll = (userID) => {
+    findAll = (whereParams, limit, skip, sort) => {
+        console.log(whereParams);
         return new Promise(async (resolve, reject) => {
             try {
-                resolve(await Job.find({ owner: userID }));
+                resolve(await Job.find(whereParams).limit(limit).skip(skip).sort(sort));
             } catch (error) {
                 console.log('find job repository error');
                 reject(error);

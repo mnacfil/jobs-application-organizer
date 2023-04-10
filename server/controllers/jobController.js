@@ -43,7 +43,8 @@ const deleteJob = async (req, res) => {
     ));
 }
 const getAllJob = async (req, res) => {
-    const jobs = await JobService.findAll(req.user.userID);
+    req.query.owner = req.user.userID;
+    const jobs = await JobService.findAll( req.query );
     res.
         status(200).
         json(responseTemplate(
