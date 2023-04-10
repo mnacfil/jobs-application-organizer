@@ -7,7 +7,8 @@ const {
     getJob,
     createJob,
     updateJob,
-    deleteJob
+    deleteJob,
+    getJobApplicationStats
 } = require('../controllers/jobController');
 
 // setup authentication middleware,
@@ -15,9 +16,9 @@ const {
 router.route('/').
                 post( authenticate, createJob).
                 get( authenticate, getAllJob);
+router.get('/stats', authenticate, getJobApplicationStats);
 router.route('/:id').
                     get( authenticate, getJob).
                     patch( authenticate, updateJob).
                     delete( authenticate, deleteJob);
-
 module.exports = router;

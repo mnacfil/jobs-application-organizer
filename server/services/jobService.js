@@ -64,6 +64,13 @@ class JobService {
             throw new NotFound(error);
         }
     }
+    stats = async(userID) => {
+        try {
+            await JobRepository.stats(userID);
+        } catch (error) {
+            throw new Error(error)
+        }
+    }
 }
 
 module.exports = new JobService()
