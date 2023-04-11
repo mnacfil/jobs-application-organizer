@@ -17,15 +17,14 @@ class JobRepository {
         })
     }
     findAll = (whereParams, limit, skip, sort) => {
-        console.log(whereParams);
         return new Promise(async (resolve, reject) => {
             try {
                 const queryJobs = await Job.find(whereParams).limit(limit).skip(skip).sort(sort);
                 const totalJobApplication = await Job.countDocuments({ owner: whereParams.owner });
                 const numberOfPage = Math.ceil( totalJobApplication / limit );
-                resolve({queryJobs, totalJobs, numberOfPage});
+                resolve({queryJobs,totalJobApplication,numberOfPage});
             } catch (error) {
-                console.log('find job repository error');
+                console.log('find all job repository error');
                 reject(error);
             }
         })
@@ -108,6 +107,7 @@ class JobRepository {
         return new Promise(async(resolve, reject) => {
             try {
                 let stats = await Job.aggregate([
+                    { $match: { owner: new mongoose.Types.ObjectId(userID) }},
                     { $group: { _id: '$jobStatus', count: { $sum: 1 }}}
                 ])
                 stats = stats.reduce((data, item) => {
@@ -126,6 +126,7 @@ class JobRepository {
                     notSelected: stats['not selected'] || 0,
                 }
                 let monthlyApplication = await Job.aggregate([
+                    { $match: { owner: new mongoose.Types.ObjectId(userID) }},
                     { $group: { 
                         _id: {
                             year: { $year: '$createdAt'},

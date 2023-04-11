@@ -66,9 +66,9 @@ class JobService {
     }
     stats = async(userID) => {
         try {
-            await JobRepository.stats(userID);
+            return await JobRepository.stats(userID);
         } catch (error) {
-            throw new Error(error)
+            throw new BadRequest(error);
         }
     }
 }

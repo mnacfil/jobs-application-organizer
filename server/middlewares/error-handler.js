@@ -2,6 +2,7 @@ const { responseTemplate } = require('./utilities')
 
 module.exports = (err, req, res, next) => {
     console.log("Error handler");
+    console.log(err);
     if(err.name.name === 'ValidationError') {
         return res.
             status(err.status).

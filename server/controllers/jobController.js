@@ -57,12 +57,12 @@ const getAllJob = async (req, res) => {
 const getJobApplicationStats = async(req, res) =>{
     const result = await JobService.stats(req.user.userID);
     res.
-    status(200).
-    json(responseTemplate(
-        "SUCCESS",
-        "Succesfully get all the job stats",
-        result
-));
+        status(200).
+        json(responseTemplate(
+            "SUCCESS",
+            "Succesfully get all the job stats",
+            result
+    ));
 }
 
 module.exports = {
