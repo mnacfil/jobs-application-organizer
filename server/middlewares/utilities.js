@@ -28,11 +28,22 @@ const isAuthorize = (owner, resourceOwner) => {
     if(owner === resourceOwner.toString()) return true;
     return false;
 }
+const isDemoUser = (userID) => {
+    // the _id of demo user is '6433aa91555b863f79f93302'
+    if(userID === '6433aa91555b863f79f93302') return true;
+    return false;
+}
+const getToken = (req) => {
+    const [ name, token ] = req.headers.authorization.split(' ');
+    return token;
+} 
 
 module.exports = {
     createToken,
     isValidToken,
     payload,
     responseTemplate,
-    isAuthorize
+    isAuthorize,
+    isDemoUser,
+    getToken
 }

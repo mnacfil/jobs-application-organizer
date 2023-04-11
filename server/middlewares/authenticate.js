@@ -1,9 +1,9 @@
-const { isValidToken } = require('./utilities');
+const { isValidToken, getToken } = require('./utilities');
 const { Unauthorized } = require('../error')
 
-const authenticate = async(req, res, next) => {
+const authenticate = (req, res, next) => {
     try {
-        const [ name, token ] = req.headers.authorization.split(' ');
+        const token = getToken(req);
         const decode = isValidToken(token);
         req.user = decode;
         next();
