@@ -7,13 +7,20 @@ const connectToDatabase = require('./config/db');
 const userRoutes = require('./routes/userRoute');
 const jobRoutes = require('./routes/jobRoute');
 const { errorHandler, notFoundPage } = require('./middlewares');
-const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const xss = require('xss-clean');
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize')
 
 const app = express();
 
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(cookieParser(process.env.TOKEN_SECRET));
+app.use(cors());
+app.use(xss());
+app.use(helmet());
+app.use(mongoSanitize());
+
 app.use('/api/v1/user', userRoutes);
 app.use('/api/v1/job', jobRoutes);
 
@@ -21,6 +28,7 @@ app.use('/api/v1/job', jobRoutes);
 app.get('/test', (req, res) => {
     res.json({msg: 'testing route'})
 })
+
 app.use(notFoundPage);
 app.use(errorHandler);
 
