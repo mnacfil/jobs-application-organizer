@@ -14,7 +14,7 @@ const AddJob = () => {
     company,
     jobLocation,
     jobType,
-    status,
+    jobStatus,
     isLoading
   } = job;
 
@@ -26,7 +26,7 @@ const AddJob = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const job = { position, company, jobLocation, status, jobType }
+    const job = { position, company, jobLocation, jobStatus, jobType }
     if(isEditing) {
       dispatch(editJob({ editID, job }));
       return;
@@ -60,8 +60,8 @@ const AddJob = () => {
           type="text"
           />
         <FormSelect
-          name='status' 
-          value={status}
+          name='jobStatus' 
+          value={jobStatus}
           handleData={handleDataInput}
           options={statusOptions}
           label='Status'

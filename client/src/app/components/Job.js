@@ -5,13 +5,14 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt, FaFlask } from 'react-icons/fa';
 
-const Job = ({ company, jobLocation, position, jobType, status, createdAt, _id }) => {
+const Job = ({ company, jobLocation, position, jobType, jobStatus, createdAt, _id }) => {
+    // add recruiter { name, email, contact number }
     const dispatch = useDispatch();
     let statusClassName = 'pending';
-    if(status === 'interview') {
+    if(jobStatus === 'interview') {
         statusClassName = 'interview'
     }
-    if(status === 'declined') {
+    if(jobStatus === 'declined') {
         statusClassName = 'declined'
     }
     return (
@@ -42,7 +43,7 @@ const Job = ({ company, jobLocation, position, jobType, status, createdAt, _id }
                     </p>
                     <p className={`status ${statusClassName}`}>
                         <FaFlask />
-                        {status}
+                        {jobStatus}
                     </p>
                 </div>
                 <div className='edit-delete-controller'>

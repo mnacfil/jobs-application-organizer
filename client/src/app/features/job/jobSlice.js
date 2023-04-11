@@ -25,7 +25,7 @@ const initialState = {
         position: '',
         company: '',
         jobLocation: getUserFromLS()?.location || '',
-        status: 'applied',
+        jobStatus: 'applied',
         jobType: 'full time',
         statusOptions: [
             'initial interview', 
