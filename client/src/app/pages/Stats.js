@@ -3,12 +3,12 @@ import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux';
 import { getJobApplicationStats } from '../features/stat/statSlice';
 import {Stat, SkeletonStatCard, ChartContainer} from '../components';
-import {FcCancel, FcExpand, FcNeutralDecision} from 'react-icons/fc'
+import { FcReadingEbook } from 'react-icons/fc'
 
 const Stats = () => {
   const dispatch = useDispatch();
   const { isStatLoading, stats, monthlyApplication } = useSelector(store => store.stat);
-
+  console.log(stats);
   useEffect(() => {
     dispatch(getJobApplicationStats())
   }, []);
@@ -19,24 +19,36 @@ const Stats = () => {
           : 
             <div>
               <section className='stats-container'>
-                <Stat 
-                  value={stats.pending} 
-                  name='pending' 
-                  Icon={FcNeutralDecision}
-                  className='stat pending'
-                />
-                <Stat 
-                  value={stats.interview} 
-                  name='interview' 
-                  Icon={FcExpand}
-                  className='stat interview'
-                />
-                <Stat 
-                  value={stats.declined} 
-                  name='declined' 
-                  Icon={FcCancel}
-                  className='stat declined'
-                />
+                {Object.keys(stats).map((status) => {
+                  let statusName = status;
+                  switch(status) {
+                    case 'initialInterview':
+                      statusName = 'initial interview';
+                      break;
+                    case 'finalInterview':
+                      statusName = 'final interview';
+                      break;
+                    case 'waitingInResult':
+                      statusName = 'waiting in result';
+                      break;
+                    case 'notSelected':
+                      statusName = 'not selected';
+                      break;
+                    case 'jobOffer':
+                      statusName = 'job offer';
+                      break;
+                    default:
+                      statusName = status;
+                  }
+                  return (
+                    <Stat 
+                      value={stats[status]}
+                      name={statusName}
+                      Icon={FcReadingEbook}
+                      className='stat pending'
+                    />
+                  )
+                })}
               </section>
               { monthlyApplication.length > 0 && <ChartContainer /> }
             </div>

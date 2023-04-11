@@ -7,7 +7,7 @@ const Stat = ({ name, value, Icon, className }) => {
             <span>{value}</span>
             <Icon />
         </div>
-        <h5>{name} applications</h5>
+        <h5>{name}</h5>
     </article>
   )
 }

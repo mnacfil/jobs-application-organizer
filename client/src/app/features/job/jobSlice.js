@@ -112,8 +112,8 @@ const jobSlice = createSlice({
         clearAddJobInput : (state) => {
             state.job.position = '';
             state.job.company = '';
-            state.job.status = 'pending';
-            state.job.jobType = 'full-time';
+            state.job.status = 'applied';
+            state.job.jobType = 'full time';
             state.job.jobLocation = '';
         },
         clearAllJobFilter: (state) => {
