@@ -5,7 +5,7 @@ import { clearAddJobInput, clearAllJobFilter } from '../job/jobSlice';
 export const loginThunk = async (path, user, thunkAPI) => {
     try {
         const response = await customAxios.post(path, user);
-        return response.data;
+        return response.data.data;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data.msg);
     }

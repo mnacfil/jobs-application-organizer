@@ -1,7 +1,17 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import { loginThunk, registerThunk, clearAllDataThunk , updateThunk } from './userThunk';
+import { 
+    loginThunk, 
+    registerThunk, 
+    clearAllDataThunk , 
+    updateThunk 
+} from './userThunk';
 import { toast } from 'react-toastify';
-import { saveUserToLS, removeUserFromLS, getUserFromLS } from '../../util/localStorage';
+import { 
+    saveUserToLS, 
+    removeUserFromLS, 
+    getUserFromLS, 
+    saveUserToken 
+} from '../../util/localStorage';
 
 const user = getUserFromLS();
 
@@ -32,11 +42,11 @@ const initialState = {
 }
 
 export const registerUser = createAsyncThunk('user/register', async(user, thunkAPI) => {
-    return registerThunk('/auth/register', user, thunkAPI);
+    return registerThunk('/user/register', user, thunkAPI);
 });
 
 export const loginUser = createAsyncThunk('user/login', async(user, thunkAPI) => {
-    return loginThunk('/auth/login', user, thunkAPI);
+    return loginThunk('/user/login', user, thunkAPI);
 });
 
 export const updateUser = createAsyncThunk('user/update', async(user, thunkAPI) => {
@@ -93,19 +103,20 @@ const userSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(loginUser.fulfilled, (state, { payload }) => {
+                console.log(payload);
                 state.isLoading = false;
                 state.isError = false;
                 state.isLogin = true;
-                state.currentUser = payload.user;
-                state.user.email = payload.user.email;
-                state.user.name = payload.user.name;
-                state.user.location = payload.user.location;
-                state.user.lastName = payload.user.lastName;
-                toast.success(`Welcome back ${payload.user.name}!`);
-                saveUserToLS(payload.user);
+                state.currentUser = payload.payloadUser;
+                state.user.email = payload.payloadUser.email;
+                state.user.name = payload.payloadUser.name;
+                state.user.location = payload.payloadUser.location;
+                state.user.lastName = payload.payloadUser.lastName;
+                toast.success(`Welcome back ${payload.payloadUser.name}!`);
+                saveUserToLS(payload.payloadUser);
+                saveUserToken(payload.token);
             })
             .addCase(loginUser.rejected, (state, action) => {
-                console.log(action);
                 state.isLoading = false;
                 state.isError = true;
                 state.isLogin = false;

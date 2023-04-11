@@ -103,12 +103,12 @@ const jobSlice = createSlice({
             state.searchForm.isSearchLoading = true
         })
         .addCase(getAllJob.fulfilled, (state, { payload }) => {
-            const {jobs, totalJobs, numOfPages } = payload;
+            const {queryJobs, totalJobApplication, numberOfPages } = payload;
             state.searchForm.isSearchLoading = false;
             state.searchForm.isSearchError = false;
-            state.searchForm.allJob = jobs;
-            state.searchForm.totalJob = totalJobs;
-            state.searchForm.numberOfPage = numOfPages;
+            state.searchForm.allJob = queryJobs;
+            state.searchForm.totalJob = totalJobApplication;
+            state.searchForm.numberOfPage = numberOfPages;
         })
         .addCase(getAllJob.rejected, (state, { payload }) => {
             state.searchForm.isSearchLoading = false;

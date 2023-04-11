@@ -1,14 +1,17 @@
 import axios from 'axios'
-import { getUserFromLS } from '../util/localStorage'
+import { getUserToken } from '../util/localStorage'
+
+const thirdPartyURL = 'https://jobify-prod.herokuapp.com/api/v1/toolkit';
+const localURL = 'http://localhost:5000/api/v1'
 
 export const customAxios = axios.create({
-    baseURL: 'https://jobify-prod.herokuapp.com/api/v1/toolkit'
+    baseURL: localURL
 })
 
 customAxios.interceptors.request.use((config) => {
-    const user = getUserFromLS()
-    if(user) {
-        config.headers['Authorization'] = `Bearer ${user.token}`;
+    const token = getUserToken();
+    if(token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
     }
     return config;
 })

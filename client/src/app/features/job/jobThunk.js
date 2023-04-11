@@ -5,7 +5,7 @@ import { handleError } from '../../util/error';
 export const createJobThunk = async(job, thunkAPI) => {
     console.log(thunkAPI);
     try {
-        await customAxios.post('/jobs', job);
+        await customAxios.post('/job', job);
         thunkAPI.dispatch(clearAddJobInput());
     } catch (error) {  
         return handleError(error, thunkAPI);
@@ -24,15 +24,16 @@ export const getAllJobThunk = async( _, thunkAPI) => {
         queryParam += `&search=${search}`;
     }
     try {
-        const response = await customAxios.get(`/jobs?${queryParam}`)
-        return response.data;
+        const response = await customAxios.get(`/job?${queryParam}`);
+        console.log(response.data.data);
+        return response.data.data;
     } catch (error) {
         return handleError(error, thunkAPI);
     }
 }
 export const deleteJobThunk = async(jobID, thunkAPI) => {
     try {
-        const response = await customAxios.delete(`/jobs/${jobID}`)
+        const response = await customAxios.delete(`/job/${jobID}`)
         thunkAPI.dispatch(getAllJob());
         return response.data.msg;
     } catch (error) {
@@ -42,7 +43,7 @@ export const deleteJobThunk = async(jobID, thunkAPI) => {
 
 export const editJobThunk = async({editID, job}, thunkAPI) => {
     try {
-        const response = await customAxios.patch(`/jobs/${editID}`, job);
+        const response = await customAxios.patch(`/job/${editID}`, job);
         thunkAPI.dispatch(clearAddJobInput());
         return response.data.msg;
     } catch (error) {

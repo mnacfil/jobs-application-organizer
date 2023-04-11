@@ -11,3 +11,13 @@ export const getUserFromLS = () => {
 export const removeUserFromLS = () => {
     localStorage.removeItem('user');
 }
+
+export const saveUserToken = (token) => {
+    localStorage.setItem('token', token);
+}
+
+export const getUserToken = () => {
+    const token  = localStorage.getItem('token');
+    if(token) return token;
+    return null;
+}
