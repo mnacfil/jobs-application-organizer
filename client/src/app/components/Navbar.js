@@ -59,7 +59,7 @@ const Navbar = () => {
             onClick={() => dispatch(toggleLogoutBtn())}
             >
             <HiUserCircle />
-            <span>{user?.name}</span>
+            <span>{user?.firstName}</span>
             <AiFillCaretDown />
           </button>
           <button 

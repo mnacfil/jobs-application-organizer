@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 const Profile = () => {
   const dispatch = useDispatch();
   const { 
-    user: { name, lastName, email, location }
+    user: { firstName, lastName, email, location }
   } = useSelector(store => store.user);
 
   const handleData = (e) => {
@@ -18,21 +18,21 @@ const Profile = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!name || !lastName || !email || !location) {
+    if(!firstName || !lastName || !email || !location) {
       toast.error('Please fill up all field.')
       return;
     }
-    dispatch(updateUser({name, lastName, email, location}));
+    dispatch(updateUser({firstName, lastName, email, location}));
   }
   return (
     <Wrapper className='dashboard-center'>
       <h2>Profile Job</h2>
       <form onSubmit={handleSubmit}>
         <FormInput 
-          name='name'
+          name='firstName'
           label='First Name'
           type='text'
-          value={name}
+          value={firstName}
           handleData={handleData}
         />
         <FormInput

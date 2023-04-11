@@ -14,9 +14,10 @@ import {
 } from '../../util/localStorage';
 
 const user = getUserFromLS();
+console.log(user);
 
 const defaultUser = {
-    name: '',
+    firstName: '',
     lastName: '',
     location: '',
     email: '',
@@ -26,9 +27,9 @@ const defaultUser = {
 const initialState = {
     currentUser: getUserFromLS(),
     user: {
-        name: user?.name || '',
-        email: user?.email || '',
+        firstName: user?.firstName || '',
         lastName: user?.lastName || '',
+        email: user?.email || '',
         location: user?.location || '',
         password: '',
         action: 'login'
@@ -109,7 +110,7 @@ const userSlice = createSlice({
                 state.isLogin = true;
                 state.currentUser = payload.payloadUser;
                 state.user.email = payload.payloadUser.email;
-                state.user.name = payload.payloadUser.name;
+                state.user.firstName = payload.payloadUser.firstName;
                 state.user.location = payload.payloadUser.location;
                 state.user.lastName = payload.payloadUser.lastName;
                 toast.success(`Welcome back ${payload.payloadUser.name}!`);
@@ -132,6 +133,7 @@ const userSlice = createSlice({
                 state.currentUser = payload.user;
                 toast.success(`Welcome ${payload.user.name}`);
                 saveUserToLS(payload.user);
+                saveUserToken(payload.token);
             })
             .addCase(registerUser.rejected, (state, action) => {
                 state.isLoading = false;
