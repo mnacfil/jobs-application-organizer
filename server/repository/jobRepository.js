@@ -19,8 +19,9 @@ class JobRepository {
     findAll = (whereParams, limit, skip, sort) => {
         return new Promise(async (resolve, reject) => {
             try {
+                console.log(whereParams);
                 const queryJobs = await Job.find(whereParams).limit(limit).skip(skip).sort(sort);
-                const totalJobApplication = await Job.countDocuments({ owner: whereParams.owner });
+                const totalJobApplication = await Job.countDocuments( whereParams );
                 const numberOfPage = Math.ceil( totalJobApplication / limit );
                 resolve({queryJobs,totalJobApplication,numberOfPage});
             } catch (error) {
