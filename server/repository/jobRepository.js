@@ -125,6 +125,7 @@ class JobRepository {
                     initialInterview: stats['initial interview'] || 0,
                     jobOffer: stats['job offer'] || 0,
                     notSelected: stats['not selected'] || 0,
+                    waitingInResult: stats['waiting in result'] || 0
                 }
                 let monthlyApplication = await Job.aggregate([
                     { $match: { owner: new mongoose.Types.ObjectId(userID) }},

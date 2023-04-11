@@ -17,7 +17,17 @@ const JobSchema = new mongoose.Schema({
     jobStatus: {
         type: String,
         enum: {
-            values: ['initial interview', 'final interview', 'exam', 'assestment', 'not selected', 'job offer', 'applied', 'ghosted'],
+            values: [
+                'initial interview', 
+                'final interview', 
+                'exam', 
+                'assestment', 
+                'not selected', 
+                'job offer', 
+                'applied', 
+                'ghosted', 
+                'waiting in result'
+            ],
             message: `{VALUE} is not supported`
         },
         default: 'applied'
