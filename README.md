@@ -2,6 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
+## issue/bug
+
+edit job return error (bad request)
+deleting job doesnt show toast message
+deleting job (demo user), automatically logout when performing delete, update and add
+
+- need to just show the toast error message
+  stats page, need to add additional card for other job status;
+
 ## Available Scripts
 
 In the project directory, you can run:

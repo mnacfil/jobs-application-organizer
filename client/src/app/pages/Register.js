@@ -94,7 +94,7 @@ const Register = () => {
         <button
           className='btn btn-block demo-btn'
           type='button'
-          onClick={() => dispatch(loginUser({ email: 'testUser@test.com', password: 'secret'}))}
+          onClick={() => dispatch(loginUser({ email: 'demo@gmail.com', password: 'passw0rd'}))}
         >
           {isLoading ? 'loading...' : 'Demo app'}
         </button>

@@ -9,7 +9,7 @@ const initialState = {
     defaultChart: 'bar'
 }
 
-export const getJobApplicationStats = createAsyncThunk('stat/jobApplication', statThunk)
+export const getJobApplicationStats = createAsyncThunk('stat/jobApplication', statThunk);
 
 const statSlice = createSlice({
     name: 'stat',
@@ -27,8 +27,8 @@ const statSlice = createSlice({
             .addCase(getJobApplicationStats.fulfilled, (state, { payload }) => {
                 state.isStatLoading = false;
                 state.isStatError = false;
-                state.stats = payload.defaultStats;
-                state.monthlyApplication = payload.monthlyApplications;
+                state.stats = payload.statsData;
+                state.monthlyApplication = payload.monthlyApplication;
             })
             .addCase(getJobApplicationStats.rejected, (state) => {
                 state.isStatLoading = false;

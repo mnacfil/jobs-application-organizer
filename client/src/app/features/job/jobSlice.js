@@ -25,18 +25,52 @@ const initialState = {
         position: '',
         company: '',
         jobLocation: getUserFromLS()?.location || '',
-        status: 'pending',
-        jobType: 'full-time',
-        statusOptions: ['pending', 'declined', 'interview'],
-        jobTypeOptions: ['full-time', 'part-time', 'remote', 'internship'],
+        status: 'applied',
+        jobType: 'full time',
+        statusOptions: [
+            'initial interview', 
+            'final interview', 
+            'exam', 
+            'assestment', 
+            'not selected', 
+            'job offer', 
+            'applied', 
+            'ghosted', 
+            'waiting in result'
+        ],
+        jobTypeOptions: [
+            'full time', 
+            'part time', 
+            'internship', 
+            'remote', 
+            'freelance'
+        ],
     },
     // all-job-page
     searchForm: {
         isSearchLoading: false,
         isSearchError: false,
         searchFilter: searchDefaultFilterState,
-        statuses: ['all','interview','declined','pending'],
-        types: ['all', 'full-time', 'part-time', 'remote', 'internship'],
+        statuses: [
+            'all',
+            'initial interview', 
+            'final interview', 
+            'exam', 
+            'assestment', 
+            'not selected', 
+            'job offer', 
+            'applied', 
+            'ghosted', 
+            'waiting in result'
+        ],
+        types: [
+            'all',
+            'full time', 
+            'part time', 
+            'internship', 
+            'remote', 
+            'freelance'
+        ],
         sorts: ['latest', 'oldest', 'a-z', 'z-a'],
         allJob: [],
         totalJob: 0,

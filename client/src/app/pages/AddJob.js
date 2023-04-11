@@ -27,7 +27,10 @@ const AddJob = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const job = { position, company, jobLocation, status, jobType }
-    if(isEditing) return dispatch(editJob({ editID, job }));
+    if(isEditing) {
+      dispatch(editJob({ editID, job }));
+      return;
+    }
     dispatch(createJob(job));
   }
 
@@ -80,6 +83,7 @@ const AddJob = () => {
           <button 
             className='submit-btn btn btn-block'
             disabled={isLoading}
+            type='submit'
           >
               { isEditing ? 'Save' : 'Submit'}
           </button>
