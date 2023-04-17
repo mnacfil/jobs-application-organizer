@@ -9,7 +9,7 @@ import {
   navigateToPrevPage,
   navigateToTargetPage,
   clearAllJobFilter 
-} from '../features/job/jobSlice'
+} from '../features/job/jobSlice';
 
 const AllJob = () => {
   const dispatch = useDispatch();
@@ -179,7 +179,7 @@ const Wrapper = styled.div`
               letter-spacing: var(--letterSpacing);
             }
             .company-initial {
-              background-color: var(--primary-500);
+              /* background-color: var(--primary-500); */
               color: var(--white);
               font-weight: 800;
               font-size: 1.5rem;

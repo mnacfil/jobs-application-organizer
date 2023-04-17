@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const AddJobController = ({ isLoading, isEditing }) => {
+const AddJobController = ({ isloading, isediting }) => {
   return (
     <Wrapper>
         <div className='addJob-controller'>
@@ -13,10 +13,10 @@ const AddJobController = ({ isLoading, isEditing }) => {
             </button>
             <button 
               className='submit-btn btn'
-              disabled={isLoading}
+              disabled={isloading}
               type='submit'
             >
-              { isEditing ? 'Save Job' : 'Add Job'}
+              { isediting ? 'Save Job' : 'Add Job'}
             </button>
         </div>
     </Wrapper>

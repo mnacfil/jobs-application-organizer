@@ -2,8 +2,9 @@ import React from 'react'
 import {formatDate} from '../util/moment';
 import { deleteJob, handleEditAction } from '../features/job/jobSlice';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt, FaFlask } from 'react-icons/fa';
+import {generateRandomColor} from '../util/generateRandomColor';
 
 const Job = ({ company, jobLocation, position, jobType, jobStatus, createdAt, _id }) => {
     // add recruiter { name, email, contact number }
@@ -15,10 +16,17 @@ const Job = ({ company, jobLocation, position, jobType, jobStatus, createdAt, _i
     if(jobStatus === 'declined') {
         statusClassName = 'declined'
     }
+    const initial = [...company][0].toUpperCase();
+    const hexCode = generateRandomColor();
     return (
         <article className='job'>
             <header>
-                <div className='company-initial'>D</div>
+                <div 
+                    className='company-initial'
+                    style={{ backgroundColor: hexCode}}
+                    >
+                    {initial}
+                </div>
                 <div className='company-info'>
                     <h4>{position}</h4>
                     <p>{company}</p>
