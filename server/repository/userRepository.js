@@ -46,7 +46,7 @@ class UserRepository {
                     user.location = location;
                     user.email = email;
                     await user.save();
-                    resolve('User updated');
+                    resolve(user);
                 } else {
                     throw new Unauthorized('Youre not authorize to perform this operation');
                 }

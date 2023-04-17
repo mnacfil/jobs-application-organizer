@@ -71,15 +71,11 @@ class JobRepository {
             jobLocation, 
             company, 
             position,
-            recruiter: {
-                name,
-                email,
-                contactNumber
-            } 
         } = updatedJob;
         return new Promise (async (resolve, reject) => {
             try {
                 const job = await this.findById(jobId);
+                console.log(job);
                 if(!job) {
                     throw new NotFound('No job found!');
                 }
@@ -90,17 +86,15 @@ class JobRepository {
                     job.jobLocation = jobLocation;
                     job.company = company;
                     job.position = position;
-                    job.recruiter.name = name;
-                    job.recruiter.email = email;
-                    job.recruiter.contactNumber = contactNumber;
+                    job.recruiter.name = 'jane'
                     await job.save(); 
-                    resolve(job);
+                    resolve('Job updated.');
                 } else {
                     throw new Unauthorized('Youre not authorize to perform this operation');
                 }
             } catch (error) {
                 console.log("update job repository error");
-                reject(error)
+                reject(error);
             }
         })
     }

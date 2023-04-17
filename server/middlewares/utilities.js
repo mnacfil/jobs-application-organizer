@@ -9,7 +9,8 @@ const isValidToken = (token) => jwt.verify(token, process.env.TOKEN_SECRET);
 const payload = (user) => {
     const { firstName, lastName, email, _id, location} = user;
     return {
-        name: `${firstName} ${lastName}`,
+        firstName,
+        lastName,
         email,
         userID: _id,
         location
