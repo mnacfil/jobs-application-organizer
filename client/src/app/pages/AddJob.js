@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FormInput, FormSelect, Recruiter } from '../components'
+import { FormInput, FormSelect, Recruiter, AddJobController } from '../components'
 import { useDispatch, useSelector } from 'react-redux';
 import { handleChange, createJob, editJob } from '../features/job/jobSlice'
 
@@ -15,7 +15,10 @@ const AddJob = () => {
     jobLocation,
     jobType,
     jobStatus,
-    isLoading
+    isLoading,
+    recruiterName,
+    recruiterEmail,
+    recruiterNumber,
   } = job;
 
   const handleDataInput = (e) => {
@@ -26,7 +29,18 @@ const AddJob = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const job = { position, company, jobLocation, jobStatus, jobType }
+    const job = { 
+      position, 
+      company, 
+      jobLocation, 
+      jobStatus, 
+      jobType,
+      recruiter: {
+        name: recruiterName,
+        email: recruiterEmail,
+        contactNumber: recruiterNumber
+      } 
+    }
     if(isEditing) {
       dispatch(editJob({ editID, job }));
       return;
@@ -73,23 +87,17 @@ const AddJob = () => {
           options={jobTypeOptions}
           label='Job Type'
         />
-        <div className='form-controller'>
-          <button 
-            className='clear-btn btn btn-block' 
-            type='button'
-          >
-            Clear
-          </button>
-          <button 
-            className='submit-btn btn btn-block'
-            disabled={isLoading}
-            type='submit'
-          >
-              { isEditing ? 'Save' : 'Submit'}
-          </button>
-        </div>
       </form>
-      <Recruiter />
+      <Recruiter 
+        handleData={handleDataInput}
+        recruiterName={recruiterName}
+        recruiterEmail={recruiterEmail}
+        recruiterNumber={recruiterNumber}
+        />
+      <AddJobController 
+        isediting={isEditing}
+        isloading={isLoading}
+      />
     </Wrapper>
   )
 }
@@ -106,20 +114,6 @@ const Wrapper = styled.div`
       letter-spacing: var(--letterSpacing);
       color: var(--grey-700);
     }
-
-    .form-controller {
-      margin-top: 2rem;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: 1rem;
-      
-
-      .clear-btn {
-        background-color: var(--grey-500);
-      }
-
-    }
   }
 
   @media screen and (min-width: 992px){
@@ -128,10 +122,6 @@ const Wrapper = styled.div`
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
-
-      .form-controller {
-        margin-top: 2.2rem;
-      }
     }
   }
   @media screen and (min-width: 1120px){

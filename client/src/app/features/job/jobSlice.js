@@ -46,6 +46,9 @@ const initialState = {
             'remote', 
             'freelance'
         ],
+        recruiterName: '',
+        recruiterEmail: '',
+        recruiterNumber: ''
     },
     // all-job-page
     searchForm: {
@@ -116,6 +119,9 @@ const jobSlice = createSlice({
             state.job.status = 'applied';
             state.job.jobType = 'full time';
             state.job.jobLocation = '';
+            state.job.recruiterName = '';
+            state.job.recruiterEmail = '';
+            state.job.recruiterNumber = '';
         },
         clearAllJobFilter: (state) => {
             state.searchForm.searchFilter = searchDefaultFilterState;

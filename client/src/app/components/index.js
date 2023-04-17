@@ -14,6 +14,7 @@ import AreaChart from './AreaChartContainer';
 import Pagination from './Pagination';
 import ErrorPhoto from './404Photo';
 import Recruiter from './Recruiter';
+import AddJobController from './AddJobController';
 
 export {
     Navbar,
@@ -31,5 +32,6 @@ export {
     SmallSidebar,
     Pagination,
     ErrorPhoto,
-    Recruiter
+    Recruiter,
+    AddJobController
 }

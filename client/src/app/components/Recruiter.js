@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import FormInput from './FormInput';
 import recruiterImg from '../../assets/image/recruiter.svg';
  
-const Recruiter = () => {
+const Recruiter = ({ handleData, recruiterName, recruiterEmail, recruiterNumber}) => {
   return (
     <Wrapper>
         <h4>Recruiter Detail <span>(Optional)</span></h4>
@@ -13,22 +13,22 @@ const Recruiter = () => {
                     type='text'
                     name='recruiterName'
                     label='Name'
-                    value=''
-
+                    value={recruiterName}
+                    handleData={handleData}
                 />
                 <FormInput 
                     type='email'
                     name='recruiterEmail'
                     label='Email'
-                    value=''
-
+                    value={recruiterEmail}
+                    handleData={handleData}
                 />
                 <FormInput 
                     type='text'
                     name='recruiterNumber'
                     label='Contact Number'
-                    value=''
-
+                    value={recruiterNumber}
+                    handleData={handleData}
                 />
             </div>
             <div className='recruiter-img'>
@@ -40,7 +40,7 @@ const Recruiter = () => {
 }
 
 const Wrapper = styled.article`
-    margin-top: 3rem;
+    margin-top: 2rem;
 
     h4 {
         span {
