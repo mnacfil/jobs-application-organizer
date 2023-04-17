@@ -21,3 +21,7 @@ export const getUserToken = () => {
     if(token) return token;
     return null;
 }
+
+export const removeUserToken = () => {
+    localStorage.removeItem('token');
+}

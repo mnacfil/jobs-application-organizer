@@ -10,7 +10,8 @@ import {
     saveUserToLS, 
     removeUserFromLS, 
     getUserFromLS, 
-    saveUserToken 
+    saveUserToken,
+    removeUserToken
 } from '../../util/localStorage';
 
 const user = getUserFromLS();
@@ -79,6 +80,7 @@ const userSlice = createSlice({
             state.currentUser = null;
             state.isBigSidebarShow = true;
             removeUserFromLS();
+            removeUserToken()
             if(payload) {
                 toast.error(payload);
                 return;
