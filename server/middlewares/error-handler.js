@@ -21,13 +21,13 @@ module.exports = (err, req, res, next) => {
                 err.name._message,
             ));
     }
-    // return res.
-    //     status(err.status || 500).
-    //     json(responseTemplate(
-    //         'Failed',
-    //          err.name.name || err.name || 'Something went wrong',
-    //         null
-    //     )
-    // )
-    return res.json({ err })
+    return res.
+        status(err.status || 500).
+        json(responseTemplate(
+            'Failed',
+             err.name.name || err.name || 'Something went wrong',
+            null
+        )
+    )
+    // return res.json({ err })
 }
