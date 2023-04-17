@@ -86,7 +86,6 @@ class JobRepository {
                     job.jobLocation = jobLocation;
                     job.company = company;
                     job.position = position;
-                    job.recruiter.name = 'jane'
                     await job.save(); 
                     resolve('Job updated.');
                 } else {
