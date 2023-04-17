@@ -173,10 +173,9 @@ const jobSlice = createSlice({
             toast.success(payload);
         })
         .addCase(deleteJob.rejected, (state, { payload }) => {
-            console.log(payload);
             state.job.isLoading = false;
             state.job.isError = true;
-            toast.error('Unathorized');
+            toast.error(payload);
         })
         .addCase(editJob.pending, (state) => {
             state.job.isLoading = true;
@@ -188,12 +187,11 @@ const jobSlice = createSlice({
             toast.success('Job Updated!')
         })
         .addCase(editJob.rejected, (state, { payload }) => {
-            console.log(payload);
             state.searchForm.isEditing = false;
             state.searchForm.editID = null;
             state.job.isLoading= false;
             state.job.isError = true;
-            toast.error('Something went wrong');
+            toast.error(payload);
         })
     }
 });

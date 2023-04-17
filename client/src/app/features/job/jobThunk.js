@@ -33,7 +33,6 @@ export const getAllJobThunk = async( _, thunkAPI) => {
 export const deleteJobThunk = async(jobID, thunkAPI) => {
     try {
         const response = await customAxios.delete(`/job/${jobID}`);
-        console.log(response);
         thunkAPI.dispatch(getAllJob());
         return response.data.data;
     } catch (error) {
