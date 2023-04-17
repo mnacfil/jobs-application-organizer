@@ -29,5 +29,5 @@ module.exports = (err, req, res, next) => {
             null
         )
     )
-    // return res.json({ err })
+    return res.json({ err })
 }

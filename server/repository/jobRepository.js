@@ -65,29 +65,15 @@ class JobRepository {
         })
     }
     update = (userID, jobId, updatedJob) => {
-        const { 
-            jobStatus, 
-            jobType, 
-            jobLocation, 
-            company, 
-            position,
-        } = updatedJob;
         return new Promise (async (resolve, reject) => {
             try {
                 const job = await this.findById(jobId);
-                console.log(job);
-                if(!job) {
-                    throw new NotFound('No job found!');
-                }
                 const isUserAuthorize = isAuthorize(userID, job.owner);
                 if(isUserAuthorize) {
-                    job.jobStatus = jobStatus;
-                    job.jobType = jobType;
-                    job.jobLocation = jobLocation;
-                    job.company = company;
-                    job.position = position;
-                    await job.save(); 
-                    resolve('Job updated.');
+                    const newJob = await Job.findByIdAndUpdate(jobId, updatedJob, {
+                        new: true
+                    })
+                    resolve(newJob);
                 } else {
                     throw new Unauthorized('Youre not authorize to perform this operation');
                 }

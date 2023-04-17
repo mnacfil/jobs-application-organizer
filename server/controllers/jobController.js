@@ -23,13 +23,13 @@ const getJob = async (req, res) => {
         ));
 }
 const updateJob = async (req, res) => {
-    const result = await JobService.update( req.user.userID, req.params.id, req.body );
+    const updatedJob = await JobService.update( req.user.userID, req.params.id, req.body );
     res.
         status(200).
         json(responseTemplate(
             "SUCCESS",
             "Succesfully update the job",
-            result
+            updatedJob
     ));
 }
 const deleteJob = async (req, res) => {
