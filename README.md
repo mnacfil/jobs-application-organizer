@@ -4,12 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## issue/bug
 
-edit job return error (bad request)
-deleting job doesnt show toast message
-deleting job (demo user), automatically logout when performing delete, update and add
-
-- need to just show the toast error message
-  stats page, need to add additional card for other job status;
+1. edit job return error (bad request)
+2. deleting job (demo user), automatically logout when performing delete, update and add
+   need to just show the toast error message
+3. Updating recruiting schema
 
 ## Available Scripts
 

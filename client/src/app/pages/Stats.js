@@ -8,7 +8,6 @@ import { FcReadingEbook } from 'react-icons/fc'
 const Stats = () => {
   const dispatch = useDispatch();
   const { isStatLoading, stats, monthlyApplication } = useSelector(store => store.stat);
-  console.log(stats);
   useEffect(() => {
     dispatch(getJobApplicationStats())
   }, []);
