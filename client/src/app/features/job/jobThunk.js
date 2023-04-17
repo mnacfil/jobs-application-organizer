@@ -19,7 +19,7 @@ export const getAllJobThunk = async( _, thunkAPI) => {
         sort, 
         page
     } = thunkAPI.getState().job.searchForm.searchFilter;
-    let queryParam = `status=${status}&jobType=${type}&sort=${sort}&page=${page}`;
+    let queryParam = `status=${status}&type=${type}&sort=${sort}&page=${page}`;
     if(search) {
         queryParam += `&search=${search}`;
     }

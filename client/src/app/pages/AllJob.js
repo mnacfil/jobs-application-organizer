@@ -37,6 +37,7 @@ const AllJob = () => {
     dispatch(handleChange({ newData: { name, value }, originPage: 'all-job' }));
   }
   const handleSubmit = (e) => {
+    e.preventDefault();
     console.log(e.target);
   }
 

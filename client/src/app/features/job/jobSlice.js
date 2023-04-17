@@ -14,7 +14,8 @@ const searchDefaultFilterState = {
     status: 'all',
     type: 'all',
     sort: 'latest',
-    page: 1
+    page: 1,
+    limit: null
 }
 
 const initialState = {
@@ -137,17 +138,17 @@ const jobSlice = createSlice({
             state.searchForm.isSearchLoading = true
         })
         .addCase(getAllJob.fulfilled, (state, { payload }) => {
-            const {queryJobs, totalJobApplication, numberOfPages } = payload;
+            const {queryJobs, totalJobApplication, numberOfPage } = payload;
             state.searchForm.isSearchLoading = false;
             state.searchForm.isSearchError = false;
             state.searchForm.allJob = queryJobs;
             state.searchForm.totalJob = totalJobApplication;
-            state.searchForm.numberOfPage = numberOfPages;
+            state.searchForm.numberOfPage = numberOfPage;
         })
         .addCase(getAllJob.rejected, (state, { payload }) => {
             state.searchForm.isSearchLoading = false;
             state.searchForm.isSearchError = true;
-            console.log(payload);
+            toast.error('Something error, while getting all job.')
         })
         .addCase(createJob.pending, (state) => {
             state.job.isLoading = true;

@@ -17,7 +17,8 @@ const Pagination = ({ pages, page, dispatch, navigateToNextPage, navigateToPrevP
             <div>
                 {Array(pages).fill().map((button, index) => {
                     return (
-                        <button 
+                        <button
+                            key={index} 
                             className={`${(index + 1) === page ? 'active-btn' : ''} page-btn`}
                             onClick={() => dispatch(navigateToTargetPage(index + 1))}
                         >
