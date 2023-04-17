@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FormInput, FormSelect } from '../components'
+import { FormInput, FormSelect, Recruiter } from '../components'
 import { useDispatch, useSelector } from 'react-redux';
 import { handleChange, createJob, editJob } from '../features/job/jobSlice'
 
@@ -89,6 +89,7 @@ const AddJob = () => {
           </button>
         </div>
       </form>
+      <Recruiter />
     </Wrapper>
   )
 }

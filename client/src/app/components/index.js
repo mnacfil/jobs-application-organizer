@@ -13,6 +13,7 @@ import BarChart from './BarChartContainer';
 import AreaChart from './AreaChartContainer';
 import Pagination from './Pagination';
 import ErrorPhoto from './404Photo';
+import Recruiter from './Recruiter';
 
 export {
     Navbar,
@@ -29,5 +30,6 @@ export {
     AreaChart,
     SmallSidebar,
     Pagination,
-    ErrorPhoto
+    ErrorPhoto,
+    Recruiter
 }
