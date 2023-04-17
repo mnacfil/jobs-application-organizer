@@ -19,7 +19,7 @@ const Stats = () => {
           : 
             <div>
               <section className='stats-container'>
-                {Object.keys(stats).map((status) => {
+                {Object.keys(stats).map((status, index) => {
                   let statusName = status;
                   switch(status) {
                     case 'initialInterview':
@@ -41,7 +41,8 @@ const Stats = () => {
                       statusName = status;
                   }
                   return (
-                    <Stat 
+                    <Stat
+                      key={index} 
                       value={stats[status]}
                       name={statusName}
                       Icon={FcReadingEbook}

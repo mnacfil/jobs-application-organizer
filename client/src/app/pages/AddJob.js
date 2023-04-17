@@ -23,7 +23,6 @@ const AddJob = () => {
     const value = e.target.value;
     dispatch(handleChange({ newData: { name, value }, originPage: 'add-job'}));
   }
-  console.log(jobType);
 
   const handleSubmit = (e) => {
     e.preventDefault();

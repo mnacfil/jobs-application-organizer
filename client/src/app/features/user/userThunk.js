@@ -22,7 +22,7 @@ export const registerThunk = async (path, user, thunkAPI) => {
 export const updateThunk = async (path, user, thunkAPI) => {
     try {
         const response = await customAxios.patch(path, user);
-        return response.data;
+        return response.data.data;
     } catch (error) {
         if(error.response.status === 401) {
             thunkAPI.dispatch(logoutUser(error.response.data.msg));

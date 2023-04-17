@@ -25,7 +25,6 @@ export const getAllJobThunk = async( _, thunkAPI) => {
     }
     try {
         const response = await customAxios.get(`/job?${queryParam}`);
-        console.log(response.data.data);
         return response.data.data;
     } catch (error) {
         return handleError(error, thunkAPI);
@@ -33,9 +32,10 @@ export const getAllJobThunk = async( _, thunkAPI) => {
 }
 export const deleteJobThunk = async(jobID, thunkAPI) => {
     try {
-        const response = await customAxios.delete(`/job/${jobID}`)
+        const response = await customAxios.delete(`/job/${jobID}`);
+        console.log(response);
         thunkAPI.dispatch(getAllJob());
-        return response.data.msg;
+        return response.data.data;
     } catch (error) {
         return handleError(error, thunkAPI);
     }
@@ -45,7 +45,7 @@ export const editJobThunk = async({editID, job}, thunkAPI) => {
     try {
         const response = await customAxios.patch(`/job/${editID}`, job);
         thunkAPI.dispatch(clearAddJobInput());
-        return response.data.msg;
+        return response.data.message;
     } catch (error) {
         return handleError(error, thunkAPI);
     }

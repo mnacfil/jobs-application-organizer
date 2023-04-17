@@ -169,7 +169,7 @@ const jobSlice = createSlice({
         })
         .addCase(deleteJob.fulfilled, (state, { payload }) => {
             state.job.isLoading = false;
-            toast.success(payload)
+            toast.success(payload);
         })
         .addCase(deleteJob.rejected, (state, { payload }) => {
             console.log(payload);
@@ -190,6 +190,7 @@ const jobSlice = createSlice({
             console.log(payload);
             state.searchForm.isEditing = false;
             state.searchForm.editID = null;
+            state.job.isLoading= false;
             state.job.isError = true;
             toast.error('Something went wrong');
         })

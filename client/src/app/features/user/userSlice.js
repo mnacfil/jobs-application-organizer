@@ -51,7 +51,7 @@ export const loginUser = createAsyncThunk('user/login', async(user, thunkAPI) =>
 });
 
 export const updateUser = createAsyncThunk('user/update', async(user, thunkAPI) => {
-    return updateThunk('/auth/updateUser', user, thunkAPI);
+    return updateThunk('/user/update', user, thunkAPI);
 });
 
 export const clearAllWhenUserLogout = createAsyncThunk('user/clearAllWhenUserLogout', 
@@ -104,7 +104,6 @@ const userSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(loginUser.fulfilled, (state, { payload }) => {
-                console.log(payload);
                 state.isLoading = false;
                 state.isError = false;
                 state.isLogin = true;
@@ -113,7 +112,7 @@ const userSlice = createSlice({
                 state.user.firstName = payload.payloadUser.firstName;
                 state.user.location = payload.payloadUser.location;
                 state.user.lastName = payload.payloadUser.lastName;
-                toast.success(`Welcome back ${payload.payloadUser.name}!`);
+                toast.success(`Welcome back ${payload.payloadUser.firstName}!`);
                 saveUserToLS(payload.payloadUser);
                 saveUserToken(payload.token);
             })
@@ -145,10 +144,11 @@ const userSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(updateUser.fulfilled, (state, { payload }) => {
+                console.log(payload);
                 state.isLoading = false;
                 state.isError = false;
                 toast.success('Success, Profile updated!');
-                saveUserToLS(payload.user);
+                saveUserToLS(payload);
             })
             .addCase(updateUser.rejected, (state, { payload }) => {
                 state.isLoading = false;
