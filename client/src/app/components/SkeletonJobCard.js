@@ -29,18 +29,20 @@ const SkeletonCard = () => {
                                 <p className='type'><Skeleton width={120}/></p>
                                 <p className='status skeleton-loading-btn'><Skeleton width={120}/></p>
                             </div>
-                            <div className='edit-delete-controller'>
-                                <button 
-                                    className='edit-btn btn skeleton-loading-btn'>
-                                        <Skeleton width={80} height={25}/>
-                                </button>
-                                <button 
-                                    className='delete-btn btn skeleton-loading-btn'
-                                    >
-                                    <Skeleton width={80} height={25}/>
-                                </button>
-                            </div>
                         </div>
+                        <footer className='skeleton-loading-btn'>
+                            <div className='recruiter-detail'>
+                                <p className='name'>
+                                    <Skeleton width={150}/>
+                                </p>
+                                <p className='email'>
+                                    <Skeleton width={150}/>
+                                </p>
+                                <p className='contact'>
+                                    <Skeleton width={150}/>
+                                </p>
+                            </div>
+                        </footer>
                     </article> 
                 )
             })}

@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt, FaFlask } from 'react-icons/fa';
 import {generateRandomColor} from '../util/generateRandomColor';
-import {AiOutlineMail} from 'react-icons/ai';
+import {AiOutlineMail, AiFillEdit, AiFillDelete} from 'react-icons/ai';
 import {RiContactsLine} from 'react-icons/ri';
 import {BsPersonCheck} from 'react-icons/bs';
 
@@ -25,17 +25,25 @@ const Job = (prop) => {
         }
     } = prop;
     const dispatch = useDispatch();
-    // let statusClassName = 'pending';
-    // if(jobStatus === 'interview') {
-    //     statusClassName = 'interview'
-    // }
-    // if(jobStatus === 'declined') {
-    //     statusClassName = 'declined'
-    // }
     const initial = [...company][0].toUpperCase();
     const hexCode = generateRandomColor();
     return (
         <article className='job'>
+            <div className='edit-delete-controller'>
+                <Link 
+                    to='/add-job'
+                    className='edit-btn'
+                    onClick={() => dispatch(handleEditAction(_id))}
+                >
+                    <AiFillEdit />
+                </Link>
+                <button 
+                    className='delete-btn'
+                    onClick={() => dispatch(deleteJob(_id))}
+                >
+                    <AiFillDelete />
+                </button>
+            </div>
             <header>
                 <div 
                     className='company-initial'
@@ -69,21 +77,6 @@ const Job = (prop) => {
                         <FaFlask />
                         {jobStatus}
                     </p>
-                </div>
-                <div className='edit-delete-controller'>
-                    <Link 
-                        to='/add-job'
-                        className='edit-btn btn'
-                        onClick={() => dispatch(handleEditAction(_id))}
-                    >
-                        Edit
-                    </Link>
-                    <button 
-                        className='delete-btn btn'
-                        onClick={() => dispatch(deleteJob(_id))}
-                    >
-                        Delete
-                    </button>
                 </div>
             </div>
             <footer>

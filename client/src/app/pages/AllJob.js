@@ -159,11 +159,37 @@ const Wrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.5rem;
+
       .job {
         background-color: var(--white);
         padding: 2rem;
         box-shadow: var(--shadow-2);
         border-radius: var(--borderRadius);
+        position: relative;
+          .edit-delete-controller {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+
+            .edit-btn {
+              color: var(--green-dark);
+              &:hover {
+                opacity: 0.7;
+              }
+            }
+            .delete-btn {
+              color: var(--red-dark);
+              border: none;
+              background: none;
+              cursor: pointer;
+              transition:var(--transition);
+
+              &:hover {
+                opacity: 0.7;
+              }
+            }
+          }
+
           header {
             display: flex;
             align-items: center;
@@ -212,6 +238,10 @@ const Wrapper = styled.div`
               box-shadow: var(--shadow-2);
               background-color: #EEF3E2;
             }
+            .skeleton-loading-btn {
+              background: none;
+              box-shadow: none;
+            }
             /* .interview {
               background: var(--interview-bg);
               color: var(--interview-color);
@@ -233,21 +263,7 @@ const Wrapper = styled.div`
                 color: var(--pending-color);
               }
             } */
-    
-            .edit-btn {
-              margin-right: 1rem;
-              background-color: var(--green-light);
-              color: var(--green-dark);
-            }
-            .delete-btn {
-              background-color: var(--red-light);
-              color: var(--red-dark);
-            }
-            .skeleton-loading-btn {
-              background: none;
-              box-shadow: none;
-            }
-    
+  
             @media screen and (min-width: 576px){
               .first-data, .second-data {
                 display: flex;
@@ -256,8 +272,8 @@ const Wrapper = styled.div`
               }
             }
           }
+
           footer {
-            margin-top: 1rem;
             padding: 10px;
             background-color: #ECF1EF;
             border-radius: var(--borderRadius);
@@ -275,6 +291,9 @@ const Wrapper = styled.div`
                 margin-right: 0.5rem;
               }
             }
+          }
+          .skeleton-loading-btn {
+            background: var(--grey-200);
           }
       }
   }
