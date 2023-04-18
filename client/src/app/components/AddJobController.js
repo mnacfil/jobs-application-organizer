@@ -1,20 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const AddJobController = ({ isloading, isediting }) => {
+const AddJobController = ({ isloading, isediting, handleSubmit, handleClear }) => {
   return (
     <Wrapper>
         <div className='addJob-controller'>
             <button 
               className='clear-btn btn' 
               type='button'
+              onClick={handleClear}
             >
               Clear
             </button>
             <button 
               className='submit-btn btn'
               disabled={isloading}
-              type='submit'
+              type='button'
+              onClick={handleSubmit}
             >
               { isediting ? 'Save Job' : 'Add Job'}
             </button>

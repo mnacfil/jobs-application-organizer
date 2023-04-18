@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { FormInput, FormSelect, Recruiter, AddJobController } from '../components'
 import { useDispatch, useSelector } from 'react-redux';
-import { handleChange, createJob, editJob } from '../features/job/jobSlice'
+import { handleChange, createJob, editJob, clearAddJobInput } from '../features/job/jobSlice'
+import { toast } from 'react-toastify';
 
 const AddJob = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,10 @@ const AddJob = () => {
     dispatch(handleChange({ newData: { name, value }, originPage: 'add-job'}));
   }
 
+  const handleClearInput = () => {
+    dispatch(clearAddJobInput());
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const job = { 
@@ -40,6 +45,10 @@ const AddJob = () => {
         email: recruiterEmail,
         contactNumber: recruiterNumber
       } 
+    }
+    if(!position || !company || !jobLocation) {
+      toast.error('Please fill out all required field.');
+      return;
     }
     if(isEditing) {
       dispatch(editJob({ editID, job }));
@@ -97,6 +106,8 @@ const AddJob = () => {
       <AddJobController 
         isediting={isEditing}
         isloading={isLoading}
+        handleSubmit={handleSubmit}
+        handleClear={handleClearInput}
       />
     </Wrapper>
   )

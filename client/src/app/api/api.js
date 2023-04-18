@@ -5,7 +5,7 @@ const deployURL = 'https://mnacfil-jobs-organizer.onrender.com/api/v1';
 const localURL = 'http://localhost:5000/api/v1';
 
 export const customAxios = axios.create({
-    baseURL: deployURL
+    baseURL: localURL
 })
 
 customAxios.interceptors.request.use((config) => {

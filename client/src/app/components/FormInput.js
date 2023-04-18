@@ -7,7 +7,7 @@ const FormInput = ({type, label, value, handleData, name}) => {
           htmlFor={label}
           className='form-label'
         >
-          {label}
+          {['Position', 'Company', 'Job Location'].includes(label) ? `${label}*` : label}
         </label>
         <input
           className='form-input'

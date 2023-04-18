@@ -104,7 +104,7 @@ const jobSlice = createSlice({
         },
         handleEditAction: (state, { payload }) => {
             const jobToBeEdit = state.searchForm.allJob.find(job => job._id === payload);
-            const { position, company, status, jobType, jobLocation} = jobToBeEdit;
+            const { position, company, status, jobType, jobLocation, recruiter} = jobToBeEdit;
             state.searchForm.isEditing = true;
             state.searchForm.editID = payload;
             state.job.position = position;
@@ -112,6 +112,9 @@ const jobSlice = createSlice({
             state.job.status = status;
             state.job.jobType = jobType;
             state.job.jobLocation = jobLocation;
+            state.job.recruiterName = recruiter.name;
+            state.job.recruiterEmail = recruiter.email;
+            state.job.recruiterNumber = recruiter.contactNumber;
         },
         clearAddJobInput : (state) => {
             state.job.position = '';
@@ -187,6 +190,7 @@ const jobSlice = createSlice({
             state.job.isLoading = true;
         })
         .addCase(editJob.fulfilled, (state, { payload }) => {
+            console.log(payload);
             state.job.isLoading = false;
             state.searchForm.isEditing = false;
             state.searchForm.editID = null;

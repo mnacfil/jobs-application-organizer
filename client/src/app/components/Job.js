@@ -18,11 +18,7 @@ const Job = (prop) => {
         jobStatus, 
         createdAt, 
         _id,
-        recruiter: {
-            name,
-            email,
-            contactNumber 
-        }
+        recruiter
     } = prop;
     const dispatch = useDispatch();
     const initial = [...company][0].toUpperCase();
@@ -83,15 +79,15 @@ const Job = (prop) => {
                 <div className='recruiter-detail'>
                     <p className='name'>
                         <BsPersonCheck />
-                        {name}
+                        {recruiter?.name || 'Recruiter name'}
                     </p>
                     <p className='email'>
                         <AiOutlineMail />
-                        {email}
+                        {recruiter?.email || 'Recruiter email'}
                     </p>
                     <p className='contact'>
                         <RiContactsLine />
-                        {contactNumber}
+                        {recruiter?.contactNumber || 'Recruiter number'}
                     </p>
                 </div>
             </footer>

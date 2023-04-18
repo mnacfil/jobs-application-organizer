@@ -3,7 +3,6 @@ import { getAllJob, clearAddJobInput } from './jobSlice';
 import { handleError } from '../../util/error';
 
 export const createJobThunk = async(job, thunkAPI) => {
-    console.log(thunkAPI);
     try {
         await customAxios.post('/job', job);
         thunkAPI.dispatch(clearAddJobInput());

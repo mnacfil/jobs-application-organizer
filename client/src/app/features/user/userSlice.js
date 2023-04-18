@@ -15,7 +15,6 @@ import {
 } from '../../util/localStorage';
 
 const user = getUserFromLS();
-console.log(user);
 
 const defaultUser = {
     firstName: '',
