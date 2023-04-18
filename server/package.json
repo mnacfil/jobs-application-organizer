@@ -1,5 +1,5 @@
 {
-  "name": "Jobs Organizer server",
+  "name": "mnacfil/jobsOrganizer",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
