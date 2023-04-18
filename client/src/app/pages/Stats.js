@@ -45,7 +45,7 @@ const Stats = () => {
                       value={stats[status]}
                       name={statusName}
                       Icon={FcReadingEbook}
-                      className='stat pending'
+                      className='stat'
                     />
                   )
                 })}
@@ -88,39 +88,15 @@ const Wrapper = styled.div`
         color: var(--grey-700);
       }
     }
-    .stat.pending {
-      border-bottom: 5px solid var(--pending-color);
+    .stat {
+      border-bottom: 5px solid var(--primary-400);
       div {
 
         span {
-          color: var(--pending-color);
+          color: var(--primary-400);
         }
         svg {
-          background-color: var(--pending-bg);
-        }
-      }
-    }
-    .stat.interview {
-      border-bottom: 5px solid var(--interview-color);
-      div {
-
-        span {
-          color: var(--interview-color);
-        }
-        svg {
-          background-color: var(--interview-bg);
-        }
-      }
-    }
-    .stat.declined {
-      border-bottom: 5px solid rgb(214, 106, 106);
-      div {
-
-        span {
-          color: rgb(214, 106, 106);
-        }
-        svg {
-          background-color: var(--declined-bg);
+          background-color: var(--primary-400) ;
         }
       }
     }
