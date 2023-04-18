@@ -210,8 +210,9 @@ const Wrapper = styled.div`
               padding: 0.25rem 0.5rem;
               border-radius: var(--borderRadius);
               box-shadow: var(--shadow-2);
+              background-color: #EEF3E2;
             }
-            .interview {
+            /* .interview {
               background: var(--interview-bg);
               color: var(--interview-color);
               svg {
@@ -231,7 +232,7 @@ const Wrapper = styled.div`
               svg {
                 color: var(--pending-color);
               }
-            }
+            } */
     
             .edit-btn {
               margin-right: 1rem;
@@ -252,6 +253,26 @@ const Wrapper = styled.div`
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+              }
+            }
+          }
+          footer {
+            margin-top: 1rem;
+            padding: 10px;
+            background-color: #ECF1EF;
+            border-radius: var(--borderRadius);
+            box-shadow: var(--shadow-2);
+
+            p{
+              margin: 0;
+              color: var(--grey-500);
+            }
+            .email, .contact, .name {
+              display: flex;
+              align-items: center;
+
+              svg {
+                margin-right: 0.5rem;
               }
             }
           }

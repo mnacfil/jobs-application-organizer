@@ -5,17 +5,33 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt, FaFlask } from 'react-icons/fa';
 import {generateRandomColor} from '../util/generateRandomColor';
+import {AiOutlineMail} from 'react-icons/ai';
+import {RiContactsLine} from 'react-icons/ri';
+import {BsPersonCheck} from 'react-icons/bs';
 
-const Job = ({ company, jobLocation, position, jobType, jobStatus, createdAt, _id }) => {
-    // add recruiter { name, email, contact number }
+const Job = (prop) => {
+    const { 
+        company, 
+        jobLocation, 
+        position, 
+        jobType, 
+        jobStatus, 
+        createdAt, 
+        _id,
+        recruiter: {
+            name,
+            email,
+            contactNumber 
+        }
+    } = prop;
     const dispatch = useDispatch();
-    let statusClassName = 'pending';
-    if(jobStatus === 'interview') {
-        statusClassName = 'interview'
-    }
-    if(jobStatus === 'declined') {
-        statusClassName = 'declined'
-    }
+    // let statusClassName = 'pending';
+    // if(jobStatus === 'interview') {
+    //     statusClassName = 'interview'
+    // }
+    // if(jobStatus === 'declined') {
+    //     statusClassName = 'declined'
+    // }
     const initial = [...company][0].toUpperCase();
     const hexCode = generateRandomColor();
     return (
@@ -49,7 +65,7 @@ const Job = ({ company, jobLocation, position, jobType, jobStatus, createdAt, _i
                         <FaBriefcase />
                         {jobType}
                     </p>
-                    <p className={`status ${statusClassName}`}>
+                    <p className={`status`}>
                         <FaFlask />
                         {jobStatus}
                     </p>
@@ -70,6 +86,22 @@ const Job = ({ company, jobLocation, position, jobType, jobStatus, createdAt, _i
                     </button>
                 </div>
             </div>
+            <footer>
+                <div className='recruiter-detail'>
+                    <p className='name'>
+                        <BsPersonCheck />
+                        {name}
+                    </p>
+                    <p className='email'>
+                        <AiOutlineMail />
+                        {email}
+                    </p>
+                    <p className='contact'>
+                        <RiContactsLine />
+                        {contactNumber}
+                    </p>
+                </div>
+            </footer>
         </article> 
   )
 }
