@@ -12,6 +12,7 @@ import {
 } from '../features/job/jobSlice';
 
 const AllJob = () => {
+  console.log("All Job Page");
   const dispatch = useDispatch();
   const { searchForm } = useSelector(store => store.job);
   const { 

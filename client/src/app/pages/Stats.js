@@ -6,6 +6,7 @@ import {Stat, SkeletonStatCard, ChartContainer} from '../components';
 import { FcReadingEbook } from 'react-icons/fc'
 
 const Stats = () => {
+  console.log("Stats page");
   const dispatch = useDispatch();
   const { isStatLoading, stats, monthlyApplication } = useSelector(store => store.stat);
   useEffect(() => {

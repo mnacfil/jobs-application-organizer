@@ -125,6 +125,8 @@ const jobSlice = createSlice({
             state.job.recruiterName = '';
             state.job.recruiterEmail = '';
             state.job.recruiterNumber = '';
+            state.searchForm.isEditing = false;
+            state.searchForm.editID = null;
         },
         clearAllJobFilter: (state) => {
             state.searchForm.searchFilter = searchDefaultFilterState;
@@ -190,7 +192,6 @@ const jobSlice = createSlice({
             state.job.isLoading = true;
         })
         .addCase(editJob.fulfilled, (state, { payload }) => {
-            console.log(payload);
             state.job.isLoading = false;
             state.searchForm.isEditing = false;
             state.searchForm.editID = null;
