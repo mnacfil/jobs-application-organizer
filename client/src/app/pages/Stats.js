@@ -6,12 +6,16 @@ import {Stat, SkeletonStatCard, ChartContainer} from '../components';
 import { FcReadingEbook } from 'react-icons/fc'
 
 const Stats = () => {
-  console.log("Stats page");
   const dispatch = useDispatch();
   const { isStatLoading, stats, monthlyApplication } = useSelector(store => store.stat);
   useEffect(() => {
     dispatch(getJobApplicationStats())
   }, []);
+
+  let statsData = [];
+  for(const [status, value] of Object.entries(stats)) {
+    statsData.push({ status, value })
+  }
 
   return (
         <Wrapper className='dashboard-center'>
@@ -19,7 +23,8 @@ const Stats = () => {
           : 
             <div>
               <section className='stats-container'>
-                {Object.keys(stats).map((status, index) => {
+                {statsData.map((stat, index) => {
+                  const { status, value } = stat;
                   let statusName = status;
                   switch(status) {
                     case 'initialInterview':
@@ -37,18 +42,18 @@ const Stats = () => {
                     case 'jobOffer':
                       statusName = 'job offer';
                       break;
-                    default:
-                      statusName = status;
                   }
-                  return (
-                    <Stat
-                      key={index} 
-                      value={stats[status]}
-                      name={statusName}
-                      Icon={FcReadingEbook}
-                      className='stat'
-                    />
-                  )
+                  if(value > 0) {
+                    return (
+                      <Stat
+                        key={index} 
+                        value={value}
+                        name={statusName}
+                        Icon={FcReadingEbook}
+                        className='stat'
+                      />
+                    )
+                  }
                 })}
               </section>
               { monthlyApplication.length > 0 && <ChartContainer /> }

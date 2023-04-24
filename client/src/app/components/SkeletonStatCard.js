@@ -5,7 +5,7 @@ const SkeletonStatCard = () => {
   return (
     <SkeletonTheme baseColor='#d9e2ec' highlightColor="#9fb3c8">
         <section className='stats-container'>
-            {Array(3).fill().map((_, index) => {
+            {Array(4).fill().map((_, index) => {
                 return (
                     <article className='stat' key={index}>
                         <div>

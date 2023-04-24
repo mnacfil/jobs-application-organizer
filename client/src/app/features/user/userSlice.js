@@ -145,7 +145,6 @@ const userSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(updateUser.fulfilled, (state, { payload }) => {
-                console.log(payload);
                 state.isLoading = false;
                 state.isError = false;
                 toast.success('Success, Profile updated!');

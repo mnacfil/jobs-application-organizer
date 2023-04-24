@@ -8,7 +8,8 @@ import { toast } from 'react-toastify'
 const Profile = () => {
   const dispatch = useDispatch();
   const { 
-    user: { firstName, lastName, email, location }
+    user: { firstName, lastName, email, location },
+    isLoading
   } = useSelector(store => store.user);
 
   const handleData = (e) => {
@@ -59,7 +60,7 @@ const Profile = () => {
         <button
           type='submit' 
           className='save-btn btn btn-block'>
-            Save Changes
+            {isLoading ? 'Saving Changes...' : 'Save Changes'}
         </button>
       </form>
     </Wrapper>

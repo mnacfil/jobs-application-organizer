@@ -36,6 +36,7 @@ const Job = (prop) => {
                 <button 
                     className='delete-btn'
                     onClick={() => dispatch(deleteJob(_id))}
+                    type='button'
                 >
                     <AiFillDelete />
                 </button>
