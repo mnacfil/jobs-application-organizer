@@ -4,9 +4,11 @@ import { FormInput, FormSelect, Recruiter, AddJobController } from '../component
 import { useDispatch, useSelector } from 'react-redux';
 import { handleChange, createJob, editJob, clearAddJobInput } from '../features/job/jobSlice'
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const AddJob = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {job, searchForm: {isEditing, editID}} = useSelector(store => store.job)
   const {
     statusOptions, 
@@ -52,9 +54,17 @@ const AddJob = () => {
     }
     if(isEditing) {
       dispatch(editJob({ editID, job }));
+      navigateToAllJobPage()
       return;
     }
     dispatch(createJob(job));
+    navigateToAllJobPage()
+  }
+
+  const navigateToAllJobPage = () => {
+    setTimeout(() => {
+      navigate('/all-job');
+    }, 2000)
   }
 
   return (

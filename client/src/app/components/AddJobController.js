@@ -18,7 +18,10 @@ const AddJobController = ({ isloading, isediting, handleSubmit, handleClear }) =
               type='button'
               onClick={handleSubmit}
             >
-              { isediting ? 'Save Job' : 'Add Job'}
+              { isloading 
+                ? (isediting ? 'Saving...': 'Adding') 
+                : 
+                (isediting ? 'Save Job' : 'Add Job')}
             </button>
         </div>
     </Wrapper>
